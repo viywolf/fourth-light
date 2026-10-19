@@ -15,6 +15,7 @@ var glide_speed_retainment_rate = 0.05
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("glide"):
 		is_gliding = !is_gliding
+		$GliderModel.visible = is_gliding
 		glide_speed_y = 50
 	
 	if is_gliding:

@@ -2,12 +2,31 @@
 
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_o5qli"]
 
+[sub_resource type="Environment" id="Environment_1vivr"]
+background_mode = 2
+ambient_light_source = 3
+ambient_light_color = Color(0.3896, 0.4, 0.352, 1)
+reflected_light_source = 1
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_1vivr"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1vivr"]
 size = Vector3(100, 1, 100)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1vivr"]
 height = 4.4174805
 radius = 3.8833008
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1vivr"]
+top_radius = 3.8833008
+bottom_radius = 3.8833008
+height = 4.4174805
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o5qli"]
+top_radius = 3.8833008
+bottom_radius = 3.8833008
+height = 17.542
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_o5qli"]
 height = 17.542
@@ -15,23 +34,38 @@ radius = 3.8833008
 
 [node name="Main" type="Node3D" unique_id=404240586]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1527801134]
+environment = SubResource("Environment_1vivr")
+
+[node name="SunDirectionalLight" type="DirectionalLight3D" parent="." unique_id=247186993]
+transform = Transform3D(-0.93667215, 0.17510371, -0.30328852, 0, 0.8660254, 0.5, 0.35020742, 0.46833608, -0.81118184, 0, 40.63407, 0)
+shadow_enabled = true
+
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1449650364]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1474787239]
 shape = SubResource("BoxShape3D_1vivr")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1891289361]
+mesh = SubResource("BoxMesh_1vivr")
+
 [node name="Player" parent="." unique_id=894728165 instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.823193, 12.00992, -3.7149725)
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=2070174269]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2087402, -3.5316324)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=2135093984]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2087402, -3.5316324)
 shape = SubResource("CylinderShape3D_1vivr")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=857523055]
+mesh = SubResource("CylinderMesh_1vivr")
+
 [node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=295458537]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.982033, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.053547, 1.2087402, -3.5316324)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D3" unique_id=1742385103]
+mesh = SubResource("CylinderMesh_o5qli")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=864189345]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2087402, -3.5316324)
 shape = SubResource("CylinderShape3D_o5qli")

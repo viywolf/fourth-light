@@ -7,6 +7,11 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g2els"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1vivr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1vivr"]
+size = Vector3(3, 0.1, 1)
+
 [node name="Player" type="CharacterBody3D" unique_id=894728165]
 script = ExtResource("1_3vyb7")
 
@@ -24,3 +29,10 @@ shape = SubResource("SphereShape3D_g2els")
 spring_length = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="Camera/SpringArm3D" unique_id=402478905]
+
+[node name="PlayerModel" type="MeshInstance3D" parent="." unique_id=1207075548]
+mesh = SubResource("CapsuleMesh_1vivr")
+
+[node name="GliderModel" type="MeshInstance3D" parent="." unique_id=2121960748]
+transform = Transform3D(1, 0, 0, 0, 0.58902746, -0.80811304, 0, 0.80811304, 0.58902746, 0.01369977, 0.24963081, 0.38166595)
+mesh = SubResource("BoxMesh_1vivr")
