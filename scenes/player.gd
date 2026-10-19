@@ -9,7 +9,8 @@ var deceleration: float = 50
 var is_gliding := false
 # Move this elsewhere to easier change it
 var gravity: float = 70
-var glide_speed_y: float = 30
+var glide_speed_y: float = 10
+var glide_speed_retainment_rate = 0.2
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("glide"):
@@ -18,12 +19,19 @@ func _physics_process(delta: float) -> void:
 	if is_gliding:
 		if is_on_floor():
 			is_gliding = false
+		
+		var camera_direction: Vector3 = -%Camera.global_basis.z
+		
+		var face_direction_up = Vector3.UP.dot(camera_direction)
+		if face_direction_up > 0: #Looking above the horizon
+			print("llonign up")
+			glide_speed_y = move_toward(glide_speed_y, 0, gravity * delta * glide_speed_retainment_rate)
 		else:
-			self.velocity.y = move_toward(self.velocity.y, -gravity, glide_speed_y * delta)
+			glide_speed_y += Vector3.DOWN.dot(camera_direction)
+			
+		print(glide_speed_y)
 		
-		var flight_direction: Vector3 = -%Camera.global_basis.z
-		
-		self.velocity = velocity.move_toward(flight_direction * speed, acceleration * delta)
+		self.velocity = velocity.move_toward(camera_direction * speed, acceleration * delta)
 		move_and_slide()
 		return
 	
