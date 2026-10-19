@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://1va2irtqfii4"]
+
+[ext_resource type="Script" uid="uid://0rwyqi63su6t" path="res://scenes/title_screen.gd" id="1_fgkus"]
+
+[node name="TitleScreen" type="Node2D" unique_id=1466945169]
+script = ExtResource("1_fgkus")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1818300750]
+visible = false
+offset_left = 281.0
+offset_top = 23.0
+offset_right = 881.0
+offset_bottom = 623.0
+columns = 3
+
+[node name="MovementSceneButton" type="Button" parent="GridContainer" unique_id=1194481367]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "Go to movement scene"
+
+[node name="MainTitleScreen" type="HBoxContainer" parent="." unique_id=1138618579]
+offset_right = 1151.0
+offset_bottom = 643.0
+
+[node name="Spacer2" type="Control" parent="MainTitleScreen" unique_id=506916052]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="MainTitleScreen" unique_id=928828606]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="MainTitleScreen/ButtonsContainer" unique_id=746516337]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MainTitleScreen/ButtonsContainer" unique_id=669459915]
+layout_mode = 2
+text = "Fourth Light"
+
+[node name="StartButton" type="Button" parent="MainTitleScreen/ButtonsContainer" unique_id=660501771]
+layout_mode = 2
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="MainTitleScreen/ButtonsContainer" unique_id=14813805]
+layout_mode = 2
+text = "Quit"
+
+[node name="Spacer" type="Control" parent="MainTitleScreen/ButtonsContainer" unique_id=1498560750]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="MainTitleScreen" unique_id=174336770]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="GridContainer/MovementSceneButton" to="." method="_on_movement_scene_button_pressed"]
+[connection signal="pressed" from="MainTitleScreen/ButtonsContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainTitleScreen/ButtonsContainer/QuitButton" to="." method="_on_quit_button_pressed"]
