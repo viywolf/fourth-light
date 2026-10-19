@@ -6,10 +6,27 @@ var jump_velocity: float = 25
 var acceleration: float = 50
 var deceleration: float = 50
 
+var is_gliding := false
 # Move this elsewhere to easier change it
 var gravity: float = 70
+var glide_speed_y: float = 30
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("glide"):
+		is_gliding = !is_gliding
+	
+	if is_gliding:
+		if is_on_floor():
+			is_gliding = false
+		else:
+			self.velocity.y = move_toward(self.velocity.y, -gravity, glide_speed_y * delta)
+		
+		var flight_direction: Vector3 = -%Camera.global_basis.z
+		
+		self.velocity = velocity.move_toward(flight_direction * speed, acceleration * delta)
+		move_and_slide()
+		return
+	
 	var raw_input: Vector2 = Input.get_vector("left", "right", "forward", "backward")
 	var local_forward: Vector3 = %Camera.global_basis.z
 	var local_right: Vector3 = %Camera.global_basis.x
@@ -17,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	var movement_direction: Vector3 = (local_forward * raw_input.y) + (local_right * raw_input.x)
 	movement_direction.y = 0.0
 	movement_direction = movement_direction.normalized()
-	
+	-%Camera.global_basis.z
 	if raw_input != Vector2.ZERO:
 		self.velocity = velocity.move_toward(movement_direction * speed, acceleration * delta)
 	else:
@@ -27,7 +44,8 @@ func _physics_process(delta: float) -> void:
 	
 	if is_starting_jump:
 		self.velocity.y = jump_velocity
-	else:
+	
+	if is_on_floor() == false:
 		self.velocity.y = move_toward(self.velocity.y, -gravity, gravity * delta)
 		
 		
