@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dqkfntt42nfnm"]
+
+[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_o5qli"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1vivr"]
+size = Vector3(10, 1, 10)
+
+[node name="Main" type="Node3D" unique_id=404240586]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1449650364]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1474787239]
+shape = SubResource("BoxShape3D_1vivr")
+
+[node name="Player" parent="." unique_id=894728165 instance=ExtResource("1_o5qli")]
