@@ -67,7 +67,7 @@ mesh = SubResource("BoxMesh_1vivr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.823193, 12.00992, -3.7149725)
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=2070174269]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2087402, -3.5316324)
+transform = Transform3D(1, 0, 0, 0, 5.4209795, 0, 0, 0, 1, -10.774181, 1.2087402, -3.5316324)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=2135093984]
 shape = SubResource("CylinderShape3D_1vivr")
