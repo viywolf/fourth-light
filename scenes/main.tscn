@@ -5,7 +5,8 @@
 [sub_resource type="Environment" id="Environment_1vivr"]
 background_mode = 2
 ambient_light_source = 3
-ambient_light_color = Color(0.3896, 0.4, 0.352, 1)
+ambient_light_color = Color(0.48045176, 0.4937067, 0.44090906, 1)
+ambient_light_energy = 0.5
 reflected_light_source = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1vivr"]
@@ -38,8 +39,21 @@ radius = 3.8833008
 environment = SubResource("Environment_1vivr")
 
 [node name="SunDirectionalLight" type="DirectionalLight3D" parent="." unique_id=247186993]
-transform = Transform3D(-0.93667215, 0.17510371, -0.30328852, 0, 0.8660254, 0.5, 0.35020742, 0.46833608, -0.81118184, 0, 40.63407, 0)
+transform = Transform3D(-0.93667215, 0.17510371, -0.30328852, 0, 0.8660254, 0.5, 0.35020742, 0.46833608, -0.8111819, 0, 64.41162, 0)
+light_color = Color(0.9704384, 0.9529211, 0.93710184, 1)
 shadow_enabled = true
+
+[node name="BounceDirectionalLight" type="DirectionalLight3D" parent="." unique_id=988105649]
+transform = Transform3D(0.48480958, -0.43730986, 0.7574428, 0, 0.8660254, 0.49999994, -0.8746197, -0.24240479, 0.41985735, 0, 40.63407, 0)
+light_color = Color(0.8271798, 0.8448478, 0.9568158, 1)
+light_energy = 0.2
+light_specular = 0.0
+
+[node name="BounceDirectionalLight2" type="DirectionalLight3D" parent="." unique_id=2043958928]
+transform = Transform3D(0.9003188, 0.21761554, -0.37692118, 0, 0.8660254, 0.5, 0.4352311, -0.4501594, 0.77969897, 0, 52.822147, 0)
+light_color = Color(0.8271798, 0.8448478, 0.9568158, 1)
+light_energy = 0.2
+light_specular = 0.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1449650364]
 
