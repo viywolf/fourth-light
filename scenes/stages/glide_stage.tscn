@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_i5f7v"]
 [ext_resource type="Script" uid="uid://dot6rpuygi04q" path="res://scenes/camera.gd" id="2_qi0ma"]
+[ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/collectable.tscn" id="3_qi0ma"]
 
 [sub_resource type="Environment" id="Environment_lroeq"]
 background_mode = 2
@@ -11,6 +12,79 @@ ambient_light_energy = 0.5
 reflected_light_source = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4rnny"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i5f7v"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qi0ma"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_i5f7v"]
+top_radius = 5.0
+bottom_radius = 5.0
+height = 50.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qi0ma"]
+height = 50.0
+radius = 5.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qi0ma"]
+top_radius = 5.0
+bottom_radius = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i5f7v"]
+radius = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lroeq"]
+radius = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4rnny"]
+radius = 5.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lroeq"]
+top_radius = 5.0
+bottom_radius = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_en7q1"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_qi0ma"]
+resource_name = "Platform Rise"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Platforms/Platform8:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(2.2418885, -0.7437191, -14.602976), Vector3(2.2418885, -44.779526, -14.602976), Vector3(2.2418885, -0.7437191, -14.602976)]
+}
+
+[sub_resource type="Animation" id="Animation_lroeq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Platforms/Platform8:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.2418885, -0.7437191, -14.602976)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4rnny"]
+_data = {
+&"Platform Rise": SubResource("Animation_qi0ma"),
+&"RESET": SubResource("Animation_lroeq")
+}
 
 [node name="GlideStage" type="Node3D" unique_id=424875943]
 
@@ -51,3 +125,128 @@ shape = SubResource("SphereShape3D_4rnny")
 spring_length = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="PlayerController/Camera/SpringArm3D" unique_id=1033254465]
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=919653573]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -45.164925, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1711470249]
+mesh = SubResource("BoxMesh_i5f7v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=984841295]
+shape = SubResource("BoxShape3D_qi0ma")
+
+[node name="Platforms" type="Node3D" parent="." unique_id=1225725250]
+
+[node name="Platform" type="StaticBody3D" parent="Platforms" unique_id=1588960287]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -27, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Platform" unique_id=1502950211]
+mesh = SubResource("CylinderMesh_i5f7v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Platform" unique_id=1605901265]
+shape = SubResource("CylinderShape3D_qi0ma")
+
+[node name="Platform2" type="StaticBody3D" parent="Platforms" unique_id=2102085635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.95461, -21.364231, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Platform2" unique_id=2020768289]
+mesh = SubResource("CylinderMesh_i5f7v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Platform2" unique_id=2123345337]
+shape = SubResource("CylinderShape3D_qi0ma")
+
+[node name="Platform3" type="StaticBody3D" parent="Platforms" unique_id=1282308479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.12985, -34.406906, -24.83438)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Platform3" unique_id=269964606]
+mesh = SubResource("CylinderMesh_i5f7v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Platform3" unique_id=816130374]
+shape = SubResource("CylinderShape3D_qi0ma")
+
+[node name="Platform4" type="StaticBody3D" parent="Platforms" unique_id=643249605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.764948, -34.406906, -24.83438)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Platform4" unique_id=323925797]
+mesh = SubResource("CylinderMesh_i5f7v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Platform4" unique_id=1037736379]
+shape = SubResource("CylinderShape3D_qi0ma")
+
+[node name="Platform5" type="StaticBody3D" parent="Platforms" unique_id=1297089455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.235052, -22.406906, -7.834379)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Platform5" unique_id=1887206127]
+mesh = SubResource("CylinderMesh_qi0ma")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Platform5" unique_id=1359262921]
+shape = SubResource("CylinderShape3D_i5f7v")
+
+[node name="Platform6" type="StaticBody3D" parent="Platforms" unique_id=1034678454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2464905, -10.172905, -31.197163)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Platform6" unique_id=793294395]
+mesh = SubResource("CylinderMesh_qi0ma")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Platform6" unique_id=1257447827]
+shape = SubResource("CylinderShape3D_lroeq")
+
+[node name="Platform7" type="StaticBody3D" parent="Platforms" unique_id=272662683]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.75629, -0.7437191, 18.583382)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Platform7" unique_id=1350392949]
+mesh = SubResource("CylinderMesh_qi0ma")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Platform7" unique_id=1263651013]
+shape = SubResource("CylinderShape3D_4rnny")
+
+[node name="Platform8" type="AnimatableBody3D" parent="Platforms" unique_id=1114304820]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2418885, -0.7437191, -14.602976)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Platform8" unique_id=165169062]
+mesh = SubResource("CylinderMesh_lroeq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Platform8" unique_id=829978185]
+shape = SubResource("CylinderShape3D_en7q1")
+
+[node name="Collectables" type="Node3D" parent="." unique_id=874445567]
+
+[node name="Collectable" parent="Collectables" unique_id=514947110 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5853477, 1.8766737, 0)
+
+[node name="Collectable2" parent="Collectables" unique_id=1211835052 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.473377, 4.9333997, 0)
+
+[node name="Collectable3" parent="Collectables" unique_id=1674640974 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.953707, 6.6778874, 0)
+
+[node name="Collectable4" parent="Collectables" unique_id=858337158 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(0.9996713, -0.014107937, -0.021407792, 0.013602475, 0.9996295, -0.023575759, 0.021732466, 0.023276808, 0.9994928, 14.701122, 4.5711484, 10.053754)
+
+[node name="Collectable5" parent="Collectables" unique_id=588106494 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(0.9996713, -0.014107937, -0.021407792, 0.013602475, 0.9996295, -0.023575759, 0.021732466, 0.023276808, 0.9994928, 10.921717, 2.1578584, 20.041283)
+
+[node name="Collectable6" parent="Collectables" unique_id=1158135099 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(0.9996713, -0.014107937, -0.021407792, 0.013602475, 0.9996295, -0.023575759, 0.021732466, 0.023276808, 0.9994928, -4.6063643, -4.784342, 13.718544)
+
+[node name="Collectable7" parent="Collectables" unique_id=347631428 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(0.9996713, -0.014107937, -0.021407792, 0.013602475, 0.9996295, -0.023575759, 0.021732466, 0.023276808, 0.9994928, -12.807271, -13.140366, 5.247267)
+
+[node name="Collectable8" parent="Collectables" unique_id=650187210 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(0.9996713, -0.014107937, -0.021407792, 0.013602475, 0.9996295, -0.023575759, 0.021732466, 0.023276808, 0.9994928, -15.695026, -19.906786, -8.53333)
+
+[node name="Collectable9" parent="Collectables" unique_id=45329288 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(0.9996713, -0.014107937, -0.021407792, 0.013602475, 0.9996295, -0.023575759, 0.021732466, 0.023276808, 0.9994928, -18.126213, -7.2871666, -28.370255)
+
+[node name="Collectable10" parent="Collectables" unique_id=477127264 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(0.9996713, -0.014107937, -0.021407792, 0.013602475, 0.9996295, -0.023575759, 0.021732466, 0.023276808, 0.9994928, -2.1860313, -7.2871666, -31.66996)
+
+[node name="Collectable11" parent="Collectables" unique_id=1233279836 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(0.9996713, -0.014107937, -0.021407792, 0.013602475, 0.9996295, -0.023575759, 0.021732466, 0.023276808, 0.9994928, 14.10424, -7.2871666, -25.725164)
+
+[node name="Collectable12" parent="Collectables" unique_id=1441225427 instance=ExtResource("3_qi0ma")]
+transform = Transform3D(0.9996713, -0.014107937, -0.021407792, 0.013602475, 0.9996295, -0.023575759, 0.021732466, 0.023276808, 0.9994928, 14.10424, 2.7128334, -15.725164)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1293942999]
+libraries/ = SubResource("AnimationLibrary_4rnny")
+autoplay = &"Platform Rise"
