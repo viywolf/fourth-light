@@ -22,8 +22,10 @@ var previous_yaw: float = 0
 
 var is_swimming := false
 
-var swim_speed: float = 20
-var swim_acceleration: float = 40
+var swim_speed: float = 10
+var swim_acceleration: float = 6
+var swim_deceleration: float = 8
+var swim_rise_speed: float = 1
 
 func _physics_process(delta: float) -> void:
 	
@@ -41,15 +43,20 @@ func _physics_process(delta: float) -> void:
 		if node.get_node("Area3D").overlaps_body(self):
 			print("In water")
 			is_swimming = true
+			stop_gliding()
+		else:
+			is_swimming = false
 	
 	if is_swimming:
-		self.velocity = velocity.move_toward(camera_direction * swim_speed, swim_acceleration * delta)
-		movement_direction.y = 0.0
 		movement_direction = movement_direction.normalized()
 		if raw_input != Vector2.ZERO:
-			self.velocity = velocity.move_toward(movement_direction * speed, acceleration * delta)
+			self.velocity = velocity.move_toward(movement_direction * swim_speed, swim_acceleration * delta)
 		else:
-			self.velocity = velocity.move_toward(Vector3.ZERO, deceleration * delta)
+			self.velocity = velocity.move_toward(Vector3.ZERO, swim_deceleration * delta)
+		
+		if Input.is_action_pressed("jump"):
+			self.velocity.y += swim_rise_speed
+			
 		move_and_slide()
 		return
 	
@@ -62,14 +69,13 @@ func _physics_process(delta: float) -> void:
 		if is_gliding == true:
 			$GliderModel.show()
 		else:
-			$GliderModel.hide()
+			stop_gliding()
 		glide_speed = starting_glide_speed
 		glide_speed_y = 0
 	
 	if is_gliding:
 		if is_on_floor():
-			is_gliding = false
-			$GliderModel.hide()
+			stop_gliding()
 		
 		self.rotation.y = camera_direction.x
 		
@@ -99,8 +105,7 @@ func _physics_process(delta: float) -> void:
 			print("Glide speed: " + str(glide_speed))
 		
 		if is_equal_approx(self.velocity.y, -gravity):
-			is_gliding = false
-			$GliderModel.hide()
+			stop_gliding()
 		move_and_slide()
 		return
 	
@@ -123,3 +128,8 @@ func _physics_process(delta: float) -> void:
 	previous_yaw = self.rotation.y
 		
 	move_and_slide()
+
+
+func stop_gliding() -> void:
+	is_gliding = false
+	$GliderModel.hide()
