@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dy8fghsx5oarm"]
+
+[ext_resource type="Script" uid="uid://bscdxnlhxrcdw" path="res://scenes/collectable.gd" id="1_ti8a4"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1vivr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1vivr"]
+
+[node name="Collectable" type="Node3D" unique_id=514947110]
+script = ExtResource("1_ti8a4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1829850265]
+mesh = SubResource("SphereMesh_1vivr")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=278776301]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1854405699]
+shape = SubResource("SphereShape3D_1vivr")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

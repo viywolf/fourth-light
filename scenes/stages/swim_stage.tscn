@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://cot6yv4of8ggl"]
+
+[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_e3lnv"]
+[ext_resource type="Script" uid="uid://dot6rpuygi04q" path="res://scenes/camera.gd" id="2_ihy7i"]
+[ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/collectable.tscn" id="3_qa102"]
+
+[sub_resource type="Environment" id="Environment_ihy7i"]
+background_mode = 2
+ambient_light_source = 3
+ambient_light_color = Color(0.48045176, 0.4937067, 0.44090906, 1)
+ambient_light_energy = 0.5
+reflected_light_source = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qa102"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lelvp"]
+size = Vector3(300, 300, 300)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e3lnv"]
+size = Vector3(300, 300, 300)
+
+[node name="SwimStage" type="Node3D" unique_id=599306705]
+
+[node name="Environment" type="Node3D" parent="." unique_id=1993890957]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=1886942372]
+environment = SubResource("Environment_ihy7i")
+
+[node name="SunDirectionalLight" type="DirectionalLight3D" parent="Environment" unique_id=2030571930]
+transform = Transform3D(-0.93667215, 0.17510371, -0.30328852, 0, 0.8660254, 0.5, 0.35020742, 0.46833608, -0.8111819, 0, 64.41162, 0)
+light_color = Color(0.9704384, 0.9529211, 0.93710184, 1)
+shadow_enabled = true
+
+[node name="BounceDirectionalLight" type="DirectionalLight3D" parent="Environment" unique_id=543056268]
+transform = Transform3D(0.4848096, -0.43730986, 0.7574429, 0, 0.8660254, 0.50000006, -0.8746198, -0.24240479, 0.41985744, 0, 40.63407, 0)
+light_color = Color(0.8271798, 0.8448478, 0.9568158, 1)
+light_energy = 0.2
+light_specular = 0.0
+
+[node name="BounceDirectionalLight2" type="DirectionalLight3D" parent="Environment" unique_id=1871071670]
+transform = Transform3D(0.9003188, 0.21761554, -0.3769212, 0, 0.8660254, 0.5, 0.4352311, -0.4501594, 0.77969897, 0, 52.822147, 0)
+light_color = Color(0.8271798, 0.8448478, 0.9568158, 1)
+light_energy = 0.2
+light_specular = 0.0
+
+[node name="PlayerController" type="Node3D" parent="." unique_id=1027033063]
+
+[node name="Player" parent="PlayerController" unique_id=894728165 instance=ExtResource("1_e3lnv")]
+unique_name_in_owner = true
+
+[node name="Camera" type="Node3D" parent="PlayerController" unique_id=1327005003]
+unique_name_in_owner = true
+script = ExtResource("2_ihy7i")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="PlayerController/Camera" unique_id=1086462052]
+transform = Transform3D(1, 0, 0, 0, 0.9563048, 0.2923717, 0, -0.2923717, 0.9563048, 0, -0.09999359, 0)
+shape = SubResource("SphereShape3D_qa102")
+spring_length = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="PlayerController/Camera/SpringArm3D" unique_id=1063082962]
+
+[node name="Water" type="Node3D" parent="." unique_id=2095803093 groups=["Water"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Water" unique_id=2110960243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007843018, 0, -0.009479761)
+mesh = SubResource("BoxMesh_lelvp")
+
+[node name="Area3D" type="Area3D" parent="Water" unique_id=787119953]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/Area3D" unique_id=736807207]
+shape = SubResource("BoxShape3D_e3lnv")
+
+[node name="Collectable" parent="." unique_id=514947110 instance=ExtResource("3_qa102")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.191589, -6.636549)
+
+[node name="Collectable2" parent="." unique_id=542419756 instance=ExtResource("3_qa102")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.052254, -9.390591)
+
+[node name="Collectable3" parent="." unique_id=171734800 instance=ExtResource("3_qa102")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.858864, -12.716684)
+
+[node name="Collectable4" parent="." unique_id=804267615 instance=ExtResource("3_qa102")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.782372, -16.099787)
+
+[node name="Collectable5" parent="." unique_id=227068987 instance=ExtResource("3_qa102")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.171299, -16.099787)
+
+[node name="Collectable6" parent="." unique_id=1030657065 instance=ExtResource("3_qa102")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.627731, -16.099787)
+
+[node name="Collectable7" parent="." unique_id=1034719119 instance=ExtResource("3_qa102")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.614977, -16.099787)

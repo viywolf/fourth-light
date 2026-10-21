@@ -25,7 +25,7 @@ var is_swimming := false
 var swim_speed: float = 10
 var swim_acceleration: float = 6
 var swim_deceleration: float = 8
-var swim_rise_speed: float = 1
+var swim_rise_speed: float = 0.2
 
 func _physics_process(delta: float) -> void:
 	
@@ -41,7 +41,6 @@ func _physics_process(delta: float) -> void:
 	
 	for node in get_tree().get_nodes_in_group("Water"):
 		if node.get_node("Area3D").overlaps_body(self):
-			print("In water")
 			is_swimming = true
 			stop_gliding()
 		else:
