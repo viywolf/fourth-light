@@ -70,6 +70,7 @@ light_energy = 0.2
 light_specular = 0.0
 
 [node name="PlayerController" type="Node3D" parent="." unique_id=1010644352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7453082, 0)
 
 [node name="Player" parent="PlayerController" unique_id=894728165 instance=ExtResource("1_o5qli")]
 unique_name_in_owner = true

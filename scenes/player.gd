@@ -3,6 +3,13 @@ extends CharacterBody3D
 var speed: float = 8
 var jump_velocity: float = 25
 
+var rotation_speed: float = 12
+
+var last_move_direction: Vector3 = Vector3.BACK
+
+var jumps_left: int = 1
+var coyote_timer: float = 0
+
 # Move this elsewhere to easier change it
 var gravity: float = 70
 
@@ -80,7 +87,6 @@ func _physics_process(delta: float) -> void:
 		
 		var face_direction_up = Vector3.UP.dot(camera_direction)
 		if face_direction_up > 0: #Looking above the horizon
-			print("llonign up")
 			glide_speed = move_toward(glide_speed, 0, gravity * delta * glide_speed_retainment_rate * face_direction_up)
 			glide_speed_y = move_toward(glide_speed_y, -gravity, gravity * delta * glide_speed_retainment_rate * face_direction_up)
 		else:
@@ -99,7 +105,7 @@ func _physics_process(delta: float) -> void:
 		self.velocity = velocity.move_toward(camera_direction * glide_speed, acceleration * delta)
 		self.velocity.y += glide_speed_y / 5
 		
-		if true:
+		if false:
 			print("Velocity y: " + str(velocity.y))
 			print("Glide speed: " + str(glide_speed))
 		
@@ -116,17 +122,27 @@ func _physics_process(delta: float) -> void:
 	else:
 		self.velocity = velocity.move_toward(Vector3.ZERO, deceleration * delta)
 	
-	var is_starting_jump: bool = Input.is_action_just_pressed("jump") and is_on_floor()
+	if is_on_floor() == false:
+		self.velocity.y = move_toward(self.velocity.y, -gravity, gravity * delta)
+		coyote_timer -= delta
+	else:
+		coyote_timer = 1
+		jumps_left = 1
+		
+	var is_starting_jump: bool = Input.is_action_just_pressed("jump") and coyote_timer > 0 and jumps_left > 0
 	
 	if is_starting_jump:
 		self.velocity.y = jump_velocity
-	
-	if is_on_floor() == false:
-		self.velocity.y = move_toward(self.velocity.y, -gravity, gravity * delta)
+		jumps_left -= 1
 		
 	previous_yaw = self.rotation.y
 		
 	move_and_slide()
+	
+	if movement_direction.length() > 0.2:
+		last_move_direction = movement_direction
+	var target_angle: float = Vector3.BACK.signed_angle_to(last_move_direction, Vector3.UP)
+	self.global_rotation.y = lerp_angle(self.global_rotation.y, target_angle, rotation_speed * delta)
 
 
 func stop_gliding() -> void:

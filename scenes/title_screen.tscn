@@ -8,15 +8,35 @@ script = ExtResource("1_fgkus")
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1818300750]
 visible = false
 offset_left = 281.0
-offset_top = 23.0
-offset_right = 881.0
-offset_bottom = 623.0
+offset_top = 119.0
+offset_right = 889.0
+offset_bottom = 553.0
 columns = 3
+
+[node name="BackToMenuButton" type="Button" parent="GridContainer" unique_id=227201344]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "Back"
+
+[node name="MainSceneButton" type="Button" parent="GridContainer" unique_id=1488468598]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "Go to main scene"
 
 [node name="MovementSceneButton" type="Button" parent="GridContainer" unique_id=1194481367]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 text = "Go to movement scene"
+
+[node name="GlideSceneButton" type="Button" parent="GridContainer" unique_id=289763525]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "Go to glide scene"
+
+[node name="SwimSceneButton" type="Button" parent="GridContainer" unique_id=2130400240]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "Go to swim scene"
 
 [node name="MainTitleScreen" type="HBoxContainer" parent="." unique_id=1138618579]
 offset_right = 1151.0
@@ -53,6 +73,10 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
+[connection signal="pressed" from="GridContainer/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
+[connection signal="pressed" from="GridContainer/MainSceneButton" to="." method="_on_main_scene_button_pressed"]
 [connection signal="pressed" from="GridContainer/MovementSceneButton" to="." method="_on_movement_scene_button_pressed"]
+[connection signal="pressed" from="GridContainer/GlideSceneButton" to="." method="_on_glide_scene_button_pressed"]
+[connection signal="pressed" from="GridContainer/SwimSceneButton" to="." method="_on_swim_scene_button_pressed"]
 [connection signal="pressed" from="MainTitleScreen/ButtonsContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MainTitleScreen/ButtonsContainer/QuitButton" to="." method="_on_quit_button_pressed"]
