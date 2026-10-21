@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://dqkfntt42nfnm"]
 
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://bnoe4agqvrt6o" path="res://blender/rock2.blend" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://b6xv3f3b8dln0" path="res://blender/rock1.blend" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://dot6rpuygi04q" path="res://scenes/camera.gd" id="2_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://ow80tfbkmu8s" path="res://blender/rock3.blend" id="4_jyhfs"]
 
 [sub_resource type="Environment" id="Environment_1vivr"]
 background_mode = 2
@@ -15,8 +19,10 @@ size = Vector3(100, 1, 100)
 [sub_resource type="BoxMesh" id="BoxMesh_1vivr"]
 size = Vector3(100, 1, 100)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_tefeu"]
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1vivr"]
-height = 4.4174805
+height = 22.0
 radius = 3.8833008
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1vivr"]
@@ -64,15 +70,29 @@ shape = SubResource("BoxShape3D_1vivr")
 mesh = SubResource("BoxMesh_1vivr")
 
 [node name="Player" parent="." unique_id=894728165 instance=ExtResource("1_o5qli")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.823193, 12.00992, -3.7149725)
 
+[node name="Camera" type="Node3D" parent="." unique_id=1604678607]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.823193, 12.624077, -3.7149725)
+script = ExtResource("2_tbgi4")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Camera" unique_id=734279703]
+transform = Transform3D(1, 0, 0, 0, 0.9563048, 0.2923717, 0, -0.2923717, 0.9563048, 0, -0.09999359, 0)
+shape = SubResource("SphereShape3D_tefeu")
+spring_length = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="Camera/SpringArm3D" unique_id=941048303]
+
 [node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=2070174269]
-transform = Transform3D(1, 0, 0, 0, 5.4209795, 0, 0, 0, 1, -10.774181, 1.2087402, -3.5316324)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.774181, 1.2087402, -3.5316324)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=2135093984]
 shape = SubResource("CylinderShape3D_1vivr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=857523055]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_1vivr")
 
 [node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=295458537]
@@ -83,3 +103,12 @@ mesh = SubResource("CylinderMesh_o5qli")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=864189345]
 shape = SubResource("CylinderShape3D_o5qli")
+
+[node name="rock1" parent="." unique_id=1241940159 instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.896542, 1.9176118, -39.706028)
+
+[node name="rock2" parent="." unique_id=88908993 instance=ExtResource("1_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.140236, 1.0803651, -39.09682)
+
+[node name="rock3" parent="." unique_id=438768886 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(-0.23871662, -1.8496592, 0, 1.8496592, -0.23871662, 0, 0, 0, 1.865, 16.52932, 0.51082695, -39.34876)
