@@ -12,6 +12,8 @@ ambient_light_source = 3
 ambient_light_color = Color(0.48045176, 0.4937067, 0.44090906, 1)
 ambient_light_energy = 0.5
 reflected_light_source = 1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1vivr"]
 size = Vector3(100, 1, 100)
@@ -38,6 +40,12 @@ height = 17.542
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_o5qli"]
 height = 17.542
 radius = 3.8833008
+
+[sub_resource type="BoxMesh" id="BoxMesh_8vrlf"]
+size = Vector3(10, 10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8vrlf"]
+size = Vector3(10, 10, 10)
 
 [node name="Main" type="Node3D" unique_id=404240586]
 
@@ -112,3 +120,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.140236, 1.0803651, -39.096
 
 [node name="rock3" parent="." unique_id=438768886 instance=ExtResource("4_jyhfs")]
 transform = Transform3D(-0.23871662, -1.8496592, 0, 1.8496592, -0.23871662, 0, 0, 0, 1.865, 16.52932, 0.51082695, -39.34876)
+
+[node name="Water" type="Node3D" parent="." unique_id=2039063405 groups=["Water"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Water" unique_id=1328533477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9603424, 27.349834)
+mesh = SubResource("BoxMesh_8vrlf")
+
+[node name="Area3D" type="Area3D" parent="Water" unique_id=1587375988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9603424, 27.349834)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/Area3D" unique_id=1937174628]
+shape = SubResource("BoxShape3D_8vrlf")

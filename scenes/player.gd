@@ -3,12 +3,13 @@ extends CharacterBody3D
 var speed: float = 8
 var jump_velocity: float = 25
 
+# Move this elsewhere to easier change it
+var gravity: float = 70
+
 var acceleration: float = 50
 var deceleration: float = 50
 
 var is_gliding := false
-# Move this elsewhere to easier change it
-var gravity: float = 70
 
 var max_glide_speed: float = 30
 var starting_glide_speed: float = 20
@@ -19,7 +20,41 @@ var glide_turning_speed_decrease: float = 8
 
 var previous_yaw: float = 0
 
+var is_swimming := false
+
+var swim_speed: float = 20
+var swim_acceleration: float = 40
+
 func _physics_process(delta: float) -> void:
+	
+	# Get basic inputs
+	var camera_direction: Vector3 = -%Camera.global_basis.z
+	var raw_input: Vector2 = Input.get_vector("left", "right", "forward", "backward")
+	var local_forward: Vector3 = %Camera.global_basis.z
+	var local_right: Vector3 = %Camera.global_basis.x
+	
+	var movement_direction: Vector3 = (local_forward * raw_input.y) + (local_right * raw_input.x)
+	
+	# Swimming
+	
+	for node in get_tree().get_nodes_in_group("Water"):
+		if node.get_node("Area3D").overlaps_body(self):
+			print("In water")
+			is_swimming = true
+	
+	if is_swimming:
+		self.velocity = velocity.move_toward(camera_direction * swim_speed, swim_acceleration * delta)
+		movement_direction.y = 0.0
+		movement_direction = movement_direction.normalized()
+		if raw_input != Vector2.ZERO:
+			self.velocity = velocity.move_toward(movement_direction * speed, acceleration * delta)
+		else:
+			self.velocity = velocity.move_toward(Vector3.ZERO, deceleration * delta)
+		move_and_slide()
+		return
+	
+	# Gliding
+	
 	var yaw_difference: float = previous_yaw - self.rotation.y
 	
 	if Input.is_action_just_pressed("glide"):
@@ -36,7 +71,6 @@ func _physics_process(delta: float) -> void:
 			is_gliding = false
 			$GliderModel.hide()
 		
-		var camera_direction: Vector3 = -%Camera.global_basis.z
 		self.rotation.y = camera_direction.x
 		
 		var face_direction_up = Vector3.UP.dot(camera_direction)
@@ -70,11 +104,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	
-	var raw_input: Vector2 = Input.get_vector("left", "right", "forward", "backward")
-	var local_forward: Vector3 = %Camera.global_basis.z
-	var local_right: Vector3 = %Camera.global_basis.x
-	
-	var movement_direction: Vector3 = (local_forward * raw_input.y) + (local_right * raw_input.x)
+	# Walking
 	movement_direction.y = 0.0
 	movement_direction = movement_direction.normalized()
 	if raw_input != Vector2.ZERO:
