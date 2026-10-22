@@ -27,23 +27,34 @@ var deceleration: float = 50
 
 var is_gliding := false
 
-var max_glide_speed: float = 35
-var starting_glide_speed: float = 5
+var glide_max_speed: float = 35
+var glide_starting_speed: float = 5
 var glide_speed: float = 10
 var glide_speed_y: float = 0
 var glide_speed_retainment_rate: float = 0.25
 var glide_turning_speed_decrease: float = 150
-var gliding_gravity: float = 10
+var glide_gravity: float = 10
 
 var yaw_difference: float = 0
 var previous_yaw: float = 0
 
 var is_swimming := false
+var is_underwater := false
+
+var is_head_under_water := false
+var bob_velocity: float = 5
+
+var is_diving := false
+var dive_timer: float = 0
+var dive_time: float = 2
+var dive_speed: float = 5
 
 var swim_speed: float = 10
 var swim_acceleration: float = 6
 var swim_deceleration: float = 8
 var swim_rise_speed: float = 0.2
+var swim_sink_speed: float = 0.2
+var swim_max_vertical_speed: float = 10
 
 func _physics_process(delta: float) -> void:
 	# Get basic inputs
@@ -56,6 +67,18 @@ func _physics_process(delta: float) -> void:
 	yaw_difference = previous_yaw - self.rotation.y
 	previous_yaw = self.rotation.y
 	
+	# Gliding
+	
+	if Input.is_action_just_pressed("movement_ability"):
+		is_gliding = !is_gliding
+		if is_gliding == true:
+			$GliderModel.show()
+		else:
+			stop_gliding()
+		glide_speed = glide_starting_speed
+		glide_speed_y = 0
+		
+		
 	# Swimming
 	
 	for node in get_tree().get_nodes_in_group("Water"):
@@ -64,20 +87,22 @@ func _physics_process(delta: float) -> void:
 			stop_gliding()
 		else:
 			is_swimming = false
-	
-	# Gliding
-	
-	if Input.is_action_just_pressed("glide"):
-		is_gliding = !is_gliding
-		if is_gliding == true:
-			$GliderModel.show()
+			
+		if node.get_node("Area3D").overlaps_body($HeadPosition):
+			is_head_under_water = true
 		else:
-			stop_gliding()
-		glide_speed = starting_glide_speed
-		glide_speed_y = 0
+			is_head_under_water = false
+			
+	if Input.is_action_just_pressed("movement_ability") and is_swimming:
+		is_diving = true
+		
 	
-	
-	if is_swimming:
+	if is_diving:
+		dive_timer = dive_time
+		dive_into_water(delta)
+		swim_movement(delta)
+	elif is_swimming:
+		stay_above_water(delta)
 		swim_movement(delta)
 	elif is_gliding:
 		glide_movement(delta)
@@ -136,7 +161,7 @@ func glide_movement(delta: float) -> void:
 		glide_speed_y -= glide_speed_diff / glide_speed_retainment_rate * delta
 	else:
 		# Glide speed increases based on how much it is facing down (0 to 1)
-		glide_speed += face_direction_down * delta * (max_glide_speed)
+		glide_speed += face_direction_down * delta * (glide_max_speed)
 		if glide_speed > 2:
 			glide_speed_y = move_toward(glide_speed_y, 0, gravity * delta * glide_speed_retainment_rate)
 		else:
@@ -144,14 +169,14 @@ func glide_movement(delta: float) -> void:
 		
 	#glide_speed -= abs(yaw_difference * delta * glide_turning_speed_decrease)
 	
-	glide_speed = clampf(glide_speed, 0, max_glide_speed)
+	glide_speed = clampf(glide_speed, 0, glide_max_speed)
 	if glide_speed < 2:
-		glide_speed_y -= gliding_gravity * delta
-		glide_speed_y = clampf(glide_speed_y, -gliding_gravity, glide_speed_y)
+		glide_speed_y -= glide_gravity * delta
+		glide_speed_y = clampf(glide_speed_y, -glide_gravity, glide_speed_y)
 	
 	self.velocity = velocity.move_toward(camera_direction * glide_speed, acceleration * delta)
 	self.velocity.y += glide_speed_y / 5
-	self.velocity.y = clampf(self.velocity.y, -gliding_gravity, self.velocity.y)
+	self.velocity.y = clampf(self.velocity.y, -glide_gravity, self.velocity.y)
 		
 	%GlideLabel.text = "Glide Speed: " + str(round(glide_speed))
 	%HeightLabel.text = "Height: " + str(round(self.global_position.y))
@@ -165,6 +190,18 @@ func stop_gliding() -> void:
 	is_gliding = false
 	$GliderModel.hide()
 
+
+func stay_above_water(delta: float) -> void:
+	if is_head_under_water:
+		self.velocity.y -= bob_velocity * delta
+
+
+func dive_into_water(delta: float) -> void:
+	self.velocity.y = dive_speed
+	dive_timer -= delta
+	if dive_timer <= 0:
+		is_diving = false
+
 	
 func swim_movement(delta: float) -> void:
 	movement_direction = movement_direction.normalized()
@@ -175,5 +212,9 @@ func swim_movement(delta: float) -> void:
 	
 	if Input.is_action_pressed("jump"):
 		self.velocity.y += swim_rise_speed
+	elif Input.is_action_pressed("shift"):
+		self.velocity.y -= swim_sink_speed
+		
+	self.velocity.y = clampf(self.velocity.y, -swim_max_vertical_speed, swim_max_vertical_speed)
 		
 	move_and_slide()

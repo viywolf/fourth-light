@@ -90,3 +90,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.627731, -16.099787)
 
 [node name="Collectable7" parent="." unique_id=1034719119 instance=ExtResource("3_qa102")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.614977, -16.099787)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1240013889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5305773, -2.2753701)
+text = "WASD to move in the direction you are facing. Press SPACE to rise up and SHIFT to sink down."
