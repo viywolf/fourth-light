@@ -23,12 +23,13 @@ var deceleration: float = 50
 
 var is_gliding := false
 
-var max_glide_speed: float = 30
-var starting_glide_speed: float = 20
+var max_glide_speed: float = 35
+var starting_glide_speed: float = 5
 var glide_speed: float = 10
-var glide_speed_y: float
-var glide_speed_retainment_rate: float = 0.05
-var glide_turning_speed_decrease: float = 8
+var glide_speed_y: float = 0
+var glide_speed_retainment_rate: float = 0.25
+var glide_turning_speed_decrease: float = 150
+var gliding_gravity: float = 10
 
 var yaw_difference: float = 0
 var previous_yaw: float = 0
@@ -49,6 +50,7 @@ func _physics_process(delta: float) -> void:
 	camera_direction = -%Camera.global_basis.z
 	movement_direction = (local_forward * raw_input.y) + (local_right * raw_input.x)
 	yaw_difference = previous_yaw - self.rotation.y
+	previous_yaw = self.rotation.y
 	
 	# Swimming
 	
@@ -100,8 +102,6 @@ func ground_movement(delta: float) -> void:
 		self.velocity.y = jump_velocity
 		jumps_left -= 1
 		
-	previous_yaw = self.rotation.y
-		
 	move_and_slide()
 	
 	if movement_direction.length() > 0.2:
@@ -119,31 +119,31 @@ func glide_movement(delta: float) -> void:
 	var face_direction_up = Vector3.UP.dot(camera_direction)
 	var face_direction_down = Vector3.DOWN.dot(camera_direction)
 	if face_direction_up > 0: #Looking above the horizon
-		# Glide speed decreases towards 0, glide speed y decreases towards negative gravity
+		# Glide speed decreases towards 0
 		var glide_speed_diff: float = glide_speed - move_toward(glide_speed, 0, gravity * delta * glide_speed_retainment_rate * face_direction_up)
 		glide_speed = move_toward(glide_speed, 0, gravity * delta * glide_speed_retainment_rate * face_direction_up)
-		glide_speed_y -= glide_speed_diff 
-		#move_toward(glide_speed_y, -gravity, gravity * delta * glide_speed_retainment_rate * face_direction_down)
+		glide_speed_y -= glide_speed_diff / glide_speed_retainment_rate * delta
 	else:
 		# Glide speed increases based on how much it is facing down (0 to 1)
-		glide_speed += face_direction_down * delta * (max_glide_speed / 2)
+		glide_speed += face_direction_down * delta * (max_glide_speed)
 		if glide_speed > 2:
-			glide_speed_y = 0
+			glide_speed_y = move_toward(glide_speed_y, 0, gravity * delta * glide_speed_retainment_rate)
 		else:
 			glide_speed_y -= gravity * delta * glide_speed_retainment_rate
 		
-	#glide_speed -= yaw_difference * delta * glide_turning_speed_decrease
+	#glide_speed -= abs(yaw_difference * delta * glide_turning_speed_decrease)
 	
 	glide_speed = clampf(glide_speed, 0, max_glide_speed)
 	if glide_speed < 2:
-		glide_speed_y -= gravity * delta
+		glide_speed_y -= gliding_gravity * delta
+		glide_speed_y = clampf(glide_speed_y, -gliding_gravity, glide_speed_y)
 	
 	self.velocity = velocity.move_toward(camera_direction * glide_speed, acceleration * delta)
 	self.velocity.y += glide_speed_y / 5
-	
-	if true:
-		print("Velocity y: " + str(velocity.y))
-		print("Glide speed: " + str(glide_speed))
+	self.velocity.y = clampf(self.velocity.y, -gliding_gravity, self.velocity.y)
+		
+	%GlideLabel.text = "Glide Speed: " + str(round(glide_speed))
+	%HeightLabel.text = "Height: " + str(round(self.global_position.y))
 	
 	if is_equal_approx(self.velocity.y, -gravity):
 		stop_gliding()

@@ -28,6 +28,15 @@ height = 50.0
 height = 50.0
 radius = 5.0
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_4rnny"]
+top_radius = 5.0
+bottom_radius = 5.0
+height = 200.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h0baf"]
+height = 200.0
+radius = 5.0
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_qi0ma"]
 top_radius = 5.0
 bottom_radius = 5.0
@@ -173,6 +182,15 @@ mesh = SubResource("CylinderMesh_i5f7v")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Platform4" unique_id=1037736379]
 shape = SubResource("CylinderShape3D_qi0ma")
 
+[node name="Platform9" type="StaticBody3D" parent="Platforms" unique_id=686645470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.418512, -34.406906, 20.783907)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Platform9" unique_id=347351758]
+mesh = SubResource("CylinderMesh_4rnny")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Platform9" unique_id=1057834984]
+shape = SubResource("CylinderShape3D_h0baf")
+
 [node name="Platform5" type="StaticBody3D" parent="Platforms" unique_id=1297089455]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.235052, -22.406906, -7.834379)
 
@@ -250,3 +268,7 @@ transform = Transform3D(0.9996713, -0.014107937, -0.021407792, 0.013602475, 0.99
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1293942999]
 libraries/ = SubResource("AnimationLibrary_4rnny")
 autoplay = &"Platform Rise"
+
+[node name="Label3D" type="Label3D" parent="." unique_id=597560289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.023757)
+text = "Press Q to fly while midair"
