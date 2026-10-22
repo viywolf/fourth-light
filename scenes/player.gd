@@ -117,17 +117,22 @@ func glide_movement(delta: float) -> void:
 	self.rotation.y = camera_direction.x
 	
 	var face_direction_up = Vector3.UP.dot(camera_direction)
+	var face_direction_down = Vector3.DOWN.dot(camera_direction)
 	if face_direction_up > 0: #Looking above the horizon
+		# Glide speed decreases towards 0, glide speed y decreases towards negative gravity
+		var glide_speed_diff: float = glide_speed - move_toward(glide_speed, 0, gravity * delta * glide_speed_retainment_rate * face_direction_up)
 		glide_speed = move_toward(glide_speed, 0, gravity * delta * glide_speed_retainment_rate * face_direction_up)
-		glide_speed_y = move_toward(glide_speed_y, -gravity, gravity * delta * glide_speed_retainment_rate * face_direction_up)
+		glide_speed_y -= glide_speed_diff 
+		#move_toward(glide_speed_y, -gravity, gravity * delta * glide_speed_retainment_rate * face_direction_down)
 	else:
-		glide_speed += Vector3.DOWN.dot(camera_direction) * delta * speed * glide_speed_retainment_rate
+		# Glide speed increases based on how much it is facing down (0 to 1)
+		glide_speed += face_direction_down * delta * (max_glide_speed / 2)
 		if glide_speed > 2:
 			glide_speed_y = 0
 		else:
-			glide_speed_y -= gravity * delta
+			glide_speed_y -= gravity * delta * glide_speed_retainment_rate
 		
-	glide_speed -= yaw_difference * delta * glide_turning_speed_decrease
+	#glide_speed -= yaw_difference * delta * glide_turning_speed_decrease
 	
 	glide_speed = clampf(glide_speed, 0, max_glide_speed)
 	if glide_speed < 2:
@@ -136,7 +141,7 @@ func glide_movement(delta: float) -> void:
 	self.velocity = velocity.move_toward(camera_direction * glide_speed, acceleration * delta)
 	self.velocity.y += glide_speed_y / 5
 	
-	if false:
+	if true:
 		print("Velocity y: " + str(velocity.y))
 		print("Glide speed: " + str(glide_speed))
 	
