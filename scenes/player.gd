@@ -6,19 +6,23 @@ var camera_direction: Vector3
 var raw_input: Vector2
 
 var speed: float = 8
-var jump_velocity: float = 25
+var jump_velocity: float = 35
 
 var rotation_speed: float = 12
 
 var last_move_direction: Vector3 = Vector3.BACK
 
 var jumps_left: int = 1
+
+var jump_timer: float = 0
+var jump_cooldown: float = 0.1
+
 var coyote_timer: float = 0
+var coyote_time: float = 0.15
 
-# Move this elsewhere to easier change it
-var gravity: float = 70
+var gravity: float = 110
 
-var acceleration: float = 50
+var acceleration: float = 25
 var deceleration: float = 50
 
 var is_gliding := false
@@ -93,14 +97,21 @@ func ground_movement(delta: float) -> void:
 		self.velocity.y = move_toward(self.velocity.y, -gravity, gravity * delta)
 		coyote_timer -= delta
 	else:
-		coyote_timer = 1
+		coyote_timer = coyote_time
 		jumps_left = 1
+		jump_timer -= delta
 		
-	var is_starting_jump: bool = Input.is_action_just_pressed("jump") and coyote_timer > 0 and jumps_left > 0
+	var is_starting_jump: bool = (
+		Input.is_action_pressed("jump") 
+		and coyote_timer > 0
+		and jumps_left > 0
+		and jump_timer <= 0
+		)
 	
 	if is_starting_jump:
 		self.velocity.y = jump_velocity
 		jumps_left -= 1
+		jump_timer = jump_cooldown
 		
 	move_and_slide()
 	
@@ -150,6 +161,11 @@ func glide_movement(delta: float) -> void:
 	move_and_slide()
 	
 	
+func stop_gliding() -> void:
+	is_gliding = false
+	$GliderModel.hide()
+
+	
 func swim_movement(delta: float) -> void:
 	movement_direction = movement_direction.normalized()
 	if raw_input != Vector2.ZERO:
@@ -161,8 +177,3 @@ func swim_movement(delta: float) -> void:
 		self.velocity.y += swim_rise_speed
 		
 	move_and_slide()
-
-
-func stop_gliding() -> void:
-	is_gliding = false
-	$GliderModel.hide()

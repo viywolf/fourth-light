@@ -20,6 +20,7 @@ mesh = SubResource("CapsuleMesh_1vivr")
 
 [node name="GliderModel" type="MeshInstance3D" parent="." unique_id=2121960748]
 transform = Transform3D(1, 0, 0, 0, 0.58778524, 0.809017, 0, -0.809017, 0.58778524, 0.01369977, 0.24963081, -0.5934621)
+visible = false
 mesh = SubResource("BoxMesh_1vivr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=701054313]
