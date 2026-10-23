@@ -4,6 +4,9 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1vivr"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_1vivr"]
+radius = 0.1
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1vivr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1vivr"]
@@ -15,8 +18,11 @@ script = ExtResource("1_3vyb7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=721722052]
 shape = SubResource("CapsuleShape3D_1vivr")
 
-[node name="HeadPosition" type="Node3D" parent="." unique_id=186110230]
+[node name="HeadPosition" type="Area3D" parent="." unique_id=2050383787]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75445354, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeadPosition" unique_id=2067663216]
+shape = SubResource("SphereShape3D_1vivr")
 
 [node name="PlayerModel" type="MeshInstance3D" parent="." unique_id=1207075548]
 mesh = SubResource("CapsuleMesh_1vivr")

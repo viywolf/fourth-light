@@ -10,7 +10,14 @@ var jump_velocity: float = 35
 
 var rotation_speed: float = 12
 
+var gravity: float = 110
+
+var acceleration: float = 25
+var deceleration: float = 50
+
 var last_move_direction: Vector3 = Vector3.BACK
+
+#region - Jumping Variables
 
 var jumps_left: int = 1
 
@@ -20,10 +27,9 @@ var jump_cooldown: float = 0.1
 var coyote_timer: float = 0
 var coyote_time: float = 0.15
 
-var gravity: float = 110
+#endregion
 
-var acceleration: float = 25
-var deceleration: float = 50
+#region - Gliding Variables
 
 var is_gliding := false
 
@@ -38,16 +44,21 @@ var glide_gravity: float = 10
 var yaw_difference: float = 0
 var previous_yaw: float = 0
 
+#endregion
+
+#region - Swimming Variables
+
 var is_swimming := false
 var is_underwater := false
 
 var is_head_under_water := false
-var bob_velocity: float = 5
+var bob_velocity: float = 60
 
 var is_diving := false
+var has_dived := false
 var dive_timer: float = 0
-var dive_time: float = 2
-var dive_speed: float = 5
+var dive_time: float = 1
+var dive_speed: float = 30
 
 var swim_speed: float = 10
 var swim_acceleration: float = 6
@@ -55,6 +66,8 @@ var swim_deceleration: float = 8
 var swim_rise_speed: float = 0.2
 var swim_sink_speed: float = 0.2
 var swim_max_vertical_speed: float = 10
+
+#endregion
 
 func _physics_process(delta: float) -> void:
 	# Get basic inputs
@@ -88,21 +101,24 @@ func _physics_process(delta: float) -> void:
 		else:
 			is_swimming = false
 			
-		if node.get_node("Area3D").overlaps_body($HeadPosition):
+		if node.get_node("Area3D").overlaps_area($HeadPosition):
 			is_head_under_water = true
 		else:
 			is_head_under_water = false
+			has_dived = false
 			
 	if Input.is_action_just_pressed("movement_ability") and is_swimming:
 		is_diving = true
+		dive_timer = dive_time
 		
 	
 	if is_diving:
-		dive_timer = dive_time
 		dive_into_water(delta)
 		swim_movement(delta)
-	elif is_swimming:
+	elif is_swimming and !has_dived:
 		stay_above_water(delta)
+		swim_movement(delta)
+	elif is_swimming:
 		swim_movement(delta)
 	elif is_gliding:
 		glide_movement(delta)
@@ -193,14 +209,15 @@ func stop_gliding() -> void:
 
 func stay_above_water(delta: float) -> void:
 	if is_head_under_water:
-		self.velocity.y -= bob_velocity * delta
+		self.velocity.y += bob_velocity * delta
 
 
 func dive_into_water(delta: float) -> void:
-	self.velocity.y = dive_speed
+	self.velocity.y = -dive_speed
 	dive_timer -= delta
 	if dive_timer <= 0:
 		is_diving = false
+		has_dived = true
 
 	
 func swim_movement(delta: float) -> void:
