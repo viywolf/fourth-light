@@ -50,14 +50,18 @@ size = Vector3(30, 30, 30)
 [sub_resource type="PlaneMesh" id="PlaneMesh_1vivr"]
 size = Vector2(20, 20)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0kjrq"]
-cull_mode = 2
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tipki"]
+fractal_type = 2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6xl0"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o6xl0"]
+noise = SubResource("FastNoiseLite_tipki")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
 render_priority = 0
 shader = ExtResource("6_o6xl0")
-shader_parameter/colour = Color(0.57889366, 0.6812701, 0.43072516, 1)
-shader_parameter/colour2 = Color(0.06455705, 0.25932175, 0.421155, 1)
+shader_parameter/colour = Color(0.63872033, 0.68965715, 0.3445679, 1)
+shader_parameter/colour2 = Color(0.105440564, 0.25621927, 0.27940604, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_o6xl0")
 shader_parameter/noiseScale = 20.0
 
 [sub_resource type="MultiMesh" id="MultiMesh_o6xl0"]
@@ -162,7 +166,6 @@ cast_shadow = 0
 mesh = SubResource("PlaneMesh_1vivr")
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Grass" unique_id=672226735]
-material_override = SubResource("StandardMaterial3D_0kjrq")
-material_overlay = SubResource("ShaderMaterial_o6xl0")
+material_override = SubResource("ShaderMaterial_tipki")
 cast_shadow = 0
 multimesh = SubResource("MultiMesh_o6xl0")

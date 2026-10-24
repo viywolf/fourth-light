@@ -1,4 +1,5 @@
 shader_type spatial;
+render_mode cull_disabled;
 
 uniform vec3 colour: source_color;
 uniform vec3 colour2: source_color;
@@ -13,7 +14,10 @@ void vertex() {
 
 void fragment() {
 	vec3 noiseLevel = texture(noise, worldPos.xz / noiseScale).rgb;
-	ALBEDO = mix(colour, colour2, UV.y);
+	ALBEDO = mix(colour, colour2, UV.y) * mix(colour, colour2, noiseLevel.r);
+	if (!FRONT_FACING){
+		NORMAL = -NORMAL;
+	}
 }
 
 //void light() {
