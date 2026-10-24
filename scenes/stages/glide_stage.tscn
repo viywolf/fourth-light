@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cj4ojt4invmyh"]
 
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_i5f7v"]
+[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_lroeq"]
 [ext_resource type="Script" uid="uid://dot6rpuygi04q" path="res://scenes/camera.gd" id="2_qi0ma"]
 [ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/collectable.tscn" id="3_qi0ma"]
 
@@ -96,6 +97,8 @@ _data = {
 }
 
 [node name="GlideStage" type="Node3D" unique_id=424875943]
+
+[node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_lroeq")]
 
 [node name="Environment" type="Node3D" parent="." unique_id=1239470786]
 

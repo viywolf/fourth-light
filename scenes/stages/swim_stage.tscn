@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cot6yv4of8ggl"]
 
+[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_a303w"]
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_e3lnv"]
 [ext_resource type="Script" uid="uid://dot6rpuygi04q" path="res://scenes/camera.gd" id="2_ihy7i"]
 [ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/collectable.tscn" id="3_qa102"]
@@ -20,6 +21,8 @@ size = Vector3(300, 300, 300)
 size = Vector3(300, 300, 300)
 
 [node name="SwimStage" type="Node3D" unique_id=599306705]
+
+[node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_a303w")]
 
 [node name="Environment" type="Node3D" parent="." unique_id=1993890957]
 

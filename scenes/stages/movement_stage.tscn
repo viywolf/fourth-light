@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b0mhf5hr4jq3a"]
 
 [ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/collectable.tscn" id="1_8k35l"]
+[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_d6qtq"]
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_io46t"]
 [ext_resource type="Script" uid="uid://dot6rpuygi04q" path="res://scenes/camera.gd" id="2_d6qtq"]
 
@@ -26,6 +27,8 @@ size = Vector3(5, 0.5, 5)
 size = Vector3(5, 0.5, 5)
 
 [node name="MovementStage" type="Node3D" unique_id=617576540]
+
+[node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_d6qtq")]
 
 [node name="Environment" type="Node3D" parent="." unique_id=1208183573]
 

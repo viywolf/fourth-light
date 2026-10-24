@@ -12,6 +12,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED):
 			camera_input_direction = event.screen_relative * mouse_sensitivity
 			
+			
 func _physics_process(delta: float) -> void:
 	self.rotation.x -= camera_input_direction.y * delta
 	self.rotation.x = clamp(self.rotation.x, -PI / 3.0, PI / 6.0)
