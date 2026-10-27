@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://btjl8wi7aaiqn"]
+
+[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_4t1lv"]
+[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="2_c3gfm"]
+[ext_resource type="Script" uid="uid://dot6rpuygi04q" path="res://scenes/camera.gd" id="3_12xdt"]
+
+[sub_resource type="Environment" id="Environment_aw8p0"]
+background_mode = 2
+ambient_light_source = 3
+ambient_light_color = Color(0.48045176, 0.4937067, 0.44090906, 1)
+ambient_light_energy = 0.5
+reflected_light_source = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2p5uw"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1vivr"]
+size = Vector2(16, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1vivr"]
+size = Vector3(16, 2, 16)
+
+[node name="ChunkLoadingTest" type="Node3D" unique_id=1093858828]
+
+[node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_4t1lv")]
+
+[node name="Environment" type="Node3D" parent="." unique_id=1481713501]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=1022533608]
+environment = SubResource("Environment_aw8p0")
+
+[node name="SunDirectionalLight" type="DirectionalLight3D" parent="Environment" unique_id=881008588]
+transform = Transform3D(-0.93667215, 0.17510371, -0.30328852, 0, 0.8660254, 0.5, 0.35020742, 0.46833608, -0.8111819, 0, 64.41162, 0)
+light_color = Color(0.9704384, 0.9529211, 0.93710184, 1)
+shadow_enabled = true
+
+[node name="BounceDirectionalLight" type="DirectionalLight3D" parent="Environment" unique_id=365129698]
+transform = Transform3D(0.4848096, -0.43730986, 0.7574429, 0, 0.8660254, 0.50000006, -0.8746198, -0.24240479, 0.41985744, 0, 40.63407, 0)
+light_color = Color(0.8271798, 0.8448478, 0.9568158, 1)
+light_energy = 0.2
+light_specular = 0.0
+
+[node name="BounceDirectionalLight2" type="DirectionalLight3D" parent="Environment" unique_id=538847574]
+transform = Transform3D(0.9003188, 0.21761554, -0.3769212, 0, 0.8660254, 0.5, 0.4352311, -0.4501594, 0.77969897, 0, 52.822147, 0)
+light_color = Color(0.8271798, 0.8448478, 0.9568158, 1)
+light_energy = 0.2
+light_specular = 0.0
+
+[node name="PlayerController" type="Node3D" parent="." unique_id=1205504354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9297285, 0)
+
+[node name="Player" parent="PlayerController" unique_id=894728165 instance=ExtResource("2_c3gfm")]
+unique_name_in_owner = true
+
+[node name="Camera" type="Node3D" parent="PlayerController" unique_id=340913077]
+unique_name_in_owner = true
+script = ExtResource("3_12xdt")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="PlayerController/Camera" unique_id=274194974]
+transform = Transform3D(1, 0, 0, 0, 0.9563048, 0.2923717, 0, -0.2923717, 0.9563048, 0, -0.09999359, 0)
+shape = SubResource("SphereShape3D_2p5uw")
+spring_length = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="PlayerController/Camera/SpringArm3D" unique_id=889514409]
+
+[node name="World" type="Node3D" parent="." unique_id=1324276275]
+
+[node name="Chunk1" type="Node3D" parent="World" unique_id=1711676486]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Chunk1" unique_id=1535542301]
+mesh = SubResource("PlaneMesh_1vivr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Chunk1" unique_id=267355392]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Chunk1/StaticBody3D" unique_id=307206185]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_1vivr")
+
+[node name="Label3D" type="Label3D" parent="World/Chunk1" unique_id=1448718293]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+text = "Chunk 1"
+font_size = 200

@@ -4,11 +4,13 @@ extends Control
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	GameStatus.is_paused = true
+	get_tree().paused = true
 
 
 func _on_continue_button_pressed() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	GameStatus.is_paused = false
+	get_tree().paused = false
 	self.queue_free()
 	
 
