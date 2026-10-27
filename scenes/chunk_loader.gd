@@ -34,9 +34,6 @@ func _physics_process(delta: float) -> void:
 		load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
 	prev_player_pos = player_pos
 	$GUI/Label2.text = str(get_position_in_chunks(player_pos))
-	
-	if Input.is_action_just_pressed("ui_up"):
-		load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
 
 
 func get_cantor_int_from_pair(pair: Vector2i) -> int:
@@ -69,20 +66,26 @@ func add_chunk(chunk_id: Vector2i) -> void:
 	new_chunk.position.x += ChunkInformation.CHUNK_SIZE / 2
 	new_chunk.position.z += ChunkInformation.CHUNK_SIZE / 2
 	new_chunk.get_child(0).text = str(chunk_id) + "\n" + str(get_cantor_int_from_pair(chunk_id))
+	new_chunk.name = str(get_cantor_int_from_pair(chunk_id))
 	
 	$World.add_child(new_chunk)
 
-
-func destroy_chunks() -> void:
-	for child in $World.get_children():
-		child.queue_free()
-
-
 func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
-	# Dont need to destroy every chunk here
-	destroy_chunks()
+	
+	var checked_chunks: Dictionary[int, bool]
+	
+	for child in $World.get_children():
+		checked_chunks[int(child.name)] = false
+	
 	for i in range(-(chunk_radius - 1), chunk_radius):
 		for j in range(-(chunk_radius - 1), chunk_radius):
-			add_chunk(Vector2i(i + center_position.x, j + center_position.y))
-			print(str(Vector2i(i + center_position.x, j + center_position.y)) + ": " + str(get_cantor_int_from_pair(Vector2i(i + center_position.x, j + center_position.y))))
+			var cur_pos := Vector2i(i + center_position.x, j + center_position.y)
+			if get_node_or_null("World/" + str(get_cantor_int_from_pair(cur_pos))) == null:
+				add_chunk(cur_pos)
+			checked_chunks[get_cantor_int_from_pair(cur_pos)] = true
+			print(str(cur_pos) + ": " + str(get_cantor_int_from_pair(cur_pos)))
+			
+	for key in checked_chunks.keys():
+		if checked_chunks[key] == false:
+			$World.get_node(str(key)).queue_free()
 	
