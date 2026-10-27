@@ -50,5 +50,7 @@ func get_coords_from_chunks(chunk_input: Vector2) -> Vector3:
 func add_chunk(chunk_id: Vector2i):
 	var new_chunk: Node3D = chunk.duplicate()
 	new_chunk.position = get_coords_from_chunks(chunk_id)
+	new_chunk.position.x += ChunkInformation.CHUNK_SIZE / 2
+	new_chunk.position.z += ChunkInformation.CHUNK_SIZE / 2
 	new_chunk.get_child(0).text = str(chunk_id)
 	$World.add_child(new_chunk)
