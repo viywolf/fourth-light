@@ -2,6 +2,10 @@ extends Node3D
 
 var chunk: Node3D
 
+# Move this to the player script with a signal going up?
+var player_pos: Vector2
+var prev_player_pos: Vector2
+
 func _ready() -> void:
 	chunk = Node3D.new()
 	var label := Label3D.new()
@@ -30,10 +34,16 @@ func _ready() -> void:
 	
 
 
-func _process(delta: float) -> void:
-	var player_pos: Vector2 = Vector2(%Player.global_position.x, %Player.global_position.z)
+func _physics_process(delta: float) -> void:
+	player_pos = Vector2(%Player.global_position.x, %Player.global_position.z)
+	if get_position_in_chunks(player_pos) != get_position_in_chunks(prev_player_pos):
+		load_chunks(get_position_in_chunks(player_pos), 2)
+	prev_player_pos = player_pos
 	$GUI/Label2.text = str(get_position_in_chunks(player_pos))
 	#print(get_position_in_chunks())
+	
+	if Input.is_action_just_pressed("ui_up"):
+		load_chunks(get_position_in_chunks(player_pos), 2)
 
 
 func get_position_in_chunks(input_position: Vector2) -> Vector2:
@@ -47,10 +57,23 @@ func get_coords_from_chunks(chunk_input: Vector2) -> Vector3:
 	return Vector3(chunk_input.x * ChunkInformation.CHUNK_SIZE, 0, chunk_input.y * ChunkInformation.CHUNK_SIZE)
 
 
-func add_chunk(chunk_id: Vector2i):
+func add_chunk(chunk_id: Vector2i) -> void:
 	var new_chunk: Node3D = chunk.duplicate()
 	new_chunk.position = get_coords_from_chunks(chunk_id)
 	new_chunk.position.x += ChunkInformation.CHUNK_SIZE / 2
 	new_chunk.position.z += ChunkInformation.CHUNK_SIZE / 2
 	new_chunk.get_child(0).text = str(chunk_id)
 	$World.add_child(new_chunk)
+
+
+func destroy_chunks() -> void:
+	for child in $World.get_children():
+		child.queue_free()
+
+
+func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
+	destroy_chunks()
+	for i in range(-(chunk_radius - 1), chunk_radius):
+		for j in range(-(chunk_radius - 1), chunk_radius):
+			add_chunk(Vector2i(i + center_position.x, j + center_position.y))
+	
