@@ -64,7 +64,7 @@ script = ExtResource("3_12xdt")
 [node name="SpringArm3D" type="SpringArm3D" parent="PlayerController/Camera" unique_id=274194974]
 transform = Transform3D(1, 0, 0, 0, 0.9563048, 0.2923717, 0, -0.2923717, 0.9563048, 0, -0.09999359, 0)
 shape = SubResource("SphereShape3D_2p5uw")
-spring_length = 5.0
+spring_length = 30.0
 
 [node name="Camera3D" type="Camera3D" parent="PlayerController/Camera/SpringArm3D" unique_id=889514409]
 

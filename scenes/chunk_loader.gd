@@ -11,6 +11,7 @@ func _ready() -> void:
 	var label := Label3D.new()
 	label.font_size = 200
 	label.rotation_degrees.x = -90
+	label.position.y = 1
 	chunk.add_child(label)
 	var mesh := MeshInstance3D.new()
 	var plane_mesh := PlaneMesh.new()
@@ -25,31 +26,36 @@ func _ready() -> void:
 	coll_shape.position.y = -1
 	static_body.add_child(coll_shape)
 	chunk.add_child(static_body)
-	
-	##
-	
-	for i in range(5):
-		for j in range(5):
-			add_chunk(Vector2i(i, j))
-	
 
 
 func _physics_process(delta: float) -> void:
 	player_pos = Vector2(%Player.global_position.x, %Player.global_position.z)
 	if get_position_in_chunks(player_pos) != get_position_in_chunks(prev_player_pos):
-		load_chunks(get_position_in_chunks(player_pos), 2)
+		load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
 	prev_player_pos = player_pos
 	$GUI/Label2.text = str(get_position_in_chunks(player_pos))
-	#print(get_position_in_chunks())
 	
 	if Input.is_action_just_pressed("ui_up"):
-		load_chunks(get_position_in_chunks(player_pos), 2)
+		load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
+
+
+func get_cantor_int_from_pair(pair: Vector2i) -> int:
+	var x: int = pair.x
+	var y: int = pair.y
+	# Convert int to natural numbers
+	if x >= 0:
+		x = 2 * x
+	else:
+		x = (-2 * x) - 1
+	if y >= 0:
+		y = 2 * y
+	else:
+		y = (-2 * y) - 1
+	# Cantor pairing formula
+	return int(0.5 * (x + y) * (x + y + 1)) + y
 
 
 func get_position_in_chunks(input_position: Vector2) -> Vector2:
-	# Replace the player with a variable from save or something
-	#
-	
 	return floor(input_position / ChunkInformation.CHUNK_SIZE)
 
 
@@ -62,7 +68,8 @@ func add_chunk(chunk_id: Vector2i) -> void:
 	new_chunk.position = get_coords_from_chunks(chunk_id)
 	new_chunk.position.x += ChunkInformation.CHUNK_SIZE / 2
 	new_chunk.position.z += ChunkInformation.CHUNK_SIZE / 2
-	new_chunk.get_child(0).text = str(chunk_id)
+	new_chunk.get_child(0).text = str(chunk_id) + "\n" + str(get_cantor_int_from_pair(chunk_id))
+	
 	$World.add_child(new_chunk)
 
 
@@ -72,8 +79,10 @@ func destroy_chunks() -> void:
 
 
 func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
+	# Dont need to destroy every chunk here
 	destroy_chunks()
 	for i in range(-(chunk_radius - 1), chunk_radius):
 		for j in range(-(chunk_radius - 1), chunk_radius):
 			add_chunk(Vector2i(i + center_position.x, j + center_position.y))
+			print(str(Vector2i(i + center_position.x, j + center_position.y)) + ": " + str(get_cantor_int_from_pair(Vector2i(i + center_position.x, j + center_position.y))))
 	
