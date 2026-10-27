@@ -1,12 +1,10 @@
 extends CanvasLayer
 
+var pause_screen_scene: PackedScene = preload("res://scenes/pause_screen.tscn")
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("escape"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		self.add_child(pause_screen_scene.instantiate())
 
 
 func _on_back_button_pressed() -> void:

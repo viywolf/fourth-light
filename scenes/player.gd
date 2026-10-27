@@ -70,6 +70,8 @@ var swim_max_vertical_speed: float = 10
 #endregion
 
 func _physics_process(delta: float) -> void:
+	if GameStatus.is_paused:
+		return
 	# Get basic inputs
 	raw_input = Input.get_vector("left", "right", "forward", "backward")
 	var local_forward: Vector3 = %Camera.global_basis.z
