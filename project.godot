@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameStatus="*uid://r0pkbvirca0u"
+ChunkInformation="*uid://bwncv4j7pgn3v"
 
 [display]
 

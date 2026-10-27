@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://btjl8wi7aaiqn"]
 
 [ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_4t1lv"]
+[ext_resource type="Script" uid="uid://biguf2cvw3ev" path="res://scenes/chunk_loader.gd" id="1_c3gfm"]
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="2_c3gfm"]
 [ext_resource type="Script" uid="uid://dot6rpuygi04q" path="res://scenes/camera.gd" id="3_12xdt"]
 
@@ -20,8 +21,13 @@ size = Vector2(16, 16)
 size = Vector3(16, 2, 16)
 
 [node name="ChunkLoadingTest" type="Node3D" unique_id=1093858828]
+script = ExtResource("1_c3gfm")
 
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_4t1lv")]
+
+[node name="Label2" type="Label" parent="GUI" unique_id=861590919]
+offset_right = 40.0
+offset_bottom = 31.0
 
 [node name="Environment" type="Node3D" parent="." unique_id=1481713501]
 
