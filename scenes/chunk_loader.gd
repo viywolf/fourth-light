@@ -6,7 +6,7 @@ var chunk: Node3D
 var player_pos: Vector2
 var prev_player_pos: Vector2 
 
-var loading_queue: Dictionary[int, bool]
+var checked_chunks: Dictionary[int, bool]
 
 # Loading async vars
 var is_cancelling_loading: bool = false
@@ -38,7 +38,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	player_pos = Vector2(%Player.global_position.x, %Player.global_position.z)
 	if get_position_in_chunks(player_pos) != get_position_in_chunks(prev_player_pos):
-		load_chunks(get_position_in_chunks(player_pos), 1)
+		add_chunk(get_position_in_chunks(player_pos))
 		load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
 	prev_player_pos = player_pos
 	$GUI/Label2.text = str(get_position_in_chunks(player_pos))
@@ -75,12 +75,11 @@ func add_chunk(chunk_id: Vector2i) -> void:
 	new_chunk.position.x += ChunkInformation.CHUNK_SIZE / 2
 	new_chunk.position.z += ChunkInformation.CHUNK_SIZE / 2
 	new_chunk.get_child(0).text = str(chunk_id) + "\n" + str(get_cantor_int_from_pair(chunk_id))
-	new_chunk.name = str(get_cantor_int_from_pair(chunk_id))
 	
 	await get_tree().create_timer(0).timeout
-	#print("add chunk " + str(get_cantor_int_from_pair(chunk_id)))
 	
 	if $World.get_node_or_null(str(get_cantor_int_from_pair(chunk_id))) == null:
+		new_chunk.name = str(get_cantor_int_from_pair(chunk_id))
 		$World.add_child(new_chunk)
 
 func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
@@ -88,16 +87,10 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 	# Hopefully there is enough time to
 	# cancel other async loads by the time this is false
 	
-	var checked_chunks: Dictionary[int, bool]
-	
 	for child in $World.get_children():
 		checked_chunks[int(child.name)] = false
-	
-	for i in range(-(chunk_radius - 1), chunk_radius):
-		for j in range(-(chunk_radius - 1), chunk_radius):
-			var cur_pos := Vector2(i + center_position.x, j + center_position.y)
-			loading_queue[get_cantor_int_from_pair(cur_pos)] = true
 			
+				
 	is_cancelling_loading = false
 	
 	# Loop through all chunks in a spiral
@@ -105,17 +98,15 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 	var j: int = 0
 	var diff := Vector2i(0, -1)
 	
-	for _i in range(pow(ChunkInformation.chunk_load_radius + 1, 2)):
-		if (i > -ChunkInformation.chunk_load_radius / 2.0 and
-			i <= ChunkInformation.chunk_load_radius / 2.0 and
-			j > -ChunkInformation.chunk_load_radius / 2.0 and
-			j <= ChunkInformation.chunk_load_radius / 2.0):
+	for _i in range(pow(chunk_radius + 1, 2)):
+		if (i > -chunk_radius / 2.0 and
+			i <= chunk_radius / 2.0 and
+			j > -chunk_radius / 2.0 and
+			j <= chunk_radius / 2.0):
 				var cur_pos := Vector2(i + center_position.x, j + center_position.y)
 				checked_chunks[get_cantor_int_from_pair(cur_pos)] = true
-				loading_queue[get_cantor_int_from_pair(cur_pos)] = false
 				if get_node_or_null("World/" + str(get_cantor_int_from_pair(cur_pos))) == null:
-					#await add_chunk(cur_pos)
-					add_chunk(cur_pos)
+					await add_chunk(cur_pos)
 					if is_cancelling_loading:
 						is_cancelling_loading = false
 						break
@@ -131,10 +122,9 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 	for key in checked_chunks.keys():
 		# If it was not checked this loop
 		if checked_chunks[key] == false:
-			# and it is not in the loading queue
-			if loading_queue.get_or_add(key, false) == false:
-				# and it exists
-				if $World.get_node_or_null(str(key)) != null:
-					print("tried to remove " + str(key) + " but it didnt exist")
-					$World.get_node(str(key)).queue_free()
+			# and it exists
+			if $World.get_node_or_null(str(key)) != null:
+				$World.get_node(str(key)).queue_free()
+			else:
+				print("tried to remove " + str(key) + " but it didnt exist")
 	
