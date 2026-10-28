@@ -38,6 +38,11 @@ custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 text = "Go to swim scene"
 
+[node name="ChunkSceneButton" type="Button" parent="GridContainer" unique_id=1609521176]
+layout_mode = 2
+text = "Go to chunk loading demo"
+autowrap_mode = 3
+
 [node name="MainTitleScreen" type="HBoxContainer" parent="." unique_id=1138618579]
 offset_right = 1151.0
 offset_bottom = 643.0
@@ -78,5 +83,6 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="GridContainer/MovementSceneButton" to="." method="_on_movement_scene_button_pressed"]
 [connection signal="pressed" from="GridContainer/GlideSceneButton" to="." method="_on_glide_scene_button_pressed"]
 [connection signal="pressed" from="GridContainer/SwimSceneButton" to="." method="_on_swim_scene_button_pressed"]
+[connection signal="pressed" from="GridContainer/ChunkSceneButton" to="." method="_on_chunk_scene_button_pressed"]
 [connection signal="pressed" from="MainTitleScreen/ButtonsContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MainTitleScreen/ButtonsContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -35,3 +35,7 @@ func _on_glide_scene_button_pressed() -> void:
 
 func _on_swim_scene_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/stages/swim_stage.tscn")
+
+
+func _on_chunk_scene_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/chunk_loading_test.tscn")
