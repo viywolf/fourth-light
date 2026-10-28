@@ -4,7 +4,12 @@ var chunk: Node3D
 
 # Move this to the player script with a signal going up?
 var player_pos: Vector2
-var prev_player_pos: Vector2
+var prev_player_pos: Vector2 
+
+var loading_queue: Dictionary[int, bool]
+
+# Loading async vars
+var is_cancelling_loading: bool = false
 
 func _ready() -> void:
 	chunk = Node3D.new()
@@ -26,11 +31,14 @@ func _ready() -> void:
 	coll_shape.position.y = -1
 	static_body.add_child(coll_shape)
 	chunk.add_child(static_body)
+	add_chunk(Vector2i(0, 0))
+	
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	player_pos = Vector2(%Player.global_position.x, %Player.global_position.z)
 	if get_position_in_chunks(player_pos) != get_position_in_chunks(prev_player_pos):
+		load_chunks(get_position_in_chunks(player_pos), 1)
 		load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
 	prev_player_pos = player_pos
 	$GUI/Label2.text = str(get_position_in_chunks(player_pos))
@@ -61,6 +69,7 @@ func get_coords_from_chunks(chunk_input: Vector2) -> Vector3:
 
 
 func add_chunk(chunk_id: Vector2i) -> void:
+	# TODO Change this to get a chunk from an array instead of creating a new one
 	var new_chunk: Node3D = chunk.duplicate()
 	new_chunk.position = get_coords_from_chunks(chunk_id)
 	new_chunk.position.x += ChunkInformation.CHUNK_SIZE / 2
@@ -68,9 +77,16 @@ func add_chunk(chunk_id: Vector2i) -> void:
 	new_chunk.get_child(0).text = str(chunk_id) + "\n" + str(get_cantor_int_from_pair(chunk_id))
 	new_chunk.name = str(get_cantor_int_from_pair(chunk_id))
 	
-	$World.add_child(new_chunk)
+	await get_tree().create_timer(0).timeout
+	#print("add chunk " + str(get_cantor_int_from_pair(chunk_id)))
+	
+	if $World.get_node_or_null(str(get_cantor_int_from_pair(chunk_id))) == null:
+		$World.add_child(new_chunk)
 
 func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
+	is_cancelling_loading = true
+	# Hopefully there is enough time to
+	# cancel other async loads by the time this is false
 	
 	var checked_chunks: Dictionary[int, bool]
 	
@@ -79,13 +95,46 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 	
 	for i in range(-(chunk_radius - 1), chunk_radius):
 		for j in range(-(chunk_radius - 1), chunk_radius):
-			var cur_pos := Vector2i(i + center_position.x, j + center_position.y)
-			if get_node_or_null("World/" + str(get_cantor_int_from_pair(cur_pos))) == null:
-				add_chunk(cur_pos)
-			checked_chunks[get_cantor_int_from_pair(cur_pos)] = true
-			print(str(cur_pos) + ": " + str(get_cantor_int_from_pair(cur_pos)))
+			var cur_pos := Vector2(i + center_position.x, j + center_position.y)
+			loading_queue[get_cantor_int_from_pair(cur_pos)] = true
 			
+	is_cancelling_loading = false
+	
+	# Loop through all chunks in a spiral
+	var i: int = 0
+	var j: int = 0
+	var diff := Vector2i(0, -1)
+	
+	for _i in range(pow(ChunkInformation.chunk_load_radius + 1, 2)):
+		if (i > -ChunkInformation.chunk_load_radius / 2.0 and
+			i <= ChunkInformation.chunk_load_radius / 2.0 and
+			j > -ChunkInformation.chunk_load_radius / 2.0 and
+			j <= ChunkInformation.chunk_load_radius / 2.0):
+				var cur_pos := Vector2(i + center_position.x, j + center_position.y)
+				checked_chunks[get_cantor_int_from_pair(cur_pos)] = true
+				loading_queue[get_cantor_int_from_pair(cur_pos)] = false
+				if get_node_or_null("World/" + str(get_cantor_int_from_pair(cur_pos))) == null:
+					#await add_chunk(cur_pos)
+					add_chunk(cur_pos)
+					if is_cancelling_loading:
+						is_cancelling_loading = false
+						break
+		if (i == j or
+			(i < 0 and i == -j) or
+			(i > 0 and i == 1 - j)):
+				diff = Vector2(-diff.y, diff.x)
+		i += diff.x
+		j += diff.y
+	
+	
+	# Remove chunks that have not been loaded in the main loader loop
 	for key in checked_chunks.keys():
+		# If it was not checked this loop
 		if checked_chunks[key] == false:
-			$World.get_node(str(key)).queue_free()
+			# and it is not in the loading queue
+			if loading_queue.get_or_add(key, false) == false:
+				# and it exists
+				if $World.get_node_or_null(str(key)) != null:
+					print("tried to remove " + str(key) + " but it didnt exist")
+					$World.get_node(str(key)).queue_free()
 	

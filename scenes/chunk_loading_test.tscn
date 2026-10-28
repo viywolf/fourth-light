@@ -82,6 +82,7 @@ mesh = SubResource("PlaneMesh_1vivr")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Chunk1/StaticBody3D" unique_id=307206185]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = SubResource("BoxShape3D_1vivr")
+disabled = true
 
 [node name="Label3D" type="Label3D" parent="Chunk1" unique_id=1448718293]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
