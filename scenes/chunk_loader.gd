@@ -11,6 +11,8 @@ var checked_chunks: Dictionary[int, bool]
 # Loading async vars
 var is_cancelling_loading: bool = false
 
+var only_load_new_chunks: bool = false
+
 func _ready() -> void:
 	chunk = Node3D.new()
 	var label := Label3D.new()
@@ -41,7 +43,10 @@ func _physics_process(_delta: float) -> void:
 		add_chunk(get_position_in_chunks(player_pos))
 		load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
 	prev_player_pos = player_pos
-	$GUI/Label2.text = str(get_position_in_chunks(player_pos))
+	
+	%PlayerChunkPosLabel.text = str(get_position_in_chunks(player_pos))
+	%ChunkLoadDistLabel.text = "Chunk Loading Distance: " + str(ChunkInformation.chunk_load_radius)
+	%OnlyLoadNewChunksLabel.text = "Only Load New Chunks: " + str(only_load_new_chunks)
 
 
 func get_cantor_int_from_pair(pair: Vector2i) -> int:
@@ -69,12 +74,18 @@ func get_coords_from_chunks(chunk_input: Vector2) -> Vector3:
 
 
 func add_chunk(chunk_id: Vector2i) -> void:
-	# TODO Change this to get a chunk from an array instead of creating a new one
-	var new_chunk: Node3D = chunk.duplicate()
+	var new_chunk: Node3D
+	if get_cantor_int_from_pair(chunk_id) <  ChunkInformation.all_chunks.size() \
+		and ChunkInformation.all_chunks[get_cantor_int_from_pair(chunk_id)] != "res://chunks/":
+			new_chunk = load(ChunkInformation.all_chunks[get_cantor_int_from_pair(chunk_id)]).instantiate()
+	else:
+		new_chunk = chunk.duplicate()
+		new_chunk.get_child(0).text = str(chunk_id) + "\n" + str(get_cantor_int_from_pair(chunk_id))
+		#print(new_chunk.get_child(0).text)
+		
 	new_chunk.position = get_coords_from_chunks(chunk_id)
 	new_chunk.position.x += ChunkInformation.CHUNK_SIZE / 2
 	new_chunk.position.z += ChunkInformation.CHUNK_SIZE / 2
-	new_chunk.get_child(0).text = str(chunk_id) + "\n" + str(get_cantor_int_from_pair(chunk_id))
 	
 	await get_tree().create_timer(0).timeout
 	
@@ -90,7 +101,14 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 	for child in $World.get_children():
 		checked_chunks[int(child.name)] = false
 			
-				
+	
+	if only_load_new_chunks == false:
+		for child in $World.get_children():
+			child.queue_free()
+			
+			
+	await get_tree().create_timer(0.1).timeout
+			
 	is_cancelling_loading = false
 	
 	# Loop through all chunks in a spiral

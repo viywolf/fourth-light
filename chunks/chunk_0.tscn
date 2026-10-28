@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://xh2vqxw4piwn"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7fgmp"]
+size = Vector2(16, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8kxrq"]
+size = Vector3(16, 2, 16)
+
+[node name="Chunk0" type="Node3D" unique_id=217654621]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2061174509]
+mesh = SubResource("PlaneMesh_7fgmp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1678029811]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1170223551]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_8kxrq")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=456453822]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+text = "Template Chunk"
+font_size = 200
+
+[node name="WelcomeText" type="Label3D" parent="." unique_id=1665288563]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.004917, -5.6047316)
+text = "Welcome to the chunk testing stage. As you walk around you will be able to see chunks spawning in and out. Modify the settings to see different behaviour."
+autowrap_mode = 3

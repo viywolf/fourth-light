@@ -25,9 +25,22 @@ script = ExtResource("1_c3gfm")
 
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_4t1lv")]
 
-[node name="Label2" type="Label" parent="GUI" unique_id=861590919]
+[node name="BoxContainer" type="BoxContainer" parent="GUI" unique_id=1282416707]
 offset_right = 40.0
-offset_bottom = 31.0
+offset_bottom = 40.0
+vertical = true
+
+[node name="PlayerChunkPosLabel" type="Label" parent="GUI/BoxContainer" unique_id=861590919]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ChunkLoadDistLabel" type="Label" parent="GUI/BoxContainer" unique_id=1850172873]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="OnlyLoadNewChunksLabel" type="Label" parent="GUI/BoxContainer" unique_id=948646900]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="Environment" type="Node3D" parent="." unique_id=1481713501]
 
