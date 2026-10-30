@@ -19,7 +19,7 @@ shape = SubResource("BoxShape3D_8kxrq")
 
 [node name="Label3D" type="Label3D" parent="." unique_id=456453822]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-text = "Template Chunk"
+text = "Chunk 0"
 font_size = 200
 
 [node name="WelcomeText" type="Label3D" parent="." unique_id=1665288563]

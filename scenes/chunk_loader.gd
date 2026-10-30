@@ -11,7 +11,7 @@ var checked_chunks: Dictionary[int, bool]
 # Loading async vars
 var is_cancelling_loading: bool = false
 
-var only_load_new_chunks: bool = false
+var only_load_new_chunks: bool = true
 
 func _ready() -> void:
 	chunk = Node3D.new()
@@ -34,6 +34,10 @@ func _ready() -> void:
 	static_body.add_child(coll_shape)
 	chunk.add_child(static_body)
 	add_chunk(Vector2i(0, 0))
+	
+	$ChunksPlaceholder.queue_free()
+	
+	load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
 	
 
 
@@ -87,7 +91,7 @@ func add_chunk(chunk_id: Vector2i) -> void:
 	new_chunk.position.x += ChunkInformation.CHUNK_SIZE / 2
 	new_chunk.position.z += ChunkInformation.CHUNK_SIZE / 2
 	
-	await get_tree().create_timer(0).timeout
+	await get_tree().physics_frame
 	
 	if $World.get_node_or_null(str(get_cantor_int_from_pair(chunk_id))) == null:
 		new_chunk.name = str(get_cantor_int_from_pair(chunk_id))
@@ -128,6 +132,8 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 					if is_cancelling_loading:
 						is_cancelling_loading = false
 						break
+				else:
+					$World.get_node(str(get_cantor_int_from_pair(cur_pos))).process_mode = Node.PROCESS_MODE_INHERIT
 		if (i == j or
 			(i < 0 and i == -j) or
 			(i > 0 and i == 1 - j)):
@@ -142,7 +148,8 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 		if checked_chunks[key] == false:
 			# and it exists
 			if $World.get_node_or_null(str(key)) != null:
-				$World.get_node(str(key)).queue_free()
+				#$World.get_node(str(key)).queue_free()
+				$World.get_node(str(key)).process_mode = Node.PROCESS_MODE_DISABLED
 			else:
 				print("tried to remove " + str(key) + " but it didnt exist")
 	

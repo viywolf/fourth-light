@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://biguf2cvw3ev" path="res://scenes/chunk_loader.gd" id="1_c3gfm"]
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="2_c3gfm"]
 [ext_resource type="Script" uid="uid://dot6rpuygi04q" path="res://scenes/camera.gd" id="3_12xdt"]
+[ext_resource type="PackedScene" uid="uid://xh2vqxw4piwn" path="res://chunks/chunk_0.tscn" id="5_12xdt"]
+[ext_resource type="PackedScene" uid="uid://bp3gj4mudge61" path="res://chunks/chunk_1.tscn" id="6_aw8p0"]
 
 [sub_resource type="Environment" id="Environment_aw8p0"]
 background_mode = 2
@@ -13,12 +15,6 @@ ambient_light_energy = 0.5
 reflected_light_source = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2p5uw"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_1vivr"]
-size = Vector2(16, 16)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1vivr"]
-size = Vector3(16, 2, 16)
 
 [node name="ChunkLoadingTest" type="Node3D" unique_id=1093858828]
 script = ExtResource("1_c3gfm")
@@ -65,7 +61,7 @@ light_energy = 0.2
 light_specular = 0.0
 
 [node name="PlayerController" type="Node3D" parent="." unique_id=1205504354]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9297285, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.407343, 4.9297285, 6.8077683)
 
 [node name="Player" parent="PlayerController" unique_id=894728165 instance=ExtResource("2_c3gfm")]
 unique_name_in_owner = true
@@ -83,21 +79,10 @@ spring_length = 5.0
 
 [node name="World" type="Node3D" parent="." unique_id=1324276275]
 
-[node name="Chunk1" type="Node3D" parent="." unique_id=1711676486]
+[node name="ChunksPlaceholder" type="Node3D" parent="." unique_id=2135440622]
+
+[node name="Chunk0" parent="ChunksPlaceholder" unique_id=217654621 instance=ExtResource("5_12xdt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
-visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Chunk1" unique_id=1535542301]
-mesh = SubResource("PlaneMesh_1vivr")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Chunk1" unique_id=267355392]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Chunk1/StaticBody3D" unique_id=307206185]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-shape = SubResource("BoxShape3D_1vivr")
-disabled = true
-
-[node name="Label3D" type="Label3D" parent="Chunk1" unique_id=1448718293]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-text = "Chunk 1"
-font_size = 200
+[node name="Chunk1" parent="ChunksPlaceholder" unique_id=741426205 instance=ExtResource("6_aw8p0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.691996, 0, 0)
