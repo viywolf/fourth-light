@@ -69,6 +69,10 @@ var swim_max_vertical_speed: float = 10
 
 #endregion
 
+func _ready() -> void:
+	GameStatus.is_paused = false
+
+
 func _physics_process(delta: float) -> void:
 	if GameStatus.is_paused:
 		return

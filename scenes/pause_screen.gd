@@ -1,5 +1,6 @@
 extends Control
 
+signal closed
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -9,6 +10,7 @@ func _ready() -> void:
 func _on_continue_button_pressed() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	GameStatus.is_paused = false
+	closed.emit()
 	self.queue_free()
 	
 
