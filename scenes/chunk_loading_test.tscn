@@ -71,7 +71,7 @@ text = "Load Distance: 5"
 layout_mode = 2
 min_value = 1.0
 max_value = 25.0
-value = 1.0
+value = 5.0
 
 [node name="ProcessDistLabel" type="Label" parent="ChunkSettingsMenu/Panel/ScrollContainer/VBoxContainer" unique_id=737389496]
 layout_mode = 2
@@ -82,7 +82,7 @@ text = "Process Distance: 5"
 layout_mode = 2
 min_value = 1.0
 max_value = 25.0
-value = 1.0
+value = 5.0
 
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_4t1lv")]
 
