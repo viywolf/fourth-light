@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bp3gj4mudge61"]
 
-[ext_resource type="PackedScene" uid="uid://ow80tfbkmu8s" path="res://blender/rock3.blend" id="1_487j1"]
+[ext_resource type="PackedScene" uid="uid://ow80tfbkmu8s" path="res://assets/blender/rock3.blend" id="1_487j1"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7fgmp"]
 size = Vector2(16, 16)

@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://wf3fskob066b"]
 
-[ext_resource type="FontFile" uid="uid://peufdarlaghy" path="res://ui/fonts/Capriola-Regular.ttf" id="1_g1fjd"]
+[ext_resource type="FontFile" uid="uid://peufdarlaghy" path="res://assets/ui/fonts/Capriola-Regular.ttf" id="1_g1fjd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xb56"]
 content_margin_left = 0.0

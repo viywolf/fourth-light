@@ -18,17 +18,11 @@ Chunk order
 """
 
 
-const CHUNKS_FILE_PATH := "res://chunks/"
+const CHUNKS_FILE_PATH := "res://scenes/chunks/"
+const NO_OF_READY_CHUNKS: int = 10
 
-var all_chunks: Array[String] = [
-	"res://chunks/chunk_0.tscn", # 0, 0
-	"res://chunks/chunk_1.tscn", # -1, 0
-	"res://chunks/chunk_2.tscn", # 0, -1
-	"res://chunks/chunk_3.tscn", # 1, 0
-	"res://chunks/", # -1, -1
-	"res://chunks/", # 0, 1
-	"res://chunks/", # -2, 0
-	"res://chunks/chunk_7.tscn", # 1, -1
-	"res://chunks/", # -1, 1
-	"res://chunks/", # 0, -2
-]
+var all_chunks: Array[String]
+
+func _ready() -> void:
+	for i in range(NO_OF_READY_CHUNKS):
+		all_chunks.append(CHUNKS_FILE_PATH + "chunk_" + str(i) + ".tscn")

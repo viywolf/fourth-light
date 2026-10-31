@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b2u4b2ee05vkp"
-path="res://.godot/imported/Quicksand-VariableFont_wght.ttf-da0bee1cfa8ca8b32d89a960d6e192e5.fontdata"
+uid="uid://b2rch5nnerggt"
+path="res://.godot/imported/PlaywriteDEGrund-VariableFont_wght.ttf-27f838bd9dabcdcd770ca7e81b37bbd3.fontdata"
 
 [deps]
 
-source_file="res://ui/fonts/Quicksand-VariableFont_wght.ttf"
-dest_files=["res://.godot/imported/Quicksand-VariableFont_wght.ttf-da0bee1cfa8ca8b32d89a960d6e192e5.fontdata"]
+source_file="res://assets/ui/fonts/PlaywriteDEGrund-VariableFont_wght.ttf"
+dest_files=["res://.godot/imported/PlaywriteDEGrund-VariableFont_wght.ttf-27f838bd9dabcdcd770ca7e81b37bbd3.fontdata"]
 
 [params]
 

@@ -80,7 +80,7 @@ func get_coords_from_chunks(chunk_input: Vector2) -> Vector3:
 func add_chunk(chunk_id: Vector2i) -> void:
 	var new_chunk: Node3D
 	if get_cantor_int_from_pair(chunk_id) <  ChunkInformation.all_chunks.size() \
-		and ChunkInformation.all_chunks[get_cantor_int_from_pair(chunk_id)] != "res://chunks/":
+		and FileAccess.file_exists(ChunkInformation.all_chunks[get_cantor_int_from_pair(chunk_id)]):
 			new_chunk = load(ChunkInformation.all_chunks[get_cantor_int_from_pair(chunk_id)]).instantiate()
 	else:
 		new_chunk = chunk.duplicate()

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://peufdarlaghy"
-path="res://.godot/imported/Capriola-Regular.ttf-761cc1fe4f90cf189cdb6b7f24ba2ff6.fontdata"
+path="res://.godot/imported/Capriola-Regular.ttf-6cb662154afeb437efcf1a60e4a9d959.fontdata"
 
 [deps]
 
-source_file="res://ui/fonts/Capriola-Regular.ttf"
-dest_files=["res://.godot/imported/Capriola-Regular.ttf-761cc1fe4f90cf189cdb6b7f24ba2ff6.fontdata"]
+source_file="res://assets/ui/fonts/Capriola-Regular.ttf"
+dest_files=["res://.godot/imported/Capriola-Regular.ttf-6cb662154afeb437efcf1a60e4a9d959.fontdata"]
 
 [params]
 

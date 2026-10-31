@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bsvidxfyore6y"]
 
-[ext_resource type="Script" uid="uid://dtrxah41045ed" path="res://chunk_scripts/chunk_3.gd" id="1_upjgw"]
+[ext_resource type="Script" uid="uid://dtrxah41045ed" path="res://scenes/chunks/chunk_scripts/chunk_3.gd" id="1_wqco6"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7fgmp"]
 size = Vector2(16, 16)
@@ -50,7 +50,7 @@ _data = {
 }
 
 [node name="Chunk3" type="Node3D" unique_id=217654621]
-script = ExtResource("1_upjgw")
+script = ExtResource("1_wqco6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2061174509]
 mesh = SubResource("PlaneMesh_7fgmp")

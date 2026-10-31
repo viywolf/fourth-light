@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://be342ngfc3dhc"]
 
 [ext_resource type="Shader" uid="uid://cn0cbhkc31iii" path="res://shaders/grass.gdshader" id="1_tox0q"]
-[ext_resource type="ArrayMesh" uid="uid://bvdjjidiikhf" path="res://blender/exports/grass_bunch.obj" id="2_xpkuo"]
+[ext_resource type="ArrayMesh" uid="uid://bvdjjidiikhf" path="res://assets/blender/exports/grass_bunch.obj" id="2_xpkuo"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7fgmp"]
 size = Vector2(16, 16)
