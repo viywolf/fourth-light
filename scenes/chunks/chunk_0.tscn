@@ -24,5 +24,5 @@ font_size = 200
 
 [node name="WelcomeText" type="Label3D" parent="." unique_id=1665288563]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.004917, -5.6047316)
-text = "Welcome to the chunk testing stage. As you walk around you will be able to see chunks spawning in and out. Modify the settings to see different behaviour."
+text = "Welcome to the chunk testing stage. As you walk around you will be able to see chunks spawning in and out. Modify the settings by pressing E to see different behaviour."
 autowrap_mode = 3

@@ -51,6 +51,13 @@ func _physics_process(_delta: float) -> void:
 	%PlayerChunkPosLabel.text = str(get_position_in_chunks(player_pos))
 	%ChunkLoadDistLabel.text = "Chunk Loading Distance: " + str(ChunkInformation.chunk_load_radius)
 	%OnlyLoadNewChunksLabel.text = "Only Load New Chunks: " + str(only_load_new_chunks)
+	
+	if Input.is_action_just_pressed("interact"):
+		$ChunkSettingsMenu.visible = !$ChunkSettingsMenu.visible 
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func get_cantor_int_from_pair(pair: Vector2i) -> int:
@@ -85,7 +92,6 @@ func add_chunk(chunk_id: Vector2i) -> void:
 	else:
 		new_chunk = chunk.duplicate()
 		new_chunk.get_child(0).text = str(chunk_id) + "\n" + str(get_cantor_int_from_pair(chunk_id))
-		#print(new_chunk.get_child(0).text)
 		
 	new_chunk.position = get_coords_from_chunks(chunk_id)
 	new_chunk.position.x += ChunkInformation.CHUNK_SIZE / 2
@@ -122,18 +128,28 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 	
 	for _i in range(pow(chunk_radius + 1, 2)):
 		if (i > -chunk_radius / 2.0 and
-			i <= chunk_radius / 2.0 and
-			j > -chunk_radius / 2.0 and
-			j <= chunk_radius / 2.0):
-				var cur_pos := Vector2(i + center_position.x, j + center_position.y)
-				checked_chunks[get_cantor_int_from_pair(cur_pos)] = true
-				if get_node_or_null("World/" + str(get_cantor_int_from_pair(cur_pos))) == null:
-					await add_chunk(cur_pos)
-					if is_cancelling_loading:
-						is_cancelling_loading = false
-						break
-				else:
-					$World.get_node(str(get_cantor_int_from_pair(cur_pos))).process_mode = Node.PROCESS_MODE_INHERIT
+				i <= chunk_radius / 2.0 and
+				j > -chunk_radius / 2.0 and
+				j <= chunk_radius / 2.0):
+			var cur_pos := Vector2(i + center_position.x, j + center_position.y)
+			var cur_pos_cantor_int: int = get_cantor_int_from_pair(cur_pos)
+			var cur_pos_cantor_int_string: String = str(cur_pos_cantor_int)
+			
+			checked_chunks[cur_pos_cantor_int] = true
+			
+			if get_node_or_null("World/" + cur_pos_cantor_int_string) == null:
+				await add_chunk(cur_pos)
+				if is_cancelling_loading:
+					is_cancelling_loading = false
+					break
+			else:
+				$World.get_node(cur_pos_cantor_int_string).process_mode = Node.PROCESS_MODE_INHERIT
+				
+			# Is the current chunk within process radius?
+			if i + j <= ChunkInformation.chunk_process_radius * 2:
+				$World.get_node(cur_pos_cantor_int_string).process_mode = Node.PROCESS_MODE_INHERIT
+			else:
+				$World.get_node(cur_pos_cantor_int_string).process_mode = Node.PROCESS_MODE_DISABLED
 		if (i == j or
 			(i < 0 and i == -j) or
 			(i > 0 and i == 1 - j)):
@@ -153,3 +169,19 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 			else:
 				print("tried to remove " + str(key) + " but it didnt exist")
 	
+
+
+func _on_load_new_check_box_toggled(toggled_on: bool) -> void:
+	only_load_new_chunks = toggled_on
+
+
+func _on_load_distance_slider_value_changed(value: float) -> void:
+	var int_value = int(value)
+	$ChunkSettingsMenu/Panel/ScrollContainer/VBoxContainer/LoadDistLabel.text = "Load Distance: " + str(int_value)
+	ChunkInformation.chunk_load_radius = int_value
+
+
+func _on_process_distance_slider_value_changed(value: float) -> void:
+	var int_value = int(value)
+	$ChunkSettingsMenu/Panel/ScrollContainer/VBoxContainer/ProcessDistLabel.text = "Process Distance " + str(int_value)
+	ChunkInformation.chunk_process_radius = int_value
