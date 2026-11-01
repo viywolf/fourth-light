@@ -91,6 +91,10 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Start"
 
+[node name="SettingsButton" type="Button" parent="MainTitleScreen/ButtonsContainer/HBoxContainer/VBoxContainer" unique_id=1493252953]
+layout_mode = 2
+text = "Settings"
+
 [node name="QuitButton" type="Button" parent="MainTitleScreen/ButtonsContainer/HBoxContainer/VBoxContainer" unique_id=14813805]
 layout_mode = 2
 text = "Quit"
@@ -119,4 +123,5 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="GridContainer/SwimSceneButton" to="." method="_on_swim_scene_button_pressed"]
 [connection signal="pressed" from="GridContainer/ChunkSceneButton" to="." method="_on_chunk_scene_button_pressed"]
 [connection signal="pressed" from="MainTitleScreen/ButtonsContainer/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainTitleScreen/ButtonsContainer/HBoxContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MainTitleScreen/ButtonsContainer/HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

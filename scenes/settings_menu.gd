@@ -68,3 +68,9 @@ func _on_music_h_slider_value_changed(value: float) -> void:
 func _on_sfxh_slider_value_changed(value: float) -> void:
 	Settings.update_volume(Settings.SFX_VOLUME, value)
 	%SFXVolumeContainer/Label.text = "SFX Volume: " + to_percentage(Settings.get_volume(Settings.SFX_VOLUME))
+
+
+
+
+func _on_close_button_pressed() -> void:
+	queue_free()

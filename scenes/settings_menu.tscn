@@ -208,6 +208,14 @@ layout_mode = 2
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=395667678]
 layout_mode = 2
 
+[node name="CloseButton" type="Button" parent="." unique_id=1582507989]
+layout_mode = 0
+offset_left = 852.0
+offset_top = 82.0
+offset_right = 892.0
+offset_bottom = 122.0
+text = "X"
+
 [connection signal="pressed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer/Button12" to="." method="_on_button_12_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer/Button30" to="." method="_on_button_30_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer/Button60" to="." method="_on_button_60_pressed"]
@@ -216,3 +224,4 @@ layout_mode = 2
 [connection signal="value_changed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/SFXVolumeContainer/SFXHSlider" to="." method="_on_sfxh_slider_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/LoadContainer/LoadHSlider" to="." method="_on_load_h_slider_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/ProcessContainer/ProcessHSlider" to="." method="_on_process_h_slider_value_changed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

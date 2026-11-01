@@ -1,5 +1,6 @@
 extends Node2D
 
+var settings_menu_scene: PackedScene = load("res://scenes/settings_menu.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,6 +11,11 @@ func _ready() -> void:
 func _on_start_button_pressed() -> void:
 	$GridContainer.show()
 	$MainTitleScreen.hide()
+
+
+func _on_settings_button_pressed() -> void:
+	var new_settings: Control = settings_menu_scene.instantiate()
+	self.add_child(new_settings)
 
 
 func _on_quit_button_pressed() -> void:
