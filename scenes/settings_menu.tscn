@@ -83,6 +83,7 @@ text = "Volume"
 horizontal_alignment = 1
 
 [node name="MainVolumeContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=942911520]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Spacer" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MainVolumeContainer" unique_id=1790479916]
@@ -104,6 +105,7 @@ step = 0.01
 layout_mode = 2
 
 [node name="MusicVolumeContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=802232529]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Spacer2" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MusicVolumeContainer" unique_id=1105691284]
@@ -125,6 +127,7 @@ step = 0.01
 layout_mode = 2
 
 [node name="SFXVolumeContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=224075175]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Spacer2" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/SFXVolumeContainer" unique_id=2078078540]
@@ -208,5 +211,8 @@ layout_mode = 2
 [connection signal="pressed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer/Button12" to="." method="_on_button_12_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer/Button30" to="." method="_on_button_30_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer/Button60" to="." method="_on_button_60_pressed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MainVolumeContainer/MainHSlider" to="." method="_on_main_h_slider_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MusicVolumeContainer/MusicHSlider" to="." method="_on_music_h_slider_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/SFXVolumeContainer/SFXHSlider" to="." method="_on_sfxh_slider_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/LoadContainer/LoadHSlider" to="." method="_on_load_h_slider_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/ProcessContainer/ProcessHSlider" to="." method="_on_process_h_slider_value_changed"]
