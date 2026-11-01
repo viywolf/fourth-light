@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://djpe22uvojr66"]
+
+[ext_resource type="AudioStream" uid="uid://dfxxkid38pcob" path="res://assets/audio/music/MainMusic(From SSJ).mp3" id="1_3l76d"]
+[ext_resource type="Script" uid="uid://det2kpxk6bmha" path="res://globals/music.gd" id="2_yiyia"]
+
+[node name="Music" type="AudioStreamPlayer" unique_id=443678686]
+stream = ExtResource("1_3l76d")
+volume_db = -0.225
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_yiyia")

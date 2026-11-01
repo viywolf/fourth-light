@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://0rwyqi63su6t" path="res://scenes/title_screen.gd" id="1_fgkus"]
 [ext_resource type="Texture2D" uid="uid://ig7rr3tg5ay0" path="res://assets/Skybox.png" id="2_sa3yf"]
+[ext_resource type="AudioStream" uid="uid://drw72i3aywm4w" path="res://assets/audio/sfx/click.mp3" id="3_s4lrb"]
 
 [node name="TitleScreen" type="Node2D" unique_id=1466945169]
 script = ExtResource("1_fgkus")
@@ -115,6 +116,10 @@ layout_mode = 2
 [node name="Spacer" type="Control" parent="MainTitleScreen" unique_id=174336770]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="ClickEffect" type="AudioStreamPlayer" parent="." unique_id=1835636125]
+stream = ExtResource("3_s4lrb")
+bus = &"SFX"
 
 [connection signal="pressed" from="GridContainer/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
 [connection signal="pressed" from="GridContainer/MainSceneButton" to="." method="_on_main_scene_button_pressed"]

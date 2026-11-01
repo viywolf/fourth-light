@@ -25,3 +25,5 @@ mono_crash.*.json
 # *.pck
 /addons
 /exports
+*.import
+*.uid

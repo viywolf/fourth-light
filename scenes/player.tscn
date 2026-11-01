@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ctfyare4jp0xt"]
 
 [ext_resource type="Script" uid="uid://ofh7kog7yyyc" path="res://scenes/player.gd" id="1_3vyb7"]
+[ext_resource type="AudioStream" uid="uid://dokp1kv3cha02" path="res://assets/audio/sfx/footsteps.mp3" id="2_g2els"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1vivr"]
 
@@ -48,3 +49,8 @@ text = "Glide Speed:"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Height: "
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1387439767]
+stream = ExtResource("2_g2els")
+volume_db = -16.807
+bus = &"SFX"

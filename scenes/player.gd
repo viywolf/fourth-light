@@ -148,6 +148,12 @@ func ground_movement(delta: float) -> void:
 		jumps_left = 1
 		jump_timer -= delta
 		
+	if is_on_floor() and not self.velocity.is_equal_approx(Vector3.ZERO):
+		if $AudioStreamPlayer3D.playing == false:
+			$AudioStreamPlayer3D.play()
+	else:
+		$AudioStreamPlayer3D.stop()
+		
 	var is_starting_jump: bool = (
 		Input.is_action_pressed("jump") 
 		and coyote_timer > 0
