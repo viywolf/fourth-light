@@ -1,8 +1,6 @@
 # Fourth Light
 A 3D exploration game made in Godot. Check it out at [itch.io](https://viywolf.itch.io/fourth-light).
 
-![](https://github.com/viywolf/fourth-light/blob/main/promo_images/InGameScreenshotW1.png)
-
 Godot 4.7 and Blender 4.3 was used to make this project.
 
 ## How To Play
@@ -11,6 +9,7 @@ Go to the [itch.io page](https://viywolf.itch.io/fourth-light) and download the 
 ## Features
 
 ### Week 1
+![](https://github.com/viywolf/fourth-light/blob/main/assets/promo_images/InGameScreenshotW1.png)
 - Movement
 - Swimming + diving
 - Gliding (press Q while midair to glide, direct your movement by looking in the direction you want to go)
