@@ -17,6 +17,7 @@ Go to the [itch.io page](https://viywolf.itch.io/fourth-light) and download the 
 
 
 ### Week 2
+![](https://github.com/viywolf/fourth-light/blob/main/assets/promo_images/InGameScreenshotW2.png)
 - Added a demo stage for chunk loading which will probably be used in the main stage eventually.
 - Added a settings menu with volume control, FPS, and chunk loading control.
 - Added a sky background, loading screen, walls to water, and general minor improvements.
