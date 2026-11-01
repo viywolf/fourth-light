@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://kvi2c0moag35"]
+
+[ext_resource type="Theme" uid="uid://bks1s5luxpv31" path="res://assets/ui/basic_font.tres" id="1_05p07"]
+
+[node name="SettingsMenu" type="Control" unique_id=1408656562]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=481299665]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 92.0
+offset_right = 877.0
+offset_bottom = 555.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1209868354]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1891951602]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer" unique_id=790778549]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/ScrollContainer" unique_id=2069490073]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GeneralLabel" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1113773252]
+layout_mode = 2
+text = "General"
+horizontal_alignment = 1
+
+[node name="FPSContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=168922187]
+layout_mode = 2
+theme = ExtResource("1_05p07")
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer" unique_id=1276785897]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer" unique_id=798994539]
+layout_mode = 2
+text = "Frames Per Second"
+
+[node name="12Button" type="Button" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer" unique_id=1632342945]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_05p07")
+text = "12"
+
+[node name="30Button" type="Button" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer" unique_id=654908661]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "30"
+
+[node name="60Button" type="Button" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer" unique_id=1323762088]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "60"
+
+[node name="Spacer2" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/FPSContainer" unique_id=1064066292]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1441937838]
+layout_mode = 2
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="MainVolumeContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=942911520]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MainVolumeContainer" unique_id=1790479916]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MainVolumeContainer" unique_id=1179446321]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_05p07")
+text = "Main Volume"
+
+[node name="HSlider" type="HSlider" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MainVolumeContainer" unique_id=427221451]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer2" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MainVolumeContainer" unique_id=2140241672]
+layout_mode = 2
+
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=802232529]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MusicVolumeContainer" unique_id=1105691284]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MusicVolumeContainer" unique_id=1134463967]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_05p07")
+text = "Music Volume"
+
+[node name="HSlider" type="HSlider" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MusicVolumeContainer" unique_id=124423130]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/MusicVolumeContainer" unique_id=2144024970]
+layout_mode = 2
+
+[node name="SFXVolumeContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=224075175]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/SFXVolumeContainer" unique_id=2078078540]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/SFXVolumeContainer" unique_id=1480518817]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_05p07")
+text = "SFX Volume"
+
+[node name="HSlider" type="HSlider" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/SFXVolumeContainer" unique_id=1428802204]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/SFXVolumeContainer" unique_id=1713951410]
+layout_mode = 2
+
+[node name="ChunkLabel" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1380813193]
+layout_mode = 2
+text = "Chunks"
+horizontal_alignment = 1
+
+[node name="LoadContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=467302496]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/LoadContainer" unique_id=257143253]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/LoadContainer" unique_id=937529588]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_05p07")
+text = "Load Radius"
+
+[node name="HSlider" type="HSlider" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/LoadContainer" unique_id=1149373184]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 30.0
+value = 5.0
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/LoadContainer" unique_id=1489680862]
+layout_mode = 2
+
+[node name="ProcessContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2083716621]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/ProcessContainer" unique_id=433199453]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/ProcessContainer" unique_id=1895261274]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_05p07")
+text = "Process Radius"
+
+[node name="HSlider" type="HSlider" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/ProcessContainer" unique_id=1979024448]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 30.0
+value = 5.0
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/ProcessContainer" unique_id=1258989614]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2022008192]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=741362889]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=395667678]
+layout_mode = 2

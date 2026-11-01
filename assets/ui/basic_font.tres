@@ -1,0 +1,8 @@
+[gd_resource type="Theme" format=3 uid="uid://bks1s5luxpv31"]
+
+[ext_resource type="FontFile" uid="uid://b2u4b2ee05vkp" path="res://assets/ui/fonts/Quicksand-VariableFont_wght.ttf" id="1_ep55b"]
+
+[resource]
+Button/font_sizes/font_size = 12
+Label/font_sizes/font_size = 18
+Label/fonts/font = ExtResource("1_ep55b")
