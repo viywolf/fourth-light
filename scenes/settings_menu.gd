@@ -3,6 +3,7 @@ extends Control
 
 func _ready() -> void:
 	# Chunks
+	%OnlyLoadNewContainer/LoadNewCheckBox.button_pressed = ChunkInformation.only_load_new_chunks
 	%LoadContainer/Label.text = "Load Distance: " + str(ChunkInformation.chunk_load_radius)
 	%LoadContainer/LoadHSlider.value = ChunkInformation.chunk_load_radius
 	%ProcessContainer/Label.text = "Process Distance: " + str(ChunkInformation.chunk_process_radius)
@@ -17,6 +18,11 @@ func _ready() -> void:
 	%MusicVolumeContainer/MusicHSlider.value = Settings.get_volume(Settings.MUSIC_VOLUME)
 	%SFXVolumeContainer/Label.text = "SFX Volume: " + str(Settings.get_volume(Settings.SFX_VOLUME))
 	%SFXVolumeContainer/SFXHSlider.value = Settings.get_volume(Settings.SFX_VOLUME)
+
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("escape"):
+		queue_free()
 
 
 func to_percentage(number: float) -> String:
@@ -74,3 +80,8 @@ func _on_sfxh_slider_value_changed(value: float) -> void:
 
 func _on_close_button_pressed() -> void:
 	queue_free()
+
+
+func _on_load_new_check_box_toggled(toggled_on: bool) -> void:
+	ChunkInformation.only_load_new_chunks = toggled_on
+	

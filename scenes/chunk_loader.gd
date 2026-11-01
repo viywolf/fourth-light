@@ -11,8 +11,6 @@ var checked_chunks: Dictionary[int, bool]
 # Loading async vars
 var is_cancelling_loading: bool = false
 
-var only_load_new_chunks: bool = true
-
 func _ready() -> void:
 	chunk = Node3D.new()
 	var label := Label3D.new()
@@ -49,16 +47,6 @@ func _physics_process(_delta: float) -> void:
 	prev_player_pos = player_pos
 	
 	%PlayerChunkPosLabel.text = str(get_position_in_chunks(player_pos))
-	%ChunkLoadDistLabel.text = "Chunk Loading Distance: " + str(ChunkInformation.chunk_load_radius)
-	%OnlyLoadNewChunksLabel.text = "Only Load New Chunks: " + str(only_load_new_chunks)
-	
-	if Input.is_action_just_pressed("interact"):
-		$ChunkSettingsMenu.visible = !$ChunkSettingsMenu.visible 
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
 
 func get_cantor_int_from_pair(pair: Vector2i) -> int:
 	var x: int = pair.x
@@ -112,7 +100,7 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 		checked_chunks[int(child.name)] = false
 			
 	
-	if only_load_new_chunks == false:
+	if ChunkInformation.only_load_new_chunks == false:
 		for child in $World.get_children():
 			child.queue_free()
 			
@@ -164,24 +152,7 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 		if checked_chunks[key] == false:
 			# and it exists
 			if $World.get_node_or_null(str(key)) != null:
-				#$World.get_node(str(key)).queue_free()
 				$World.get_node(str(key)).process_mode = Node.PROCESS_MODE_DISABLED
 			else:
 				print("tried to remove " + str(key) + " but it didnt exist")
 	
-
-
-func _on_load_new_check_box_toggled(toggled_on: bool) -> void:
-	only_load_new_chunks = toggled_on
-
-
-func _on_load_distance_slider_value_changed(value: float) -> void:
-	var int_value = int(value)
-	$ChunkSettingsMenu/Panel/ScrollContainer/VBoxContainer/LoadDistLabel.text = "Load Distance: " + str(int_value)
-	ChunkInformation.chunk_load_radius = int_value
-
-
-func _on_process_distance_slider_value_changed(value: float) -> void:
-	var int_value = int(value)
-	$ChunkSettingsMenu/Panel/ScrollContainer/VBoxContainer/ProcessDistLabel.text = "Process Distance " + str(int_value)
-	ChunkInformation.chunk_process_radius = int_value
