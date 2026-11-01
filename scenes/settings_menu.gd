@@ -5,7 +5,7 @@ func _ready() -> void:
 	# Chunks
 	%LoadContainer/Label.text = "Load Distance: " + str(ChunkInformation.chunk_load_radius)
 	%LoadContainer/LoadHSlider.value = ChunkInformation.chunk_load_radius
-	%ProcessContainer/Label.text = "Load Distance: " + str(ChunkInformation.chunk_process_radius)
+	%ProcessContainer/Label.text = "Process Distance: " + str(ChunkInformation.chunk_process_radius)
 	%ProcessContainer/ProcessHSlider.value = ChunkInformation.chunk_process_radius
 	
 	%FPSContainer/Label.text = "Frames Per Second (" + str(Settings.frames_per_second) + ")"
@@ -32,8 +32,8 @@ func _on_load_h_slider_value_changed(value: float) -> void:
 
 func _on_process_h_slider_value_changed(value: float) -> void:
 	var int_value = int(value)
-	ChunkInformation.chunk_load_radius = int_value
-	%ProcessContainer/Label.text = "Load Distance: " + str(int_value)
+	ChunkInformation.chunk_process_radius = int_value
+	%ProcessContainer/Label.text = "Process Distance: " + str(int_value)
 
 
 # FPS
