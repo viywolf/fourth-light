@@ -37,24 +37,24 @@ func _on_back_to_menu_button_pressed() -> void:
 
 func _on_main_scene_button_pressed() -> void:
 	play_click()
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	GlobalLoader.change_scene("res://scenes/main.tscn")
 
 
 func _on_movement_scene_button_pressed() -> void:
 	play_click()
-	get_tree().change_scene_to_file("res://scenes/stages/movement_stage.tscn")
+	GlobalLoader.change_scene("res://scenes/stages/movement_stage.tscn")
 	
 
 func _on_glide_scene_button_pressed() -> void:
 	play_click()
-	get_tree().change_scene_to_file("res://scenes/stages/glide_stage.tscn")
+	GlobalLoader.change_scene("res://scenes/stages/glide_stage.tscn")
 	
 
 func _on_swim_scene_button_pressed() -> void:
 	play_click()
-	get_tree().change_scene_to_file("res://scenes/stages/swim_stage.tscn")
+	GlobalLoader.change_scene("res://scenes/stages/swim_stage.tscn")
 
 
 func _on_chunk_scene_button_pressed() -> void:
 	play_click()
-	get_tree().change_scene_to_file("res://scenes/chunk_loading_test.tscn")
+	GlobalLoader.change_scene("res://scenes/chunk_loading_test.tscn")

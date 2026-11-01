@@ -4,7 +4,7 @@ extends Node
 const CHUNK_SIZE: float = 16
 
 var chunk_load_radius: int = 5
-var chunk_process_radius: int = 1
+var chunk_process_radius: int = 5
 
 """
 Chunk order
