@@ -4,7 +4,7 @@ var scene_to_load_path: String = "res://scenes/chunk_loading_test.tscn"
 
 var load_wait_count: float = 0
 
-var min_wait_count: float = 1.5
+var min_wait_count: float = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
