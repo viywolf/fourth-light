@@ -12,6 +12,7 @@ var checked_chunks: Dictionary[int, bool]
 var is_cancelling_loading: bool = false
 
 func _ready() -> void:
+	
 	chunk = Node3D.new()
 	var label := Label3D.new()
 	label.font_size = 200
@@ -35,7 +36,9 @@ func _ready() -> void:
 	
 	$ChunksPlaceholder.queue_free()
 	
+	add_chunk(get_position_in_chunks(player_pos))
 	load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
+	
 	
 
 
@@ -74,8 +77,9 @@ func get_coords_from_chunks(chunk_input: Vector2) -> Vector3:
 
 func add_chunk(chunk_id: Vector2i) -> void:
 	var new_chunk: Node3D
+		
 	if get_cantor_int_from_pair(chunk_id) <  ChunkInformation.all_chunks.size() \
-		and FileAccess.file_exists(ChunkInformation.all_chunks[get_cantor_int_from_pair(chunk_id)]):
+		and ResourceLoader.exists(ChunkInformation.all_chunks[get_cantor_int_from_pair(chunk_id)]):
 			new_chunk = load(ChunkInformation.all_chunks[get_cantor_int_from_pair(chunk_id)]).instantiate()
 	else:
 		new_chunk = chunk.duplicate()
