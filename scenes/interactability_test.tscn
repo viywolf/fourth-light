@@ -4,6 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_vd1vn"]
 [ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/camera.tscn" id="3_nqbjp"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8vrlf"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1vivr"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1vivr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nqbjp"]
+
 [node name="InteractabilityTest" type="Node3D" unique_id=933755663]
 
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_nqbjp")]
@@ -16,3 +26,25 @@ unique_name_in_owner = true
 
 [node name="Camera" parent="PlayerController" unique_id=359368113 instance=ExtResource("3_nqbjp")]
 unique_name_in_owner = true
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=612871860]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1137415643]
+shape = SubResource("BoxShape3D_8vrlf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1068458623]
+mesh = SubResource("BoxMesh_1vivr")
+
+[node name="Object1" type="RigidBody3D" parent="." unique_id=99375147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0159485, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Object1" unique_id=933158670]
+mesh = SubResource("SphereMesh_1vivr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Object1" unique_id=935758926]
+shape = SubResource("SphereShape3D_nqbjp")
+
+[node name="Area3D" type="Area3D" parent="Object1" unique_id=191804777]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Object1/Area3D" unique_id=701077954]
+shape = SubResource("SphereShape3D_nqbjp")

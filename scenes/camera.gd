@@ -1,5 +1,7 @@
 extends Node3D
 
+@onready var raycast: RayCast3D = $RayCast3D
+
 @export_range(0, 1) var mouse_sensitivity := 0.25
 
 var spring_arm_length: float = 5
@@ -34,3 +36,8 @@ func _physics_process(delta: float) -> void:
 	
 	spring_arm_length = clampf(spring_arm_length, min_spring_arm_length, max_spring_arm_length)
 	$SpringArm3D.spring_length = spring_arm_length
+	
+	raycast.transform = $SpringArm3D.transform
+	raycast.position.y -= 0.1
+	print(raycast.is_colliding())
+	print(raycast.get_collider())
