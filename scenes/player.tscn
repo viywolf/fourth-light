@@ -14,6 +14,7 @@ radius = 0.1
 size = Vector3(3, 0.1, 1)
 
 [node name="Player" type="CharacterBody3D" unique_id=894728165]
+collision_layer = 2
 script = ExtResource("1_3vyb7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=721722052]

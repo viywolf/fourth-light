@@ -2,10 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_i5f7v"]
 [ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_lroeq"]
-[ext_resource type="Script" uid="uid://dot6rpuygi04q" path="res://scenes/camera.gd" id="2_qi0ma"]
+[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/camera.tscn" id="3_lroeq"]
 [ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/collectable.tscn" id="3_qi0ma"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_4rnny"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_i5f7v"]
 size = Vector3(100, 1, 100)
@@ -98,16 +96,8 @@ _data = {
 [node name="Player" parent="PlayerController" unique_id=894728165 instance=ExtResource("1_i5f7v")]
 unique_name_in_owner = true
 
-[node name="Camera" type="Node3D" parent="PlayerController" unique_id=600047295]
+[node name="Camera" parent="PlayerController" unique_id=296385425 instance=ExtResource("3_lroeq")]
 unique_name_in_owner = true
-script = ExtResource("2_qi0ma")
-
-[node name="SpringArm3D" type="SpringArm3D" parent="PlayerController/Camera" unique_id=877426520]
-transform = Transform3D(1, 0, 0, 0, 0.9563048, 0.2923717, 0, -0.2923717, 0.9563048, 0, -0.09999359, 0)
-shape = SubResource("SphereShape3D_4rnny")
-spring_length = 5.0
-
-[node name="Camera3D" type="Camera3D" parent="PlayerController/Camera/SpringArm3D" unique_id=1033254465]
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=919653573]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -45.164925, 0)

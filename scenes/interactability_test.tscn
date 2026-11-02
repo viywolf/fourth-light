@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c5v0shpoegbrt"]
+
+[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_nqbjp"]
+[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_vd1vn"]
+[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/camera.tscn" id="3_nqbjp"]
+
+[node name="InteractabilityTest" type="Node3D" unique_id=933755663]
+
+[node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_nqbjp")]
+
+[node name="PlayerController" type="Node3D" parent="." unique_id=1418983913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.407343, 4.9297285, 6.8077683)
+
+[node name="Player" parent="PlayerController" unique_id=894728165 instance=ExtResource("1_vd1vn")]
+unique_name_in_owner = true
+
+[node name="Camera" parent="PlayerController" unique_id=359368113 instance=ExtResource("3_nqbjp")]
+unique_name_in_owner = true

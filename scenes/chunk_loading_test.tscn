@@ -3,11 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_4t1lv"]
 [ext_resource type="Script" uid="uid://biguf2cvw3ev" path="res://scenes/chunk_loader.gd" id="1_c3gfm"]
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="2_c3gfm"]
-[ext_resource type="Script" uid="uid://dot6rpuygi04q" path="res://scenes/camera.gd" id="3_12xdt"]
+[ext_resource type="PackedScene" uid="uid://bu7ux5xakumlt" path="res://scenes/camera.tscn" id="4_aw8p0"]
 [ext_resource type="PackedScene" uid="uid://xh2vqxw4piwn" path="res://scenes/chunks/chunk_0.tscn" id="5_12xdt"]
 [ext_resource type="PackedScene" uid="uid://bp3gj4mudge61" path="res://scenes/chunks/chunk_1.tscn" id="6_aw8p0"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_2p5uw"]
 
 [node name="ChunkLoadingTest" type="Node3D" unique_id=1093858828]
 script = ExtResource("1_c3gfm")
@@ -29,16 +27,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.407343, 4.9297285, 6.807768
 [node name="Player" parent="PlayerController" unique_id=894728165 instance=ExtResource("2_c3gfm")]
 unique_name_in_owner = true
 
-[node name="Camera" type="Node3D" parent="PlayerController" unique_id=340913077]
+[node name="Camera" parent="PlayerController" unique_id=1099315470 instance=ExtResource("4_aw8p0")]
 unique_name_in_owner = true
-script = ExtResource("3_12xdt")
-
-[node name="SpringArm3D" type="SpringArm3D" parent="PlayerController/Camera" unique_id=274194974]
-transform = Transform3D(1, 0, 0, 0, 0.9563048, 0.2923717, 0, -0.2923717, 0.9563048, 0, -0.09999359, 0)
-shape = SubResource("SphereShape3D_2p5uw")
-spring_length = 5.0
-
-[node name="Camera3D" type="Camera3D" parent="PlayerController/Camera/SpringArm3D" unique_id=889514409]
 
 [node name="World" type="Node3D" parent="." unique_id=1324276275]
 
