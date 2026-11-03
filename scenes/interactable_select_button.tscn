@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c1qitkwem6ahv"]
+
+[ext_resource type="Script" uid="uid://bmc455dgitaaq" path="res://scenes/interactable_select_button.gd" id="1_uqf32"]
+
+[node name="InteractableSelectButton" type="Button" unique_id=44827686]
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 0
+script = ExtResource("1_uqf32")

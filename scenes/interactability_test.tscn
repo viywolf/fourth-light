@@ -20,6 +20,32 @@ script = ExtResource("1_0ha6h")
 
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_nqbjp")]
 
+[node name="InteractionUI" type="CanvasLayer" parent="." unique_id=438922682]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InteractionUI" unique_id=1525084855]
+offset_left = 730.0
+offset_top = 261.0
+offset_right = 814.0
+offset_bottom = 417.0
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InteractionUI/ScrollContainer" unique_id=1392400700]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="InteractionUI" unique_id=907192030]
+offset_left = 691.0
+offset_top = 257.0
+offset_right = 731.0
+offset_bottom = 297.0
+
+[node name="Label" type="Label" parent="InteractionUI/Panel" unique_id=1502551464]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 51.0
+offset_bottom = 35.0
+text = "E"
+
 [node name="PlayerController" type="Node3D" parent="." unique_id=1418983913]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.407343, 4.9297285, 6.8077683)
 
@@ -50,4 +76,34 @@ shape = SubResource("SphereShape3D_nqbjp")
 [node name="Area3D" type="Area3D" parent="Object1" unique_id=191804777]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Object1/Area3D" unique_id=701077954]
+shape = SubResource("SphereShape3D_nqbjp")
+
+[node name="Object2" type="RigidBody3D" parent="." unique_id=1933853884]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79905653, 3.0159485, 2.8948193)
+collision_layer = 7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Object2" unique_id=1433971310]
+mesh = SubResource("SphereMesh_1vivr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Object2" unique_id=874065180]
+shape = SubResource("SphereShape3D_nqbjp")
+
+[node name="Area3D" type="Area3D" parent="Object2" unique_id=610438028]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Object2/Area3D" unique_id=682541650]
+shape = SubResource("SphereShape3D_nqbjp")
+
+[node name="Object3" type="RigidBody3D" parent="." unique_id=976065097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3689249, 3.0159485, 3.1818056)
+collision_layer = 7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Object3" unique_id=31791557]
+mesh = SubResource("SphereMesh_1vivr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Object3" unique_id=1326922145]
+shape = SubResource("SphereShape3D_nqbjp")
+
+[node name="Area3D" type="Area3D" parent="Object3" unique_id=1236019985]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Object3/Area3D" unique_id=854331585]
 shape = SubResource("SphereShape3D_nqbjp")
