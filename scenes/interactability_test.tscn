@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://r3m6brf7lncy" path="res://scenes/interactability_test.gd" id="1_0ha6h"]
 [ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_nqbjp"]
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_vd1vn"]
+[ext_resource type="Script" uid="uid://pkbwteao3d4v" path="res://scenes/interaction_ui.gd" id="3_a0noj"]
 [ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/camera.tscn" id="3_nqbjp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8vrlf"]
@@ -21,6 +22,7 @@ script = ExtResource("1_0ha6h")
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_nqbjp")]
 
 [node name="InteractionUI" type="CanvasLayer" parent="." unique_id=438922682]
+script = ExtResource("3_a0noj")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="InteractionUI" unique_id=1525084855]
 offset_left = 730.0
@@ -29,7 +31,7 @@ offset_right = 814.0
 offset_bottom = 417.0
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InteractionUI/ScrollContainer" unique_id=1392400700]
+[node name="ButtonsContainer" type="VBoxContainer" parent="InteractionUI/ScrollContainer" unique_id=1392400700]
 layout_mode = 2
 
 [node name="Panel" type="Panel" parent="InteractionUI" unique_id=907192030]
