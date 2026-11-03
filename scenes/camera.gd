@@ -39,5 +39,3 @@ func _physics_process(delta: float) -> void:
 	
 	raycast.transform = $SpringArm3D.transform
 	raycast.position.y -= 0.1
-	print(raycast.is_colliding())
-	print(raycast.get_collider())
