@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dy8fghsx5oarm"]
 
-[ext_resource type="Script" uid="uid://bscdxnlhxrcdw" path="res://scenes/collectable.gd" id="1_ti8a4"]
+[ext_resource type="Script" uid="uid://bscdxnlhxrcdw" path="res://scenes/features/interactions/collectable.gd" id="1_ti8a4"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1vivr"]
 

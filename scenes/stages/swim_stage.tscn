@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cot6yv4of8ggl"]
 
-[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_a303w"]
-[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_e3lnv"]
-[ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/collectable.tscn" id="3_qa102"]
-[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/camera.tscn" id="3_yruor"]
+[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/ui_scenes/gui.tscn" id="1_a303w"]
+[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/features/player/player.tscn" id="1_e3lnv"]
+[ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/features/interactions/collectable.tscn" id="3_qa102"]
+[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/features/player/camera.tscn" id="3_yruor"]
 [ext_resource type="Shader" uid="uid://cn0cbhkc31iii" path="res://shaders/grass.gdshader" id="4_ybxm6"]
 [ext_resource type="PackedScene" uid="uid://ow80tfbkmu8s" path="res://assets/blender/rock3.blend" id="6_tbkh5"]
 [ext_resource type="Script" uid="uid://dknxcyqxnr2aq" path="res://scripts/idle_behaviour_scripts/object_floating_in_water.gd" id="7_yruor"]

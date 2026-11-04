@@ -1,6 +1,6 @@
 extends Node2D
 
-var settings_menu_scene: PackedScene = load("res://scenes/settings_menu.tscn")
+var settings_menu_scene: PackedScene = load("res://scenes/ui_scenes/settings_menu.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b7722vjmmpimd"]
 
 [ext_resource type="Texture2D" uid="uid://ig7rr3tg5ay0" path="res://assets/Skybox.png" id="1_ep5rh"]
-[ext_resource type="Script" uid="uid://dsax6p1udgdu3" path="res://scenes/loading_screen.gd" id="1_hprjd"]
+[ext_resource type="Script" uid="uid://dsax6p1udgdu3" path="res://scenes/ui_scenes/loading_screen.gd" id="1_hprjd"]
 
 [node name="LoadingScreen" type="CanvasLayer" unique_id=553530013]
 script = ExtResource("1_hprjd")

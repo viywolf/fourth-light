@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://btjl8wi7aaiqn"]
 
-[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_4t1lv"]
-[ext_resource type="Script" uid="uid://biguf2cvw3ev" path="res://scenes/chunk_loader.gd" id="1_c3gfm"]
-[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="2_c3gfm"]
-[ext_resource type="PackedScene" uid="uid://bu7ux5xakumlt" path="res://scenes/camera.tscn" id="4_aw8p0"]
+[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/ui_scenes/gui.tscn" id="1_4t1lv"]
+[ext_resource type="Script" uid="uid://biguf2cvw3ev" path="res://scenes/features/chunks/chunk_loader.gd" id="1_c3gfm"]
+[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/features/player/player.tscn" id="2_c3gfm"]
+[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/features/player/camera.tscn" id="4_aw8p0"]
 [ext_resource type="PackedScene" uid="uid://xh2vqxw4piwn" path="res://scenes/chunks/chunk_0.tscn" id="5_12xdt"]
 [ext_resource type="PackedScene" uid="uid://bp3gj4mudge61" path="res://scenes/chunks/chunk_1.tscn" id="6_aw8p0"]
 

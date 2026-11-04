@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var scene_to_load_path: String = "res://scenes/chunk_loading_test.tscn"
+var scene_to_load_path: String = "res://scenes/features/chunks/chunk_loading_test.tscn"
 
 var load_wait_count: float = 0
 

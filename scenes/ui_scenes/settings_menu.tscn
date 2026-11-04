@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://kvi2c0moag35"]
 
 [ext_resource type="Theme" uid="uid://bks1s5luxpv31" path="res://assets/ui/basic_font.tres" id="1_05p07"]
-[ext_resource type="Script" uid="uid://djdgslitg855c" path="res://scenes/settings_menu.gd" id="1_cr101"]
+[ext_resource type="Script" uid="uid://djdgslitg855c" path="res://scenes/ui_scenes/settings_menu.gd" id="1_cr101"]
 
 [node name="SettingsMenu" type="Control" unique_id=1408656562]
 layout_mode = 3

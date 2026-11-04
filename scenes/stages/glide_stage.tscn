@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cj4ojt4invmyh"]
 
-[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_i5f7v"]
-[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_lroeq"]
-[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/camera.tscn" id="3_lroeq"]
-[ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/collectable.tscn" id="3_qi0ma"]
+[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/features/player/player.tscn" id="1_i5f7v"]
+[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/ui_scenes/gui.tscn" id="1_lroeq"]
+[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/features/player/camera.tscn" id="3_lroeq"]
+[ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/features/interactions/collectable.tscn" id="3_qi0ma"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_i5f7v"]
 size = Vector3(100, 1, 100)

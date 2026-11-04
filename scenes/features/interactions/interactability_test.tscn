@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c5v0shpoegbrt"]
 
-[ext_resource type="Script" uid="uid://r3m6brf7lncy" path="res://scenes/interactability_test.gd" id="1_0ha6h"]
-[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/gui.tscn" id="1_nqbjp"]
-[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/player.tscn" id="1_vd1vn"]
-[ext_resource type="Script" uid="uid://pkbwteao3d4v" path="res://scenes/interaction_ui.gd" id="3_a0noj"]
-[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/camera.tscn" id="3_nqbjp"]
+[ext_resource type="Script" uid="uid://r3m6brf7lncy" path="res://scenes/features/interactions/interactability_test.gd" id="1_0ha6h"]
+[ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/ui_scenes/gui.tscn" id="1_nqbjp"]
+[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/features/player/player.tscn" id="1_vd1vn"]
+[ext_resource type="Script" uid="uid://pkbwteao3d4v" path="res://scenes/features/interactions/interaction_ui.gd" id="3_a0noj"]
+[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/features/player/camera.tscn" id="3_nqbjp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8vrlf"]
 size = Vector3(50, 1, 50)
@@ -34,13 +34,13 @@ horizontal_scroll_mode = 0
 [node name="ButtonsContainer" type="VBoxContainer" parent="InteractionUI/ScrollContainer" unique_id=1392400700]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="InteractionUI" unique_id=907192030]
+[node name="KeyPrompt" type="Panel" parent="InteractionUI" unique_id=907192030]
 offset_left = 691.0
 offset_top = 257.0
 offset_right = 731.0
 offset_bottom = 297.0
 
-[node name="Label" type="Label" parent="InteractionUI/Panel" unique_id=1502551464]
+[node name="Label" type="Label" parent="InteractionUI/KeyPrompt" unique_id=1502551464]
 layout_mode = 0
 offset_left = 11.0
 offset_top = 4.0
@@ -65,7 +65,7 @@ shape = SubResource("BoxShape3D_8vrlf")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1068458623]
 mesh = SubResource("BoxMesh_1vivr")
 
-[node name="Object1" type="RigidBody3D" parent="." unique_id=99375147]
+[node name="Object1" type="RigidBody3D" parent="." unique_id=99375147 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0159485, 0)
 collision_layer = 7
 
@@ -80,7 +80,7 @@ shape = SubResource("SphereShape3D_nqbjp")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Object1/Area3D" unique_id=701077954]
 shape = SubResource("SphereShape3D_nqbjp")
 
-[node name="Object2" type="RigidBody3D" parent="." unique_id=1933853884]
+[node name="Object2" type="RigidBody3D" parent="." unique_id=1933853884 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79905653, 3.0159485, 2.8948193)
 collision_layer = 7
 
@@ -95,7 +95,7 @@ shape = SubResource("SphereShape3D_nqbjp")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Object2/Area3D" unique_id=682541650]
 shape = SubResource("SphereShape3D_nqbjp")
 
-[node name="Object3" type="RigidBody3D" parent="." unique_id=976065097]
+[node name="Object3" type="RigidBody3D" parent="." unique_id=976065097 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3689249, 3.0159485, 3.1818056)
 collision_layer = 7
 

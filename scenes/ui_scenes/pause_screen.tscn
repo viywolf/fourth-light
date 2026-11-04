@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://142cua0holhk"]
 
-[ext_resource type="Script" uid="uid://bdklkq41gkerx" path="res://scenes/pause_screen.gd" id="1_gchx3"]
+[ext_resource type="Script" uid="uid://bdklkq41gkerx" path="res://scenes/ui_scenes/pause_screen.gd" id="1_gchx3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mht5f"]
 content_margin_left = 0.0

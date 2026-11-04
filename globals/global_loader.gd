@@ -1,6 +1,6 @@
 extends Node
 
-var loading_screen: PackedScene = load("res://scenes/loading_screen.tscn")
+var loading_screen: PackedScene = load("res://scenes/ui_scenes/loading_screen.tscn")
 
 
 func change_scene(scene_path: String) -> void:

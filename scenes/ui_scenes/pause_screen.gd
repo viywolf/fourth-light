@@ -2,7 +2,7 @@ extends Control
 
 signal closed
 
-var settings_menu_scene: PackedScene = load("res://scenes/settings_menu.tscn")
+var settings_menu_scene: PackedScene = load("res://scenes/ui_scenes/settings_menu.tscn")
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -24,4 +24,4 @@ func _on_settings_button_pressed() -> void:
 
 
 func _on_menu_button_pressed() -> void:
-	GlobalLoader.change_scene("res://scenes/title_screen.tscn")
+	GlobalLoader.change_scene("res://scenes/ui_scenes/title_screen.tscn")

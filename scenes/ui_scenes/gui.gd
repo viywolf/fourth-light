@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var pause_screen_scene: PackedScene = preload("res://scenes/pause_screen.tscn")
+var pause_screen_scene: PackedScene = preload("res://scenes/ui_scenes/pause_screen.tscn")
 var is_pause_screen_active := false
 
 func _process(_delta: float) -> void:
@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_back_button_pressed() -> void:
-	GlobalLoader.change_scene("res://scenes/title_screen.tscn")
+	GlobalLoader.change_scene("res://scenes/ui_scenes/title_screen.tscn")
 
 
 func pause_screen_closed() -> void:
