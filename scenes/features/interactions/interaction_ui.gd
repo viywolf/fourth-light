@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 			buttons_container.get_child(0).queue_free()
 			for node in get_tree().get_nodes_in_group("interactables"):
 				if str(node) == body_interacted_with:
-					if node.has_method("_do_interaction"):
+					if node.get("is_interactable") == true:
 						node._do_interaction()
 					else:
 						node.queue_free()

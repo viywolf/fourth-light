@@ -1,6 +1,5 @@
 extends InteractableObject
 
-
 func _do_interaction():
 	var tween := get_tree().create_tween()
 	tween.tween_property(self, "position:y", self.position.y + 0.5, 0.2)

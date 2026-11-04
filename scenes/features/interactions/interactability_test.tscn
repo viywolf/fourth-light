@@ -90,6 +90,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79905653, 3.0159485, 2.894
 collision_layer = 6
 mass = 0.05
 script = ExtResource("6_mqo21")
+is_interactable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Items/Object2" unique_id=1433971310]
 mesh = SubResource("SphereMesh_1vivr")
