@@ -11,8 +11,8 @@ func _process(_delta: float) -> void:
 			buttons_container.get_child(0).queue_free()
 			for node in get_tree().get_nodes_in_group("interactables"):
 				if str(node) == body_interacted_with:
-					if node.has_method("do_interaction"):
-						node.interacted_with()
+					if node.has_method("_do_interaction"):
+						node._do_interaction()
 					else:
 						node.queue_free()
 						print("This node has no interaction method")

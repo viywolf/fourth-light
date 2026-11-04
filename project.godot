@@ -27,6 +27,7 @@ Settings="*uid://lv6vhw4o8038"
 Music="*uid://djpe22uvojr66"
 GlobalLoader="*uid://b5nsyls8l6v2l"
 EnvironmentGlobal="*uid://dkmtyc3vcocw4"
+ItemInteractions="*uid://bluqcmg4hp7ol"
 
 [display]
 
@@ -36,6 +37,10 @@ window/stretch/aspect="expand"
 [editor_plugins]
 
 enabled=PackedStringArray("res://.godot/scenetime/plugin.cfg", "res://addons/godot_super-wakatime/plugin.cfg")
+
+[global_group]
+
+player=""
 
 [gui]
 

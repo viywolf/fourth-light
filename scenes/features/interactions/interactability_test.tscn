@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/features/player/player.tscn" id="1_vd1vn"]
 [ext_resource type="Script" uid="uid://pkbwteao3d4v" path="res://scenes/features/interactions/interaction_ui.gd" id="3_a0noj"]
 [ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/features/player/camera.tscn" id="3_nqbjp"]
+[ext_resource type="Script" uid="uid://dgm87bkkggc18" path="res://scripts/interactables/ball.gd" id="6_mqo21"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8vrlf"]
 size = Vector3(50, 1, 50)
@@ -51,7 +52,7 @@ text = "E"
 [node name="PlayerController" type="Node3D" parent="." unique_id=1418983913]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.407343, 4.9297285, 6.8077683)
 
-[node name="Player" parent="PlayerController" unique_id=894728165 instance=ExtResource("1_vd1vn")]
+[node name="Player" parent="PlayerController" unique_id=894728165 groups=["player"] instance=ExtResource("1_vd1vn")]
 unique_name_in_owner = true
 
 [node name="Camera" parent="PlayerController" unique_id=359368113 instance=ExtResource("3_nqbjp")]
@@ -68,6 +69,8 @@ mesh = SubResource("BoxMesh_1vivr")
 [node name="Object1" type="RigidBody3D" parent="." unique_id=99375147 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0159485, 0)
 collision_layer = 7
+mass = 0.05
+script = ExtResource("6_mqo21")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Object1" unique_id=933158670]
 mesh = SubResource("SphereMesh_1vivr")
@@ -83,6 +86,8 @@ shape = SubResource("SphereShape3D_nqbjp")
 [node name="Object2" type="RigidBody3D" parent="." unique_id=1933853884 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79905653, 3.0159485, 2.8948193)
 collision_layer = 7
+mass = 0.05
+script = ExtResource("6_mqo21")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Object2" unique_id=1433971310]
 mesh = SubResource("SphereMesh_1vivr")
@@ -98,6 +103,8 @@ shape = SubResource("SphereShape3D_nqbjp")
 [node name="Object3" type="RigidBody3D" parent="." unique_id=976065097 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3689249, 3.0159485, 3.1818056)
 collision_layer = 7
+mass = 0.05
+script = ExtResource("6_mqo21")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Object3" unique_id=31791557]
 mesh = SubResource("SphereMesh_1vivr")
