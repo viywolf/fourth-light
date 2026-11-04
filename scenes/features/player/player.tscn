@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ofh7kog7yyyc" path="res://scenes/features/player/player.gd" id="1_3vyb7"]
 [ext_resource type="AudioStream" uid="uid://dokp1kv3cha02" path="res://assets/audio/sfx/footsteps.mp3" id="2_g2els"]
 [ext_resource type="Script" uid="uid://121yj0hq61di" path="res://scenes/features/interactions/interaction_area.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://dt52dmhtb4ooi" path="res://scenes/features/player/held_objects.gd" id="4_hccld"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1vivr"]
 
@@ -66,8 +67,9 @@ script = ExtResource("3_qhqgy")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=279537408]
 shape = SubResource("SphereShape3D_8vrlf")
 
-[node name="HoldPosition" type="Node3D" parent="." unique_id=840927653]
+[node name="HeldObjects" type="Node3D" parent="." unique_id=840927653]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2071749, 0.66389084)
+script = ExtResource("4_hccld")
 
 [connection signal="body_entered" from="InteractionArea" to="InteractionArea" method="_on_body_entered"]
 [connection signal="body_exited" from="InteractionArea" to="InteractionArea" method="_on_body_exited"]
