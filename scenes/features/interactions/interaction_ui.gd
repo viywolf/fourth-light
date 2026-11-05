@@ -8,7 +8,6 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
 		if buttons_container.get_child_count() != 0:
 			var body_interacted_with: String = buttons_container.get_child(0).object_id
-			buttons_container.get_child(0).queue_free()
 			for node in get_tree().get_nodes_in_group("interactables"):
 				if str(node) == body_interacted_with:
 					if node.get("is_interactable") == true:
@@ -16,6 +15,8 @@ func _process(_delta: float) -> void:
 					else:
 						node.queue_free()
 						print("This node has no interaction method")
+			delete_interactable_button(body_interacted_with)
+			buttons_container.get_child(0).queue_free()
 		
 	if buttons_container.get_child_count() == 0:
 		$KeyPrompt.hide()
@@ -23,6 +24,10 @@ func _process(_delta: float) -> void:
 		$KeyPrompt.show()
 
 func add_interactable_button(object_name: String, object_id: String) -> void:
+	#print(ItemInteractions.held_item + "vs" + object_id)
+	#print(ItemInteractions.held_item == object_id)
+	if ItemInteractions.held_item == object_id:
+		return
 	var new_button: Button = interactable_select_button.instantiate()
 	new_button.text = object_name
 	new_button.object_id = object_id

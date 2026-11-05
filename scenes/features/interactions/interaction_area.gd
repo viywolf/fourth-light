@@ -6,10 +6,10 @@ signal object_passed_interaction_zone(object_name: String, object_id: String, en
 func _on_body_entered(body: Node3D) -> void:
 	if body.get("is_interactable") == false or body.get("is_interactable") == null:
 		return
-	object_passed_interaction_zone.emit(body.name, str(body), true)
+	object_passed_interaction_zone.emit(body.name, str(body.object_id), true)
 
 
 func _on_body_exited(body: Node3D) -> void:
 	if body.get("is_interactable") == false or body.get("is_interactable") == null:
 		return
-	object_passed_interaction_zone.emit(body.name, str(body), false)
+	object_passed_interaction_zone.emit(body.name, str(body.object_id), false)
