@@ -1,14 +1,7 @@
 [gd_scene format=3 uid="uid://c5v0shpoegbrt"]
 
-[ext_resource type="Script" uid="uid://r3m6brf7lncy" path="res://scenes/features/interactions/interactability_test.gd" id="1_0ha6h"]
 [ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/ui_scenes/gui.tscn" id="1_nqbjp"]
-[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/features/player/player.tscn" id="1_vd1vn"]
-[ext_resource type="Script" uid="uid://pkbwteao3d4v" path="res://scenes/features/interactions/interaction_ui.gd" id="3_a0noj"]
-[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/features/player/camera.tscn" id="3_nqbjp"]
-[ext_resource type="Script" uid="uid://b3a2gxe85xqux" path="res://scenes/features/interactions/key_prompt.gd" id="4_8r2lh"]
-[ext_resource type="Script" uid="uid://cffm46yg1g61g" path="res://scenes/features/interactions/throw_progress_bar.gd" id="4_16y76"]
-[ext_resource type="Script" uid="uid://bj75oie8fpaqo" path="res://scenes/features/interactions/release_label.gd" id="4_x46w7"]
-[ext_resource type="Texture2D" uid="uid://dn7mhv0t51mb8" path="res://assets/ui/icons/mouse_scroll_prompt_1.png" id="5_x46w7"]
+[ext_resource type="PackedScene" uid="uid://bc73dohqa5ut2" path="res://scenes/features/player/player_controller.tscn" id="2_1m1t8"]
 [ext_resource type="Script" uid="uid://dgm87bkkggc18" path="res://scripts/interactables/ball.gd" id="6_mqo21"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8vrlf"]
@@ -22,80 +15,11 @@ size = Vector3(50, 1, 50)
 [sub_resource type="SphereShape3D" id="SphereShape3D_nqbjp"]
 
 [node name="InteractabilityTest" type="Node3D" unique_id=933755663]
-script = ExtResource("1_0ha6h")
 
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_nqbjp")]
 
-[node name="InteractionUI" type="CanvasLayer" parent="." unique_id=438922682 groups=["ui"]]
-script = ExtResource("3_a0noj")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="InteractionUI" unique_id=1525084855]
-clip_contents = false
-offset_left = 730.0
-offset_top = 261.0
-offset_right = 754.0
-offset_bottom = 417.0
-horizontal_scroll_mode = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="InteractionUI/ScrollContainer" unique_id=1692066063]
-layout_mode = 2
-
-[node name="Spacer" type="Control" parent="InteractionUI/ScrollContainer/HBoxContainer" unique_id=2096455128]
-layout_mode = 2
-
-[node name="ButtonsContainer" type="VBoxContainer" parent="InteractionUI/ScrollContainer/HBoxContainer" unique_id=1392400700]
-layout_mode = 2
-
-[node name="Spacer2" type="Control" parent="InteractionUI/ScrollContainer/HBoxContainer" unique_id=1069558563]
-layout_mode = 2
-
-[node name="ReleaseLabel" type="Label" parent="InteractionUI" unique_id=638249897]
-visible = false
-offset_left = 465.0
-offset_top = 366.0
-offset_right = 685.0
-offset_bottom = 397.0
-text = "Press F To Release"
-script = ExtResource("4_x46w7")
-
-[node name="KeyPrompt" type="Panel" parent="InteractionUI" unique_id=907192030]
-visible = false
-offset_left = 691.0
-offset_top = 257.0
-offset_right = 731.0
-offset_bottom = 297.0
-script = ExtResource("4_8r2lh")
-
-[node name="TextureRect" type="TextureRect" parent="InteractionUI/KeyPrompt" unique_id=1332525688]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("5_x46w7")
-expand_mode = 1
-
-[node name="Timer" type="Timer" parent="InteractionUI/KeyPrompt" unique_id=40124918]
-autostart = true
-
-[node name="ThrowProgressBar" type="ProgressBar" parent="InteractionUI" unique_id=1083081522]
-unique_name_in_owner = true
-visible = false
-offset_left = 673.0
-offset_top = 222.0
-offset_right = 684.0
-offset_bottom = 340.0
-max_value = 1.0
-fill_mode = 3
-show_percentage = false
-script = ExtResource("4_16y76")
-
-[node name="PlayerController" type="Node3D" parent="." unique_id=1418983913]
+[node name="PlayerController" parent="." unique_id=1255494918 instance=ExtResource("2_1m1t8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.407343, 4.9297285, 6.8077683)
-
-[node name="Player" parent="PlayerController" unique_id=894728165 groups=["player"] instance=ExtResource("1_vd1vn")]
-unique_name_in_owner = true
-
-[node name="Camera" parent="PlayerController" unique_id=359368113 instance=ExtResource("3_nqbjp")]
-unique_name_in_owner = true
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=612871860]
 
@@ -250,5 +174,3 @@ shape = SubResource("SphereShape3D_nqbjp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Items/Object8/Area3D" unique_id=963529852]
 shape = SubResource("SphereShape3D_nqbjp")
-
-[connection signal="timeout" from="InteractionUI/KeyPrompt/Timer" to="InteractionUI/KeyPrompt" method="_on_timer_timeout"]

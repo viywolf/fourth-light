@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://qu2mwpvca4eo"]
+
+[ext_resource type="Script" uid="uid://pkbwteao3d4v" path="res://scenes/features/interactions/interaction_ui.gd" id="1_orxcq"]
+[ext_resource type="Script" uid="uid://bj75oie8fpaqo" path="res://scenes/features/interactions/release_label.gd" id="2_tblrd"]
+[ext_resource type="Script" uid="uid://b3a2gxe85xqux" path="res://scenes/features/interactions/key_prompt.gd" id="3_fk7ag"]
+[ext_resource type="Texture2D" uid="uid://dn7mhv0t51mb8" path="res://assets/ui/icons/mouse_scroll_prompt_1.png" id="4_jfq7f"]
+[ext_resource type="Script" uid="uid://cffm46yg1g61g" path="res://scenes/features/interactions/throw_progress_bar.gd" id="5_u0g48"]
+
+[node name="InteractionUI" type="CanvasLayer" unique_id=1261425242 groups=["ui"]]
+script = ExtResource("1_orxcq")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=879024202]
+clip_contents = false
+offset_left = 730.0
+offset_top = 261.0
+offset_right = 754.0
+offset_bottom = 417.0
+horizontal_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer" unique_id=999148873]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="ScrollContainer/HBoxContainer" unique_id=703105237]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="ScrollContainer/HBoxContainer" unique_id=1823500523]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="ScrollContainer/HBoxContainer" unique_id=516285223]
+layout_mode = 2
+
+[node name="ReleaseLabel" type="Label" parent="." unique_id=558445538]
+visible = false
+offset_left = 465.0
+offset_top = 366.0
+offset_right = 685.0
+offset_bottom = 397.0
+text = "Press F To Release"
+script = ExtResource("2_tblrd")
+
+[node name="KeyPrompt" type="Panel" parent="." unique_id=1583637597]
+visible = false
+offset_left = 691.0
+offset_top = 257.0
+offset_right = 731.0
+offset_bottom = 297.0
+script = ExtResource("3_fk7ag")
+
+[node name="TextureRect" type="TextureRect" parent="KeyPrompt" unique_id=530839587]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_jfq7f")
+expand_mode = 1
+
+[node name="Timer" type="Timer" parent="KeyPrompt" unique_id=1393995034]
+autostart = true
+
+[node name="ThrowProgressBar" type="ProgressBar" parent="." unique_id=343909551]
+unique_name_in_owner = true
+visible = false
+offset_left = 673.0
+offset_top = 222.0
+offset_right = 684.0
+offset_bottom = 340.0
+max_value = 1.0
+fill_mode = 3
+show_percentage = false
+script = ExtResource("5_u0g48")
+
+[connection signal="timeout" from="KeyPrompt/Timer" to="KeyPrompt" method="_on_timer_timeout"]

@@ -1,11 +1,9 @@
 extends Node3D
 
-var player: CharacterBody3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	%Player/InteractionArea.object_passed_interaction_zone.connect(manage_new_interactable_object)
-	player = get_tree().get_nodes_in_group("player")[0]
+	$Player/InteractionArea.object_passed_interaction_zone.connect(manage_new_interactable_object)
 
 
 func manage_new_interactable_object(object_name: String, object_id: String, is_entering_zone: bool) -> void:

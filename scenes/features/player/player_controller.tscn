@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bc73dohqa5ut2"]
+
+[ext_resource type="Script" uid="uid://r3m6brf7lncy" path="res://scenes/features/player/player_controller.gd" id="1_li70v"]
+[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/features/player/player.tscn" id="2_ma031"]
+[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/features/player/camera.tscn" id="3_pk43t"]
+[ext_resource type="PackedScene" uid="uid://qu2mwpvca4eo" path="res://scenes/features/interactions/interaction_ui.tscn" id="4_v6yqx"]
+
+[node name="PlayerController" type="Node3D" unique_id=1255494918]
+script = ExtResource("1_li70v")
+
+[node name="Player" parent="." unique_id=894728165 groups=["player"] instance=ExtResource("2_ma031")]
+unique_name_in_owner = true
+
+[node name="Camera" parent="." unique_id=359368113 instance=ExtResource("3_pk43t")]
+unique_name_in_owner = true
+
+[node name="InteractionUI" parent="." unique_id=1261425242 instance=ExtResource("4_v6yqx")]
