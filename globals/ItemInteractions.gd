@@ -11,9 +11,9 @@ var held_item: String
 
 var player: CharacterBody3D
 
-func pick_up_item(item: Node) -> void:
+func pick_up_item(item: Node) -> bool:
 	if is_holding_item: 
-		return
+		return false
 	is_holding_item = true
 	if player == null:
 		player = get_tree().get_nodes_in_group("player")[0]
@@ -23,6 +23,7 @@ func pick_up_item(item: Node) -> void:
 	item.position = Vector3.ZERO
 	item.is_interactable = false
 	held_item = str(item)
+	return true
 
 func drop_item(item: Node, time_held: float) -> void:
 	var world: Node3D = get_tree().get_nodes_in_group("world")[0]

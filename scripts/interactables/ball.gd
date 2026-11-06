@@ -1,4 +1,4 @@
 extends InteractableObject
 
-func _do_interaction():
-	ItemInteractions.pick_up_item(self)
+func _do_interaction() -> bool:
+	return ItemInteractions.pick_up_item(self)
