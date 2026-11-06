@@ -7,12 +7,16 @@ var settings_menu_scene: PackedScene = load("res://scenes/ui_scenes/settings_men
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	GameStatus.is_paused = true
+	for node in get_tree().get_nodes_in_group("ui"):
+		node.hide()
 
 
 func _on_continue_button_pressed() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	GameStatus.is_paused = false
 	closed.emit()
+	for node in get_tree().get_nodes_in_group("ui"):
+		node.show()
 	self.queue_free()
 	
 

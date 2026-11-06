@@ -4,6 +4,8 @@ extends CanvasLayer
 
 @onready var buttons_container: Container = $ScrollContainer/ButtonsContainer
 
+var current_button_selected: int = 0
+
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
 		if buttons_container.get_child_count() != 0:
@@ -26,15 +28,17 @@ func _process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.is_pressed():
-			print("afjsajlk")
 			GameStatus.is_middle_mouse_pressed = true
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.is_released():
-			print("Relasededed!!!!!")
 			GameStatus.is_middle_mouse_pressed = false
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_pressed():
-			print("Downnn")
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_pressed():
-			print("Up upu up")
+		if GameStatus.is_middle_mouse_pressed:
+			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_pressed():
+				current_button_selected += 1
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_pressed():
+				current_button_selected -= 1
+			
+		current_button_selected = posmod(current_button_selected, buttons_container.get_child_count())
+		set_button_active(current_button_selected)
 			
 
 func add_interactable_button(object_name: String, object_id: String) -> void:
@@ -44,6 +48,8 @@ func add_interactable_button(object_name: String, object_id: String) -> void:
 	new_button.text = object_name
 	new_button.object_id = object_id
 	buttons_container.add_child(new_button)
+	if buttons_container.get_child_count() == 1:
+		set_button_active(0)
 	
 	
 func delete_interactable_button(object_id: String) -> void:
@@ -51,3 +57,14 @@ func delete_interactable_button(object_id: String) -> void:
 		if child.object_id == object_id:
 			child.queue_free()
 	
+
+func set_button_active(button_no: int) -> void:
+	if buttons_container.get_child_count() == 0:
+		return
+	for i in range(buttons_container.get_child_count()):
+		var cur_button: Button = buttons_container.get_children()[i]
+		if i == button_no:
+			cur_button.add_theme_color_override("font_color", Color(0.85, 0.777, 0.547, 1.0))
+		else:
+			cur_button.remove_theme_color_override("font_color")
+			
