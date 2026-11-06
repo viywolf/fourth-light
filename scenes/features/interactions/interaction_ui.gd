@@ -24,8 +24,6 @@ func _process(_delta: float) -> void:
 		$KeyPrompt.show()
 
 func add_interactable_button(object_name: String, object_id: String) -> void:
-	#print(ItemInteractions.held_item + "vs" + object_id)
-	#print(ItemInteractions.held_item == object_id)
 	if ItemInteractions.held_item == object_id:
 		return
 	var new_button: Button = interactable_select_button.instantiate()

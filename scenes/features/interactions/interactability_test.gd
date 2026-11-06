@@ -9,9 +9,7 @@ func _ready() -> void:
 
 
 func manage_new_interactable_object(object_name: String, object_id: String, is_entering_zone: bool) -> void:
-	print(ItemInteractions.held_item + " vs "  + object_id + "held item matches id: " + str(ItemInteractions.held_item == object_id))
 	if ItemInteractions.is_holding_item and ItemInteractions.held_item == object_id:
-		print(ItemInteractions.held_item + " vs "  + object_id + "held item matches id: " + str(ItemInteractions.held_item == object_id))
 		return
 	if is_entering_zone:
 		ItemInteractions.objects_in_range[object_id] = true

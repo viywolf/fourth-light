@@ -42,6 +42,7 @@ enabled=PackedStringArray("res://.godot/scenetime/plugin.cfg", "res://addons/god
 
 player=""
 world=""
+ui=""
 
 [gui]
 

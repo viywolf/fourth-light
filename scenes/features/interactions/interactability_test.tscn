@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/features/player/player.tscn" id="1_vd1vn"]
 [ext_resource type="Script" uid="uid://pkbwteao3d4v" path="res://scenes/features/interactions/interaction_ui.gd" id="3_a0noj"]
 [ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/features/player/camera.tscn" id="3_nqbjp"]
+[ext_resource type="Script" uid="uid://cffm46yg1g61g" path="res://scenes/features/interactions/throw_progress_bar.gd" id="4_16y76"]
 [ext_resource type="Script" uid="uid://dgm87bkkggc18" path="res://scripts/interactables/ball.gd" id="6_mqo21"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8vrlf"]
@@ -22,7 +23,7 @@ script = ExtResource("1_0ha6h")
 
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_nqbjp")]
 
-[node name="InteractionUI" type="CanvasLayer" parent="." unique_id=438922682]
+[node name="InteractionUI" type="CanvasLayer" parent="." unique_id=438922682 groups=["ui"]]
 script = ExtResource("3_a0noj")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="InteractionUI" unique_id=1525084855]
@@ -48,6 +49,18 @@ offset_top = 4.0
 offset_right = 51.0
 offset_bottom = 35.0
 text = "E"
+
+[node name="ThrowProgressBar" type="ProgressBar" parent="InteractionUI" unique_id=1083081522]
+unique_name_in_owner = true
+visible = false
+offset_left = 673.0
+offset_top = 222.0
+offset_right = 684.0
+offset_bottom = 340.0
+max_value = 1.0
+fill_mode = 3
+show_percentage = false
+script = ExtResource("4_16y76")
 
 [node name="PlayerController" type="Node3D" parent="." unique_id=1418983913]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.407343, 4.9297285, 6.8077683)
