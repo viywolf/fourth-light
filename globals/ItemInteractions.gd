@@ -24,7 +24,6 @@ func pick_up_item(item: Node) -> void:
 	item.is_interactable = false
 	held_item = str(item)
 
-
 func drop_item(item: Node, time_held: float) -> void:
 	var world: Node3D = get_tree().get_nodes_in_group("world")[0]
 	item.reparent(world)

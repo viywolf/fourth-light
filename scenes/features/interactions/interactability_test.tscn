@@ -84,7 +84,6 @@ mesh = SubResource("BoxMesh_1vivr")
 [node name="Object1" type="RigidBody3D" parent="Items" unique_id=99375147 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0159485, 0)
 collision_layer = 6
-mass = 0.05
 script = ExtResource("6_mqo21")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Items/Object1" unique_id=933158670]
@@ -101,9 +100,7 @@ shape = SubResource("SphereShape3D_nqbjp")
 [node name="Object2" type="RigidBody3D" parent="Items" unique_id=1933853884 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79905653, 3.0159485, 2.8948193)
 collision_layer = 6
-mass = 0.05
 script = ExtResource("6_mqo21")
-is_interactable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Items/Object2" unique_id=1433971310]
 mesh = SubResource("SphereMesh_1vivr")
@@ -119,7 +116,6 @@ shape = SubResource("SphereShape3D_nqbjp")
 [node name="Object3" type="RigidBody3D" parent="Items" unique_id=976065097 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3689249, 3.0159485, 3.1818056)
 collision_layer = 6
-mass = 0.05
 script = ExtResource("6_mqo21")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Items/Object3" unique_id=31791557]

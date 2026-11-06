@@ -22,6 +22,20 @@ func _process(_delta: float) -> void:
 		$KeyPrompt.hide()
 	else:
 		$KeyPrompt.show()
+		
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_MIDDLE and event.is_pressed():
+			print("afjsajlk")
+			GameStatus.is_middle_mouse_pressed = true
+		if event.button_index == MOUSE_BUTTON_MIDDLE and event.is_released():
+			print("Relasededed!!!!!")
+			GameStatus.is_middle_mouse_pressed = false
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_pressed():
+			print("Downnn")
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_pressed():
+			print("Up upu up")
+			
 
 func add_interactable_button(object_name: String, object_id: String) -> void:
 	if ItemInteractions.held_item == object_id:

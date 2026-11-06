@@ -20,7 +20,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED):
 			camera_input_direction = event.screen_relative * mouse_sensitivity
 	if event is InputEventMouseButton:
-		if event.is_pressed():
+		if event.is_pressed() and GameStatus.is_middle_mouse_pressed == false:
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				spring_arm_length *= 0.9
 			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
