@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	self.rotation.x = clamp(self.rotation.x, -PI / 3.0, PI / 6.0)
 	self.rotation.y -= camera_input_direction.x * delta
 	camera_input_direction = Vector2.ZERO
-	self.global_position = %Player.global_position
+	self.global_position = GameStatus.player.global_position
 	
 	spring_arm_length = clampf(spring_arm_length, min_spring_arm_length, max_spring_arm_length)
 	$SpringArm3D.spring_length = spring_arm_length

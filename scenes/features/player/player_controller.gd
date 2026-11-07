@@ -3,6 +3,7 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameStatus.get_player_node()
 	$Player/InteractionArea.object_passed_interaction_zone.connect(manage_new_interactable_object)
 
 

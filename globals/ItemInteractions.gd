@@ -9,17 +9,15 @@ const MAX_DROP_HOLD_TIME: float = 3
 var is_holding_item: bool = false
 var held_item: String
 
-var player: CharacterBody3D
-
 func pick_up_item(item: Node) -> bool:
 	if is_holding_item: 
 		return false
 	is_holding_item = true
-	if player == null:
-		player = get_tree().get_nodes_in_group("player")[0]
+	if GameStatus.player == null:
+		printerr("No player node set")
 	if item is RigidBody3D:
 		item.freeze = true
-	item.reparent(player.get_node("HeldObjects"))
+	item.reparent(GameStatus.player.get_node("HeldObjects"))
 	item.position = Vector3.ZERO
 	item.is_interactable = false
 	held_item = str(item)
@@ -28,11 +26,11 @@ func pick_up_item(item: Node) -> bool:
 func drop_item(item: Node, time_held: float) -> void:
 	var world: Node3D = get_tree().get_nodes_in_group("world")[0]
 	item.reparent(world)
-	if player == null:
-		player = get_tree().get_nodes_in_group("player")[0]
+	if GameStatus.player == null:
+		printerr("Not player node set")
 	if item is RigidBody3D:
 		item.freeze = false
-		var throw_direction: Vector3 = player.transform.basis.z.normalized()
+		var throw_direction: Vector3 = GameStatus.player.transform.basis.z.normalized()
 		item.apply_central_force(time_held * THROW_SPEED_MULTIPLIER * throw_direction)
 	is_holding_item = false
 	item.is_interactable = true

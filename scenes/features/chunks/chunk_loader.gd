@@ -43,7 +43,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	player_pos = Vector2(%Player.global_position.x, %Player.global_position.z)
+	player_pos = Vector2(GameStatus.player.global_position.x, GameStatus.player.global_position.z)
 	if get_position_in_chunks(player_pos) != get_position_in_chunks(prev_player_pos):
 		add_chunk(get_position_in_chunks(player_pos))
 		load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
