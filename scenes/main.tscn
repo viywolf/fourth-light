@@ -91,6 +91,7 @@ buffer = PackedFloat32Array(2.003726, 0.52066123, -2.0219195, -18.778542, -0.055
 [node name="Main" type="Node3D" unique_id=404240586]
 
 [node name="PlayerController" parent="." unique_id=1255494918 instance=ExtResource("1_choun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95057607, 0)
 
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_85g3d")]
 

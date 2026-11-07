@@ -151,8 +151,10 @@ func ground_movement(delta: float) -> void:
 	if is_on_floor() and not self.velocity.is_equal_approx(Vector3.ZERO):
 		if $AudioStreamPlayer3D.playing == false:
 			$AudioStreamPlayer3D.play()
+		play_animation_run()
 	else:
 		$AudioStreamPlayer3D.stop()
+		play_animation_idle()
 		
 	var is_starting_jump: bool = (
 		Input.is_action_pressed("jump") 
@@ -247,3 +249,11 @@ func swim_movement(delta: float) -> void:
 	self.velocity.y = clampf(self.velocity.y, -swim_max_vertical_speed, swim_max_vertical_speed)
 		
 	move_and_slide()
+
+# Animations
+
+func play_animation_idle() -> void:
+	$PlayerModel.get_node("AnimationPlayer").play("idle")
+
+func play_animation_run() -> void:
+	$PlayerModel.get_node("AnimationPlayer").play("run")
