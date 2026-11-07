@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://dqkfntt42nfnm"]
 
 [ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/ui_scenes/gui.tscn" id="1_85g3d"]
-[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/features/player/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://bc73dohqa5ut2" path="res://scenes/features/player/player_controller.tscn" id="1_choun"]
 [ext_resource type="PackedScene" uid="uid://bnoe4agqvrt6o" path="res://assets/blender/rock2.blend" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://b6xv3f3b8dln0" path="res://assets/blender/rock1.blend" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://qu2mwpvca4eo" path="res://scenes/features/interactions/interaction_ui.tscn" id="2_choun"]
-[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/features/player/camera.tscn" id="3_85g3d"]
 [ext_resource type="Shader" uid="uid://b42i2xc24ladr" path="res://shaders/colour.gdshader" id="3_tipki"]
 [ext_resource type="PackedScene" uid="uid://ow80tfbkmu8s" path="res://assets/blender/rock3.blend" id="4_jyhfs"]
 [ext_resource type="Shader" uid="uid://cn0cbhkc31iii" path="res://shaders/grass.gdshader" id="6_o6xl0"]
@@ -91,18 +90,11 @@ buffer = PackedFloat32Array(2.003726, 0.52066123, -2.0219195, -18.778542, -0.055
 
 [node name="Main" type="Node3D" unique_id=404240586]
 
+[node name="PlayerController" parent="." unique_id=1255494918 instance=ExtResource("1_choun")]
+
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_85g3d")]
 
 [node name="InteractionUI" parent="." unique_id=1261425242 instance=ExtResource("2_choun")]
-
-[node name="PlayerController" type="Node3D" parent="." unique_id=1010644352]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7453082, 0)
-
-[node name="Player" parent="PlayerController" unique_id=894728165 instance=ExtResource("1_o5qli")]
-unique_name_in_owner = true
-
-[node name="Camera" parent="PlayerController" unique_id=340302839 instance=ExtResource("3_85g3d")]
-unique_name_in_owner = true
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=1449650364]
 

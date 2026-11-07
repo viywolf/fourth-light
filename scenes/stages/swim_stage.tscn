@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://cot6yv4of8ggl"]
 
 [ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/ui_scenes/gui.tscn" id="1_a303w"]
-[ext_resource type="PackedScene" uid="uid://ctfyare4jp0xt" path="res://scenes/features/player/player.tscn" id="1_e3lnv"]
+[ext_resource type="PackedScene" uid="uid://bc73dohqa5ut2" path="res://scenes/features/player/player_controller.tscn" id="2_tbkh5"]
 [ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/features/interactions/collectable.tscn" id="3_qa102"]
-[ext_resource type="PackedScene" uid="uid://xfptev4cmuhb" path="res://scenes/features/player/camera.tscn" id="3_yruor"]
 [ext_resource type="Shader" uid="uid://cn0cbhkc31iii" path="res://shaders/grass.gdshader" id="4_ybxm6"]
 [ext_resource type="PackedScene" uid="uid://ow80tfbkmu8s" path="res://assets/blender/rock3.blend" id="6_tbkh5"]
 [ext_resource type="Script" uid="uid://dknxcyqxnr2aq" path="res://scripts/idle_behaviour_scripts/object_floating_in_water.gd" id="7_yruor"]
@@ -31,14 +30,8 @@ points = PackedVector3Array(0.00080019236, 0.06181419, 1.0748243, -9.971857e-05,
 
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_a303w")]
 
-[node name="PlayerController" type="Node3D" parent="." unique_id=1027033063]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 153.46162, 0)
-
-[node name="Player" parent="PlayerController" unique_id=894728165 instance=ExtResource("1_e3lnv")]
-unique_name_in_owner = true
-
-[node name="Camera" parent="PlayerController" unique_id=359368113 instance=ExtResource("3_yruor")]
-unique_name_in_owner = true
+[node name="PlayerController" parent="." unique_id=1255494918 instance=ExtResource("2_tbkh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 180.59023, 0)
 
 [node name="Water" type="Node3D" parent="." unique_id=2095803093 groups=["Water"]]
 
