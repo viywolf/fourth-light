@@ -7,6 +7,18 @@
 [ext_resource type="PackedScene" uid="uid://xh2vqxw4piwn" path="res://scenes/chunks/chunk_0.tscn" id="5_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://bp3gj4mudge61" path="res://scenes/chunks/chunk_1.tscn" id="6_tipki"]
 [ext_resource type="Script" uid="uid://cgbb74omycwrv" path="res://scenes/features/chunks/set_chunk_position_in_editor.gd" id="7_85g3d"]
+[ext_resource type="PackedScene" uid="uid://bkyop6kydrv5v" path="res://scenes/chunks/chunk_2.tscn" id="7_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://bsvidxfyore6y" path="res://scenes/chunks/chunk_3.tscn" id="8_trceg"]
+[ext_resource type="PackedScene" uid="uid://be342ngfc3dhc" path="res://scenes/chunks/chunk_7.tscn" id="9_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://bjv5tvhdfor05" path="res://scenes/chunks/chunk_5.tscn" id="10_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://h6h8ctg5gh38" path="res://scenes/chunks/chunk_4.tscn" id="10_trceg"]
+[ext_resource type="PackedScene" uid="uid://dln51m4qm872o" path="res://scenes/chunks/chunk_8.tscn" id="11_trceg"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7fgmp"]
+size = Vector2(16, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8kxrq"]
+size = Vector3(16, 2, 16)
 
 [node name="Main" type="Node3D" unique_id=404240586]
 
@@ -21,6 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95057607, 0)
 script = ExtResource("4_choun")
 
 [node name="ChunksPlaceholder" type="Node3D" parent="World" unique_id=1249191538]
+editor_description = "This node is for visually seeing where each chunk is in the editor."
 
 [node name="Chunk0" parent="World/ChunksPlaceholder" unique_id=217654621 instance=ExtResource("5_o6xl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
@@ -28,7 +41,58 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
 [node name="Chunk1" parent="World/ChunksPlaceholder" unique_id=1394195249 instance=ExtResource("6_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 8)
 
-[node name="SetChunkPositionInEditor" type="Node" parent="." unique_id=64842817 node_paths=PackedStringArray("node_to_change")]
+[node name="Chunk2" parent="World/ChunksPlaceholder" unique_id=761657866 instance=ExtResource("7_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -8)
+
+[node name="Chunk3" parent="World/ChunksPlaceholder" unique_id=670161966 instance=ExtResource("8_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 8)
+
+[node name="Chunk7" parent="World/ChunksPlaceholder" unique_id=127846454 instance=ExtResource("9_a8y0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -8)
+
+[node name="Chunk" type="Node3D" parent="World/ChunksPlaceholder" unique_id=1538428450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 67.99111, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/ChunksPlaceholder/Chunk" unique_id=2061174509]
+mesh = SubResource("PlaneMesh_7fgmp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/ChunksPlaceholder/Chunk" unique_id=1678029811]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/ChunksPlaceholder/Chunk/StaticBody3D" unique_id=1170223551]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_8kxrq")
+
+[node name="Label3D" type="Label3D" parent="World/ChunksPlaceholder/Chunk" unique_id=456453822]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+text = "Template Chunk"
+font_size = 200
+
+[node name="Chunk4" parent="World/ChunksPlaceholder" unique_id=315001639 instance=ExtResource("10_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+
+[node name="Chunk6" type="Node3D" parent="World/ChunksPlaceholder" unique_id=669432981]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/ChunksPlaceholder/Chunk6" unique_id=1420349761]
+mesh = SubResource("PlaneMesh_7fgmp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/ChunksPlaceholder/Chunk6" unique_id=146840483]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/ChunksPlaceholder/Chunk6/StaticBody3D" unique_id=1780361398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_8kxrq")
+
+[node name="Label3D" type="Label3D" parent="World/ChunksPlaceholder/Chunk6" unique_id=892963295]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+text = "Template Chunk"
+font_size = 200
+
+[node name="Chunk5" parent="World/ChunksPlaceholder" unique_id=170265443 instance=ExtResource("10_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 24)
+
+[node name="Chunk8" parent="World/ChunksPlaceholder" unique_id=1196025554 instance=ExtResource("11_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 24)
+
+[node name="SetChunkPositionInEditor" type="Node" parent="." unique_id=64842817]
 script = ExtResource("7_85g3d")
-node_to_change = NodePath("")
-chunk_number = 1
+chunk_number = 8

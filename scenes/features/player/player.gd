@@ -52,19 +52,19 @@ var is_swimming := false
 var is_underwater := false
 
 var is_head_under_water := false
-var bob_velocity: float = 60
+var bob_velocity: float = 30
 
 var is_diving := false
 var has_dived := false
 var dive_timer: float = 0
 var dive_time: float = 1
-var dive_speed: float = 30
+var dive_speed: float = 15
 
 var swim_speed: float = 10
 var swim_acceleration: float = 6
 var swim_deceleration: float = 8
 var swim_rise_speed: float = 0.2
-var swim_sink_speed: float = 0.2
+var swim_sink_speed: float = 0.1
 var swim_max_vertical_speed: float = 10
 
 #endregion
@@ -100,18 +100,19 @@ func _physics_process(delta: float) -> void:
 		
 	# Swimming
 	
+	is_swimming = false
+	is_head_under_water = false
+	
 	for node in get_tree().get_nodes_in_group("Water"):
 		if node.get_node("Area3D").overlaps_body(self):
 			is_swimming = true
 			stop_gliding()
-		else:
-			is_swimming = false
 			
 		if node.get_node("Area3D").overlaps_area($HeadPosition):
 			is_head_under_water = true
-		else:
-			is_head_under_water = false
-			has_dived = false
+			
+	if is_head_under_water == false and is_diving == false:
+		has_dived = false
 			
 	if Input.is_action_just_pressed("movement_ability") and is_swimming:
 		is_diving = true
@@ -131,6 +132,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		ground_movement(delta)
 
+
+# Movement
 
 func ground_movement(delta: float) -> void:
 	movement_direction.y = 0.0
@@ -249,6 +252,7 @@ func swim_movement(delta: float) -> void:
 	self.velocity.y = clampf(self.velocity.y, -swim_max_vertical_speed, swim_max_vertical_speed)
 		
 	move_and_slide()
+
 
 # Animations
 

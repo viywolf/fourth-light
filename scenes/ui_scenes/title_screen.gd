@@ -13,9 +13,8 @@ func play_click() -> void:
 
 
 func _on_start_button_pressed() -> void:
-	$GridContainer.show()
-	$MainTitleScreen.hide()
 	play_click()
+	GlobalLoader.change_scene("res://scenes/main.tscn")
 
 
 func _on_settings_button_pressed() -> void:
@@ -58,3 +57,9 @@ func _on_swim_scene_button_pressed() -> void:
 func _on_interactable_scene_button_pressed() -> void:
 	play_click()
 	GlobalLoader.change_scene("res://scenes/features/interactions/interactability_test.tscn")
+
+
+func _on_play_old_button_pressed() -> void:
+	$GridContainer.show()
+	$MainTitleScreen.hide()
+	play_click()

@@ -92,6 +92,10 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Start"
 
+[node name="PlayOldButton" type="Button" parent="MainTitleScreen/ButtonsContainer/HBoxContainer/VBoxContainer" unique_id=613709587]
+layout_mode = 2
+text = "Play Test Scenes"
+
 [node name="SettingsButton" type="Button" parent="MainTitleScreen/ButtonsContainer/HBoxContainer/VBoxContainer" unique_id=1493252953]
 layout_mode = 2
 text = "Settings"
@@ -128,5 +132,6 @@ bus = &"SFX"
 [connection signal="pressed" from="GridContainer/SwimSceneButton" to="." method="_on_swim_scene_button_pressed"]
 [connection signal="pressed" from="GridContainer/InteractableSceneButton" to="." method="_on_interactable_scene_button_pressed"]
 [connection signal="pressed" from="MainTitleScreen/ButtonsContainer/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainTitleScreen/ButtonsContainer/HBoxContainer/VBoxContainer/PlayOldButton" to="." method="_on_play_old_button_pressed"]
 [connection signal="pressed" from="MainTitleScreen/ButtonsContainer/HBoxContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MainTitleScreen/ButtonsContainer/HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

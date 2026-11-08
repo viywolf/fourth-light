@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://dln51m4qm872o"]
+
+[ext_resource type="Shader" uid="uid://cn0cbhkc31iii" path="res://shaders/grass.gdshader" id="1_ss2i3"]
+[ext_resource type="PackedScene" uid="uid://dy8fghsx5oarm" path="res://scenes/features/interactions/collectable.tscn" id="2_sog2x"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jbj1t"]
+size = Vector3(16, 16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_muem4"]
+render_priority = 0
+shader = ExtResource("1_ss2i3")
+shader_parameter/colour = Color(0.1884745, 0.23194626, 0.70516825, 1)
+shader_parameter/colour2 = Color(0.61504036, 0.8371892, 0.8391972, 1)
+shader_parameter/noiseScale = 20.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dp3eg"]
+size = Vector3(16, 16, 16)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7fgmp"]
+size = Vector2(16, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8kxrq"]
+size = Vector3(16, 2, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ss2i3"]
+size = Vector3(16, 16, 1)
+
+[node name="Chunk8" type="Node3D" unique_id=1196025554]
+
+[node name="Water" type="Node3D" parent="." unique_id=644890371 groups=["Water"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.320476, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Water" unique_id=279549711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007843018, 0, -0.009479761)
+mesh = SubResource("BoxMesh_jbj1t")
+surface_material_override/0 = SubResource("ShaderMaterial_muem4")
+
+[node name="Area3D" type="Area3D" parent="Water" unique_id=1583021773]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/Area3D" unique_id=527618189]
+shape = SubResource("BoxShape3D_dp3eg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=472387547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.461, 0)
+mesh = SubResource("PlaneMesh_7fgmp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1891834258]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.461, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=37516295]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_8kxrq")
+
+[node name="Collectable" parent="." unique_id=514947110 instance=ExtResource("2_sog2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5392547, -9.818001, 0.1616478)
+
+[node name="Collectable2" parent="." unique_id=564407745 instance=ExtResource("2_sog2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9037204, -9.279332, 0.1616478)
+
+[node name="Collectable3" parent="." unique_id=549940924 instance=ExtResource("2_sog2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42368364, -8.883869, 0.1616478)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=25574859]
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D2" unique_id=930092927]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8.001114, -8.437536, 0.09726715)
+shape = SubResource("BoxShape3D_ss2i3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1431310222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.437536, 7.609249)
+shape = SubResource("BoxShape3D_ss2i3")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1314209830]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.437536, -8.461209)
+shape = SubResource("BoxShape3D_ss2i3")
