@@ -34,63 +34,40 @@ func _ready() -> void:
 	chunk.add_child(static_body)
 	add_chunk(Vector2i(0, 0))
 	
-	add_chunk(get_position_in_chunks(player_pos))
-	load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
+	add_chunk(ChunkInformation.get_position_in_chunks(player_pos))
+	load_chunks(ChunkInformation.get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
 	
 	$ChunksPlaceholder.queue_free()
 
 
 func _physics_process(_delta: float) -> void:
 	player_pos = Vector2(GameStatus.player.global_position.x, GameStatus.player.global_position.z)
-	if get_position_in_chunks(player_pos) != get_position_in_chunks(prev_player_pos):
-		add_chunk(get_position_in_chunks(player_pos))
-		load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
+	if ChunkInformation.get_position_in_chunks(player_pos) != ChunkInformation.get_position_in_chunks(prev_player_pos):
+		add_chunk(ChunkInformation.get_position_in_chunks(player_pos))
+		load_chunks(ChunkInformation.get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
 	prev_player_pos = player_pos
 	
 	#%PlayerChunkPosLabel.text = str(get_position_in_chunks(player_pos))
-
-func get_cantor_int_from_pair(pair: Vector2i) -> int:
-	var x: int = pair.x
-	var y: int = pair.y
-	# Convert int to natural numbers
-	if x >= 0:
-		x = 2 * x
-	else:
-		x = (-2 * x) - 1
-	if y >= 0:
-		y = 2 * y
-	else:
-		y = (-2 * y) - 1
-	# Cantor pairing formula
-	return int(0.5 * (x + y) * (x + y + 1)) + y
-
-
-func get_position_in_chunks(input_position: Vector2) -> Vector2:
-	return floor(input_position / ChunkInformation.CHUNK_SIZE)
-
-
-func get_coords_from_chunks(chunk_input: Vector2) -> Vector3:
-	return Vector3(chunk_input.x * ChunkInformation.CHUNK_SIZE, 0, chunk_input.y * ChunkInformation.CHUNK_SIZE)
 
 
 func add_chunk(chunk_id: Vector2i) -> void:
 	var new_chunk: Node3D
 		
-	if get_cantor_int_from_pair(chunk_id) <  ChunkInformation.all_chunks.size() \
-		and ResourceLoader.exists(ChunkInformation.all_chunks[get_cantor_int_from_pair(chunk_id)]):
-			new_chunk = load(ChunkInformation.all_chunks[get_cantor_int_from_pair(chunk_id)]).instantiate()
+	if ChunkInformation.get_cantor_int_from_pair(chunk_id) <  ChunkInformation.all_chunks.size() \
+		and ResourceLoader.exists(ChunkInformation.all_chunks[ChunkInformation.get_cantor_int_from_pair(chunk_id)]):
+			new_chunk = load(ChunkInformation.all_chunks[ChunkInformation.get_cantor_int_from_pair(chunk_id)]).instantiate()
 	else:
 		new_chunk = chunk.duplicate()
-		new_chunk.get_child(0).text = str(chunk_id) + "\n" + str(get_cantor_int_from_pair(chunk_id))
+		new_chunk.get_child(0).text = str(chunk_id) + "\n" + str(ChunkInformation.get_cantor_int_from_pair(chunk_id))
 		
-	new_chunk.position = get_coords_from_chunks(chunk_id)
+	new_chunk.position = ChunkInformation.get_coords_from_chunks(chunk_id)
 	new_chunk.position.x += ChunkInformation.CHUNK_SIZE / 2
 	new_chunk.position.z += ChunkInformation.CHUNK_SIZE / 2
 	
 	await get_tree().physics_frame
 	
-	if get_node_or_null(str(get_cantor_int_from_pair(chunk_id))) == null:
-		new_chunk.name = str(get_cantor_int_from_pair(chunk_id))
+	if get_node_or_null(str(ChunkInformation.get_cantor_int_from_pair(chunk_id))) == null:
+		new_chunk.name = str(ChunkInformation.get_cantor_int_from_pair(chunk_id))
 		add_child(new_chunk)
 
 func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
@@ -122,7 +99,7 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 				j > -chunk_radius / 2.0 and
 				j <= chunk_radius / 2.0):
 			var cur_pos := Vector2(i + center_position.x, j + center_position.y)
-			var cur_pos_cantor_int: int = get_cantor_int_from_pair(cur_pos)
+			var cur_pos_cantor_int: int = ChunkInformation.get_cantor_int_from_pair(cur_pos)
 			var cur_pos_cantor_int_string: String = str(cur_pos_cantor_int)
 			
 			checked_chunks[cur_pos_cantor_int] = true

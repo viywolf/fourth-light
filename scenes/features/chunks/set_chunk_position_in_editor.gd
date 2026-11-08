@@ -15,22 +15,6 @@ func _process(_delta: float) -> void:
 		node_to_change.position.x += ChunkInformation.CHUNK_SIZE / 2
 		node_to_change.position.z += ChunkInformation.CHUNK_SIZE / 2
 		
-		
-func get_cantor_int_from_pair(pair: Vector2i) -> int:
-	var x: int = pair.x
-	var y: int = pair.y
-	# Convert int to natural numbers
-	if x >= 0:
-		x = 2 * x
-	else:
-		x = (-2 * x) - 1
-	if y >= 0:
-		y = 2 * y
-	else:
-		y = (-2 * y) - 1
-	# Cantor pairing formula
-	return int(0.5 * (x + y) * (x + y + 1)) + y
-	
 
 ## Brute force search to find the corresponding coords for a number
 # There's a formula for this somewhere?
@@ -44,7 +28,7 @@ func get_chunk_coords(target: int) -> Vector2i:
 				i <= search_radius / 2.0 and
 				j > -search_radius / 2.0 and
 				j <= search_radius / 2.0):
-			if get_cantor_int_from_pair(Vector2i(i, j)) == target:
+			if ChunkInformation.get_cantor_int_from_pair(Vector2i(i, j)) == target:
 				return Vector2i(i, j) 
 		if (i == j or
 			(i < 0 and i == -j) or

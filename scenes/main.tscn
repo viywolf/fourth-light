@@ -23,7 +23,7 @@ size = Vector3(16, 2, 16)
 [node name="Main" type="Node3D" unique_id=404240586]
 
 [node name="PlayerController" parent="." unique_id=1255494918 instance=ExtResource("1_choun")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95057607, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6667376, 0.95057607, 7.1714945)
 
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_85g3d")]
 
