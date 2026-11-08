@@ -34,12 +34,10 @@ func _ready() -> void:
 	chunk.add_child(static_body)
 	add_chunk(Vector2i(0, 0))
 	
-	$ChunksPlaceholder.queue_free()
-	
 	add_chunk(get_position_in_chunks(player_pos))
 	load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
 	
-	
+	$ChunksPlaceholder.queue_free()
 
 
 func _physics_process(_delta: float) -> void:
@@ -49,7 +47,7 @@ func _physics_process(_delta: float) -> void:
 		load_chunks(get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
 	prev_player_pos = player_pos
 	
-	%PlayerChunkPosLabel.text = str(get_position_in_chunks(player_pos))
+	#%PlayerChunkPosLabel.text = str(get_position_in_chunks(player_pos))
 
 func get_cantor_int_from_pair(pair: Vector2i) -> int:
 	var x: int = pair.x
@@ -91,21 +89,21 @@ func add_chunk(chunk_id: Vector2i) -> void:
 	
 	await get_tree().physics_frame
 	
-	if $World.get_node_or_null(str(get_cantor_int_from_pair(chunk_id))) == null:
+	if get_node_or_null(str(get_cantor_int_from_pair(chunk_id))) == null:
 		new_chunk.name = str(get_cantor_int_from_pair(chunk_id))
-		$World.add_child(new_chunk)
+		add_child(new_chunk)
 
 func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 	is_cancelling_loading = true
 	# Hopefully there is enough time to
 	# cancel other async loads by the time this is false
 	
-	for child in $World.get_children():
+	for child in get_children():
 		checked_chunks[int(child.name)] = false
 			
 	
 	if ChunkInformation.only_load_new_chunks == false:
-		for child in $World.get_children():
+		for child in get_children():
 			child.queue_free()
 			
 			
@@ -129,19 +127,19 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 			
 			checked_chunks[cur_pos_cantor_int] = true
 			
-			if get_node_or_null("World/" + cur_pos_cantor_int_string) == null:
+			if get_node_or_null(cur_pos_cantor_int_string) == null:
 				await add_chunk(cur_pos)
 				if is_cancelling_loading:
 					is_cancelling_loading = false
 					break
 			else:
-				$World.get_node(cur_pos_cantor_int_string).process_mode = Node.PROCESS_MODE_INHERIT
+				get_node(cur_pos_cantor_int_string).process_mode = Node.PROCESS_MODE_INHERIT
 				
 			# Is the current chunk within process radius?
 			if i + j <= ChunkInformation.chunk_process_radius * 2:
-				$World.get_node(cur_pos_cantor_int_string).process_mode = Node.PROCESS_MODE_INHERIT
+				get_node(cur_pos_cantor_int_string).process_mode = Node.PROCESS_MODE_INHERIT
 			else:
-				$World.get_node(cur_pos_cantor_int_string).process_mode = Node.PROCESS_MODE_DISABLED
+				get_node(cur_pos_cantor_int_string).process_mode = Node.PROCESS_MODE_DISABLED
 		if (i == j or
 			(i < 0 and i == -j) or
 			(i > 0 and i == 1 - j)):
@@ -155,8 +153,8 @@ func load_chunks(center_position: Vector2, chunk_radius: int) -> void:
 		# If it was not checked this loop
 		if checked_chunks[key] == false:
 			# and it exists
-			if $World.get_node_or_null(str(key)) != null:
-				$World.get_node(str(key)).process_mode = Node.PROCESS_MODE_DISABLED
+			if get_node_or_null(str(key)) != null:
+				get_node(str(key)).process_mode = Node.PROCESS_MODE_DISABLED
 			else:
 				print("tried to remove " + str(key) + " but it didnt exist")
 	

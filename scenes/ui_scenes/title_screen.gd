@@ -55,11 +55,6 @@ func _on_swim_scene_button_pressed() -> void:
 	GlobalLoader.change_scene("res://scenes/stages/swim_stage.tscn")
 
 
-func _on_chunk_scene_button_pressed() -> void:
-	play_click()
-	GlobalLoader.change_scene("res://scenes/features/chunks/chunk_loading_test.tscn")
-
-
 func _on_interactable_scene_button_pressed() -> void:
 	play_click()
 	GlobalLoader.change_scene("res://scenes/features/interactions/interactability_test.tscn")
