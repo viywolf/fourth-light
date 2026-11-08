@@ -1,4 +1,4 @@
-@abstract extends Node
+@abstract extends RigidBody3D
 class_name InteractableObject
 
 @export var is_interactable: bool = true
