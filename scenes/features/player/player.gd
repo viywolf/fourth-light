@@ -71,6 +71,7 @@ var swim_max_vertical_speed: float = 10
 
 func _ready() -> void:
 	GameStatus.is_paused = false
+	PhysicsServer3D.set_active(true)
 
 
 func _physics_process(delta: float) -> void:

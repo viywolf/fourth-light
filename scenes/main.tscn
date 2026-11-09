@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://02f0h6o325y8" path="res://scenes/ui_scenes/gui.tscn" id="1_85g3d"]
 [ext_resource type="PackedScene" uid="uid://bc73dohqa5ut2" path="res://scenes/features/player/player_controller.tscn" id="1_choun"]
-[ext_resource type="PackedScene" uid="uid://qu2mwpvca4eo" path="res://scenes/features/interactions/interaction_ui.tscn" id="2_choun"]
 [ext_resource type="Script" uid="uid://biguf2cvw3ev" path="res://scenes/features/chunks/chunk_loader.gd" id="4_choun"]
 [ext_resource type="PackedScene" uid="uid://xh2vqxw4piwn" path="res://scenes/chunks/chunk_0.tscn" id="5_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://bp3gj4mudge61" path="res://scenes/chunks/chunk_1.tscn" id="6_tipki"]
@@ -26,8 +25,6 @@ size = Vector3(16, 2, 16)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6667376, 0.95057607, 7.1714945)
 
 [node name="GUI" parent="." unique_id=144899746 instance=ExtResource("1_85g3d")]
-
-[node name="InteractionUI" parent="." unique_id=1261425242 instance=ExtResource("2_choun")]
 
 [node name="World" type="Node3D" parent="." unique_id=1291807890 groups=["world"]]
 script = ExtResource("4_choun")

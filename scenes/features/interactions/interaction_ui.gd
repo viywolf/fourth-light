@@ -28,6 +28,8 @@ func _input(event: InputEvent) -> void:
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_pressed():
 				current_button_selected -= 1
 			
+		if buttons_container.get_child_count() == 0:
+			return
 		current_button_selected = posmod(current_button_selected, buttons_container.get_child_count())
 		set_button_active(current_button_selected)
 			
@@ -36,7 +38,7 @@ func _input(event: InputEvent) -> void:
 func interact() -> void:
 	if current_button_selected < buttons_container.get_child_count():
 		var body_interacted_with: String = buttons_container.get_child(current_button_selected).object_id
-		for node in get_tree().get_nodes_in_group("interactables"):
+		for node: RigidBody3D in get_tree().get_nodes_in_group("interactables"):
 			if str(node) == body_interacted_with:
 				if node.get("is_interactable") == true:
 					# If the interaction method return true (sucessful)
