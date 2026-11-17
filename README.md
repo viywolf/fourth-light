@@ -21,3 +21,8 @@ Go to the [itch.io page](https://viywolf.itch.io/fourth-light) and download the 
 - Added a demo stage for chunk loading which will probably be used in the main stage eventually.
 - Added a settings menu with volume control, FPS, and chunk loading control.
 - Added a sky background, loading screen, walls to water, and general minor improvements.
+
+### Week 3
+![](https://github.com/viywolf/fourth-light/blob/main/assets/promo_images/InGameScreenshotW3.png)
+- Ability to hold and throw items
+- New player model
