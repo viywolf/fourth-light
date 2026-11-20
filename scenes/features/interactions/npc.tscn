@@ -5,6 +5,9 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1vivr"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_1vivr"]
+radius = 4.8479238
+
 [node name="NPC" type="CharacterBody3D" unique_id=528715837]
 collision_layer = 3
 script = ExtResource("1_6rvj7")
@@ -16,3 +19,10 @@ transform = Transform3D(1, 0, 0, 0, 1.2192242, 0, 0, 0, 1, 0, -0.07804668, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=19000391]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87793624, 0)
 shape = SubResource("BoxShape3D_1vivr")
+
+[node name="TalkArea" type="Area3D" parent="." unique_id=1845195094]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TalkArea" unique_id=506050107]
+shape = SubResource("SphereShape3D_1vivr")
+
+[connection signal="body_exited" from="TalkArea" to="." method="_on_talk_area_body_exited"]
