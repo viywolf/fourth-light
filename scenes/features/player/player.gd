@@ -77,10 +77,17 @@ var swim_max_vertical_speed: float = 10
 
 #endregion
 
+#region
+
+var is_hanging_on_ledge: bool = false
+
+#endregion
+
 func _ready() -> void:
 	GameStatus.is_paused = false
 	PhysicsServer3D.set_active(true)
 	ItemInteractions.is_holding_item = false
+	PlayerInformation.player = self
 
 
 func _physics_process(delta: float) -> void:
@@ -200,11 +207,6 @@ func ground_movement(delta: float) -> void:
 		
 	if is_ending_jump:
 		jump_held_time = 0
-		
-		
-	
-	print(jump_held_time)
-	print(cur_jump_hold_velocity_increase)
 	
 		
 	move_and_slide()
@@ -297,3 +299,12 @@ func play_animation_idle() -> void:
 
 func play_animation_run() -> void:
 	$PlayerModel.get_node("AnimationPlayer").play("run")
+
+
+func _on_ledge_collider_is_on_ledge(is_on_ledge: bool) -> void:
+	if is_on_ledge:
+		is_hanging_on_ledge = true
+		print("ledging")
+		# Do ledge stuff
+	else:
+		is_hanging_on_ledge = false

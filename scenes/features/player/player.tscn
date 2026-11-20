@@ -26,6 +26,9 @@ size = Vector3(0.1821289, 0.12915039, 0.25543213)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8vrlf"]
 size = Vector3(0.22038269, 0.03881836, 0.22598267)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1xvir"]
+size = Vector3(0.22038269, 0.03881836, 0.12070465)
+
 [node name="Player" type="CharacterBody3D" unique_id=894728165]
 script = ExtResource("1_3vyb7")
 
@@ -92,7 +95,16 @@ script = ExtResource("6_1xvir")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0059127808, 0.2583263, 0.18629456)
 shape = SubResource("BoxShape3D_8vrlf")
 
+[node name="IsLedging" type="Area3D" parent="." unique_id=1571105593]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="IsLedging" unique_id=1373751947]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0059127808, 0.12580872, 0.23893356)
+shape = SubResource("BoxShape3D_1xvir")
+
 [connection signal="body_entered" from="InteractionArea" to="InteractionArea" method="_on_body_entered"]
 [connection signal="body_exited" from="InteractionArea" to="InteractionArea" method="_on_body_exited"]
+[connection signal="is_on_ledge" from="LedgeCollider" to="." method="_on_ledge_collider_is_on_ledge"]
 [connection signal="body_entered" from="OneWayCollsionArea" to="LedgeCollider" method="_on_one_way_collsion_area_body_entered"]
 [connection signal="body_exited" from="OneWayCollsionArea" to="LedgeCollider" method="_on_one_way_collsion_area_body_exited"]
+[connection signal="body_entered" from="IsLedging" to="LedgeCollider" method="_on_is_ledging_body_entered"]
+[connection signal="body_exited" from="IsLedging" to="LedgeCollider" method="_on_is_ledging_body_exited"]
