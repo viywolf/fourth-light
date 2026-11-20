@@ -19,6 +19,14 @@ var last_move_direction: Vector3 = Vector3.BACK
 
 #region - Jumping Variables
 
+var jump_held_time: float = 0
+var min_jump_hold_multiplier: float = 0.2
+var max_jump_hold_multiplier: float = 1.5
+
+## To limit how much holding space can go against gravity
+var max_jump_hold_velocity_increase: float = jump_velocity
+var cur_jump_hold_velocity_increase: float = 0
+
 var jumps_left: int = 1
 
 var jump_timer: float = 0
@@ -72,6 +80,7 @@ var swim_max_vertical_speed: float = 10
 func _ready() -> void:
 	GameStatus.is_paused = false
 	PhysicsServer3D.set_active(true)
+	ItemInteractions.is_holding_item = false
 
 
 func _physics_process(delta: float) -> void:
@@ -151,6 +160,8 @@ func ground_movement(delta: float) -> void:
 		coyote_timer = coyote_time
 		jumps_left = 1
 		jump_timer -= delta
+		jump_held_time = 0
+		cur_jump_hold_velocity_increase = 0
 		
 	if is_on_floor() and not self.velocity.is_equal_approx(Vector3.ZERO):
 		if $AudioStreamPlayer3D.playing == false:
@@ -166,11 +177,35 @@ func ground_movement(delta: float) -> void:
 		and jumps_left > 0
 		and jump_timer <= 0
 		)
+		
+	var is_ending_jump: bool = Input.is_action_just_released("jump")
+	
+	var is_holding_jump: bool = Input.is_action_pressed("jump") 
+	
+	if jump_held_time > max_jump_hold_multiplier:
+		is_ending_jump = true
 	
 	if is_starting_jump:
-		self.velocity.y = jump_velocity
 		jumps_left -= 1
 		jump_timer = jump_cooldown
+		self.velocity.y += jump_velocity
+		
+	if is_holding_jump and cur_jump_hold_velocity_increase <= max_jump_hold_velocity_increase:
+		jump_held_time += delta
+		# Limit the jump held time multiple
+		jump_held_time += min_jump_hold_multiplier
+		jump_held_time = clampf(jump_held_time, min_jump_hold_multiplier, max_jump_hold_multiplier)
+		self.velocity.y += jump_held_time
+		cur_jump_hold_velocity_increase += jump_held_time
+		
+	if is_ending_jump:
+		jump_held_time = 0
+		
+		
+	
+	print(jump_held_time)
+	print(cur_jump_hold_velocity_increase)
+	
 		
 	move_and_slide()
 	
