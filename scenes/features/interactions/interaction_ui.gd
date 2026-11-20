@@ -38,19 +38,19 @@ func _input(event: InputEvent) -> void:
 func interact() -> void:
 	if current_button_selected < buttons_container.get_child_count():
 		var body_interacted_with: String = buttons_container.get_child(current_button_selected).object_id
-		for node: RigidBody3D in get_tree().get_nodes_in_group("interactables"):
+		for node: Node3D in get_tree().get_nodes_in_group("interactables"):
 			if str(node) == body_interacted_with:
 				if node.get("is_interactable") == true:
 					# If the interaction method return true (sucessful)
-					if node._do_interaction() == true:
+					if node.do_interaction() == true:
 						delete_interactable_button(body_interacted_with)
 				else:
 					node.queue_free()
 					print("This node has no interaction method")
 		
 
-func add_interactable_button(object_name: String, object_id: String) -> void:
-	if ItemInteractions.held_item == object_id:
+func add_interactable_button(object_name: String, object_id: String, object_type: String = "null") -> void:
+	if object_type != "NPC" and ItemInteractions.held_item == object_id:
 		return
 	var new_button: Control = interactable_select_button.instantiate()
 	new_button.change_text(object_name)

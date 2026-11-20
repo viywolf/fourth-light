@@ -8,7 +8,7 @@ var object_id: String
 var saved_linear_velocity: Vector3
 var saved_angular_velocity: Vector3
 
-@abstract func _do_interaction()
+@abstract func do_interaction() -> bool
 
 func _ready() -> void:
 	object_id = str(self)
