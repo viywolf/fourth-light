@@ -7,6 +7,9 @@ func _ready() -> void:
 	$Player/InteractionArea.object_passed_interaction_zone.connect(manage_new_interactable_object)
 
 
+## Whenever an object passes the player's interaction zone, and 
+## has a variable called is_interactable which is true,
+## add it to the ui
 func manage_new_interactable_object(object_name: String, object_id: String, is_entering_zone: bool) -> void:
 	if ItemInteractions.is_holding_item and ItemInteractions.held_item == object_id:
 		return

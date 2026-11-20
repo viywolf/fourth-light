@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bsqc4s8ghftkl" path="res://scenes/chunks/chunk_scripts/chunk_0.gd" id="1_r1y6h"]
 [ext_resource type="Script" uid="uid://dgm87bkkggc18" path="res://scripts/interactables/ball.gd" id="2_xp5vb"]
+[ext_resource type="PackedScene" uid="uid://dvmwut0pe7lpr" path="res://scenes/features/interactions/npc.tscn" id="3_xbb4i"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7fgmp"]
 size = Vector2(16, 16)
@@ -70,3 +71,6 @@ shape = SubResource("SphereShape3D_0v6ml")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Object2/Area3D" unique_id=1638236131]
 shape = SubResource("SphereShape3D_0v6ml")
+
+[node name="NPC" parent="." unique_id=1854603028 groups=["interactables"] instance=ExtResource("3_xbb4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2778683, 0, -3.991065)
