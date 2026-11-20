@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://38h46wgc8w4v" path="res://assets/blender/exports/player.glb" id="2_rbubm"]
 [ext_resource type="Script" uid="uid://121yj0hq61di" path="res://scenes/features/interactions/interaction_area.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://dt52dmhtb4ooi" path="res://scenes/features/player/held_objects.gd" id="4_hccld"]
+[ext_resource type="Script" uid="uid://dtiyp1n45fygy" path="res://scenes/features/player/ledge_collider.gd" id="6_1xvir"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1vivr"]
 radius = 0.20751953
@@ -18,6 +19,12 @@ size = Vector3(3, 0.1, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8vrlf"]
 radius = 2.7951906
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1vivr"]
+size = Vector3(0.1821289, 0.12915039, 0.25543213)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8vrlf"]
+size = Vector3(0.22038269, 0.03881836, 0.22598267)
 
 [node name="Player" type="CharacterBody3D" unique_id=894728165]
 script = ExtResource("1_3vyb7")
@@ -74,5 +81,18 @@ shape = SubResource("SphereShape3D_8vrlf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2071749, 0.66389084)
 script = ExtResource("4_hccld")
 
+[node name="LedgeCollider" type="CollisionShape3D" parent="." unique_id=1343196401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005859375, 0.20568848, 0.17837524)
+shape = SubResource("BoxShape3D_1vivr")
+script = ExtResource("6_1xvir")
+
+[node name="OneWayCollsionArea" type="Area3D" parent="." unique_id=1880204185]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OneWayCollsionArea" unique_id=602774671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0059127808, 0.2583263, 0.18629456)
+shape = SubResource("BoxShape3D_8vrlf")
+
 [connection signal="body_entered" from="InteractionArea" to="InteractionArea" method="_on_body_entered"]
 [connection signal="body_exited" from="InteractionArea" to="InteractionArea" method="_on_body_exited"]
+[connection signal="body_entered" from="OneWayCollsionArea" to="LedgeCollider" method="_on_one_way_collsion_area_body_entered"]
+[connection signal="body_exited" from="OneWayCollsionArea" to="LedgeCollider" method="_on_one_way_collsion_area_body_exited"]
