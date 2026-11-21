@@ -5,8 +5,10 @@ const DEFAULT_TEXT_REVEAL_SPEED: float = 0.05
 
 const LAST_MESSAGE_TIMEOUT: float = 3
 
-@onready var label: Label = $SubViewport/Control/Label
-@onready var options_container: VBoxContainer = $SubViewport/Control/OptionsContainer
+@onready var speech_bubble: MeshInstance3D = $SpeechBubble
+
+@onready var label: Label = $SubViewport/Control/HBoxContainer/Label
+@onready var options_container: VBoxContainer = $SubViewport/Control/HBoxContainer/OptionsContainer
 
 @export var player_left_message: String
 
@@ -45,13 +47,21 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 				i = dialogue_jump_to
 		else:
 			await reveal_text(dialogue.dialogue, dialogue.dialogue_speed)
+		await get_tree().create_timer(LAST_MESSAGE_TIMEOUT / 2).timeout
 	await get_tree().create_timer(LAST_MESSAGE_TIMEOUT).timeout
 	# or maybe hide it instead
 	self.queue_free()
 
 
 func update_text_box_size() -> void:
-	label.size.x = 100
+	label.custom_minimum_size.x = 100 * (len(label.text) / 8.0)
+	
+	speech_bubble.position.y = 0.6 #label.size.y / 1000.0
+	
+	if label.custom_minimum_size.x < 100:
+		label.custom_minimum_size.x = 100
+		
+	
 
 
 func reveal_text(message: String, text_speed: String = "normal") -> void:
