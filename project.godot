@@ -29,6 +29,7 @@ GlobalLoader="*uid://b5nsyls8l6v2l"
 EnvironmentGlobal="*uid://dkmtyc3vcocw4"
 ItemInteractions="*uid://bluqcmg4hp7ol"
 PlayerInformation="*uid://c272n4lk8x74f"
+Dialogue="*uid://ignjmlhhyqt4"
 
 [display]
 

@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bjv5tvhdfor05" path="res://scenes/chunks/chunk_5.tscn" id="10_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://h6h8ctg5gh38" path="res://scenes/chunks/chunk_4.tscn" id="10_trceg"]
 [ext_resource type="PackedScene" uid="uid://dln51m4qm872o" path="res://scenes/chunks/chunk_8.tscn" id="11_trceg"]
+[ext_resource type="PackedScene" uid="uid://bhwnhj3ffbskn" path="res://scenes/features/dialogue/dialogue_bubble.tscn" id="13_trceg"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7fgmp"]
 size = Vector2(16, 16)
@@ -93,3 +94,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 24)
 [node name="SetChunkPositionInEditor" type="Node" parent="." unique_id=64842817]
 script = ExtResource("7_85g3d")
 chunk_number = 8
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1688028428]
+
+[node name="DialogueBubble" parent="Node3D" unique_id=300148054 instance=ExtResource("13_trceg")]
