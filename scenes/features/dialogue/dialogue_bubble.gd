@@ -3,6 +3,8 @@ extends Node3D
 const SIZE_RATIO: Vector2 = Vector2(3, 2)
 const DEFAULT_TEXT_REVEAL_SPEED: float = 0.05
 
+const LAST_MESSAGE_TIMEOUT: float = 3
+
 @onready var label: Label = $SubViewport/Control/Label
 @onready var options_container: VBoxContainer = $SubViewport/Control/OptionsContainer
 
@@ -21,8 +23,7 @@ func _ready() -> void:
 	is_starting_dialogue = true
 
 
-func _process(delta: float) -> void:
-	self.rotation.y = get_viewport().get_camera_3d().global_basis.z.x
+func _process(_delta: float) -> void:
 	if is_starting_dialogue:
 		is_starting_dialogue = false
 		start_dialogue()
@@ -34,20 +35,19 @@ func _input(event: InputEvent) -> void:
 
 
 func start_dialogue(current_dialogue_index: int = 0) -> void:
-	print("A")
 	for i in range(current_dialogue_index, full_dialogue.size()):
 		var dialogue: DialogueMessage = full_dialogue[i]
 		if dialogue.is_option:
-			print("BB")
-			var dialogue_jump_to = await wait_for_response(dialogue.dialogue, dialogue.options, dialogue.options_next_dialogue_index)
+			var dialogue_jump_to = await wait_for_response(dialogue.dialogue, dialogue.dialogue_speed, dialogue.options, dialogue.options_next_dialogue_index)
 			if dialogue_jump_to == -1:
 				continue
 			else:
 				i = dialogue_jump_to
 		else:
-			print("AA")
 			await reveal_text(dialogue.dialogue, dialogue.dialogue_speed)
-	print("Finish dialogue")
+	await get_tree().create_timer(LAST_MESSAGE_TIMEOUT).timeout
+	# or maybe hide it instead
+	self.queue_free()
 
 
 func update_text_box_size() -> void:
@@ -55,9 +55,9 @@ func update_text_box_size() -> void:
 
 
 func reveal_text(message: String, text_speed: String = "normal") -> void:
-	print("B")
 	label.visible_characters = 0
 	label.text = message
+	options_container.hide()
 	
 	update_text_box_size()
 	
@@ -74,13 +74,14 @@ func reveal_text(message: String, text_speed: String = "normal") -> void:
 	
 
 
-func wait_for_response(message: String, options: Array[String], options_next_dialogue: Array[int]) -> int:
-	print("C")
-	await reveal_text(message, "fast")
+func wait_for_response(message: String, text_speed: String, options: Array[String], options_next_dialogue: Array[int]) -> int:
+	await reveal_text(message, text_speed)
 	
-	for i in range(options_container.get_child_count()):
-		var button = options_container.get_child(i)
-		button.pressed.connect(choose_option.bind(i))
+	for i in range(options.size()):
+		var new_button := Button.new()
+		new_button.text = options[i]
+		options_container.add_child(new_button)
+		new_button.pressed.connect(choose_option.bind(i))
 	options_container.show()
 	while option_chosen == -1:
 		await get_tree().process_frame

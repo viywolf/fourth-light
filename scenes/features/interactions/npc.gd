@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 class_name NPC
 
+var dialogue_bubble_scene: PackedScene = preload("res://scenes/features/dialogue/dialogue_bubble.tscn")
+
 ## This detects if the player is in the area
 ## if the player leaves, cancel the dialogue and play a special dialogue
 @onready var talk_area: Area3D = $TalkArea
@@ -14,8 +16,9 @@ var did_player_just_leave: bool = false
 # Make it so after you interact, the interact prompt pops back up
 
 func do_interaction() -> bool:
-	# Start talk dialogue
-	print("yap yap yap")
+	var new_dialogue: Node3D = dialogue_bubble_scene.instantiate()
+	self.add_child(new_dialogue)
+	new_dialogue.is_starting_dialogue = true
 	return true
 
 
