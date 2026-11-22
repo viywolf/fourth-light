@@ -14,8 +14,12 @@ var dialogue_bubble_scene: PackedScene = preload("res://scenes/features/dialogue
 @export var player_left_message: String
 @export var dialogue: Array[DialogueMessage]
 
+
+@export var conditions: Dictionary[String, Variant]
+
 var did_player_just_leave: bool = false
 var current_dialogue_bubble: Node3D
+
 
 # Make it so after you interact, the interact prompt pops back up
 

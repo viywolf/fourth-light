@@ -36,12 +36,14 @@ func _process(_delta: float) -> void:
 
 
 func start_dialogue(current_dialogue_index: int = 0) -> void:
+	var items_to_delete: Array[Node]
+	
 	var i: int = current_dialogue_index 
 	while i < full_dialogue.size():
 		print(i)
 		var dialogue: DialogueMessage = full_dialogue[i]
 		
-		# If the dialogue has a condition to trigger
+		# If the dialogue has a condition to trigger. Check if the condition has been fufilled
 		if dialogue.condition != "":
 			# Move this somewhere else
 			var is_condition_fufilled: bool = false
@@ -54,7 +56,12 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 					if ItemInteractions.held_item == item.get("object_id"):
 						print("found")
 						is_condition_fufilled = true
-						ItemInteractions.delete_held_item(item)
+						set_condition("has_given_apple", true)
+						items_to_delete.push_back(item)
+			if dialogue.condition == "has_given_apple":
+				var conditions_dict: Dictionary = get_parent().conditions
+				if conditions_dict.get(dialogue.condition) == true:
+					is_condition_fufilled = true
 		
 			if is_condition_fufilled == false:
 				i += 1
@@ -84,6 +91,9 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 			
 		await get_tree().create_timer(LAST_MESSAGE_TIMEOUT / 2).timeout
 		i += 1
+		
+	for item in items_to_delete:
+		ItemInteractions.delete_held_item(item)
 		
 	await get_tree().create_timer(LAST_MESSAGE_TIMEOUT).timeout
 	# or maybe hide it instead
@@ -152,3 +162,12 @@ func cancel_dialogue() -> void:
 
 func delete_option_select_buttons() -> void:
 	interaction_ui.delete_interactable_button(str(self))
+
+
+## Sets the condition of the parent NPC node to the given values
+func set_condition(condition_name: String, condition_value: Variant) -> void:
+	var npc_parent: NPC = get_parent()
+	if npc_parent.get("conditions") != null:
+		npc_parent.conditions[condition_name] = condition_value
+	else:
+		printerr("Parent doesn't have a conditions dictionary")
