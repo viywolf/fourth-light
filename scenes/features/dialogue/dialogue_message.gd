@@ -8,4 +8,5 @@ extends Resource
 @export var options_next_dialogue_index: Array[int]
 @export var is_last_dialogue: bool = false
 
+@export var condition: String
 @export var special_effect: String

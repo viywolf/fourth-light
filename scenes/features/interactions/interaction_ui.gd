@@ -42,20 +42,20 @@ func interact() -> void:
 			var cur_dialogue: Node3D = Dialogue.current_dialogue
 			cur_dialogue.choose_option(button_chosen.custom_info)
 		var body_interacted_with: String = buttons_container.get_child(current_button_selected).object_id
-		for node: Node3D in get_tree().get_nodes_in_group("interactables"):
-			if str(node) == body_interacted_with:
-				if node.get("is_interactable") == true:
-					# If the interaction method return true (sucessful)
-					if node.do_interaction() == true:
-						delete_interactable_button(body_interacted_with)
-				else:
-					node.queue_free()
-					print("This node has no interaction method")
+		var matching_nodes: Array[Node] = ItemInteractions.find_item_node(body_interacted_with)
+		for node: Node3D in matching_nodes:
+			if node.get("is_interactable") == true:
+				# If the interaction method return true (sucessful)
+				if node.do_interaction() == true:
+					delete_interactable_button(body_interacted_with)
+			else:
+				node.queue_free()
+				print("This node has no interaction method")
 		
 
 ## Object type could be NPC or dialogue
 func add_interactable_button(object_name: String, object_id: String, object_type: String = "null", dialogue_option: Variant = null) -> void:
-	if object_type != "NPC" and ItemInteractions.held_item == object_id and object_id != "dialogue":
+	if object_type != "NPC" and ItemInteractions.held_item == str(object_id) and object_id != "dialogue":
 		return
 	var new_button: Control = interactable_select_button.instantiate()
 	new_button.change_text(object_name)

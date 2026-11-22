@@ -5,6 +5,9 @@ class_name InteractableObject
 
 var object_id: String
 
+## TODO this is temp here
+var object_type: String = "ball"
+
 var saved_linear_velocity: Vector3
 var saved_angular_velocity: Vector3
 

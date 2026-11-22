@@ -7,6 +7,8 @@ const THROW_SPEED_MULTIPLIER: float = 30
 const MAX_DROP_HOLD_TIME: float = 3
 
 var is_holding_item: bool = false
+
+## The name/id of the node this is
 var held_item: String
 
 func pick_up_item(item: Node) -> bool:
@@ -48,3 +50,11 @@ func drop_item(item: Node, time_held: float) -> void:
 		throw_progress_bar.hide()
 	else:
 		printerr("No prograss bar availiable for throwing. (ItemInteractions)")
+
+
+func find_item_node(item_id: String) -> Array[Node]:
+	var matching_nodes: Array[Node]
+	for node: Node3D in get_tree().get_nodes_in_group("interactables"):
+		if str(node) == item_id:
+			matching_nodes.push_back(node)
+	return matching_nodes

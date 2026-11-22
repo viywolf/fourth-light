@@ -4,6 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://38h46wgc8w4v" path="res://assets/blender/exports/player.glb" id="1_okose"]
 [ext_resource type="Script" uid="uid://33p0yramfgc7" path="res://scenes/features/dialogue/dialogue_message.gd" id="2_cny8k"]
 
+[sub_resource type="Resource" id="Resource_cny8k"]
+script = ExtResource("2_cny8k")
+dialogue = "Hey! You got one, thanks!"
+is_last_dialogue = true
+condition = "is_holding_apple"
+metadata/_custom_type_script = "uid://33p0yramfgc7"
+
 [sub_resource type="Resource" id="Resource_yxr41"]
 script = ExtResource("2_cny8k")
 dialogue = "Hey! You there!"
@@ -14,7 +21,7 @@ script = ExtResource("2_cny8k")
 dialogue = "Can you help me with something real quick?"
 is_option = true
 options = Array[String](["Sure!", "Nope"])
-options_next_dialogue_index = Array[int]([2, 3])
+options_next_dialogue_index = Array[int]([3, 4])
 metadata/_custom_type_script = "uid://33p0yramfgc7"
 
 [sub_resource type="Resource" id="Resource_yv887"]
@@ -39,7 +46,7 @@ collision_layer = 3
 script = ExtResource("1_6rvj7")
 npc_name = "NPC Example"
 player_left_message = "Bye!"
-dialogue = Array[ExtResource("2_cny8k")]([SubResource("Resource_yxr41"), SubResource("Resource_1jtt0"), SubResource("Resource_yv887"), SubResource("Resource_g0b1f")])
+dialogue = Array[ExtResource("2_cny8k")]([SubResource("Resource_cny8k"), SubResource("Resource_yxr41"), SubResource("Resource_1jtt0"), SubResource("Resource_yv887"), SubResource("Resource_g0b1f")])
 
 [node name="PlayerModel" parent="." unique_id=924542848 instance=ExtResource("1_okose")]
 transform = Transform3D(1, 0, 0, 0, 1.2192242, 0, 0, 0, 1, 0, -0.07804668, 0)

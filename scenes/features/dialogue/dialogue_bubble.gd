@@ -40,6 +40,20 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 	while i < full_dialogue.size():
 		print(i)
 		var dialogue: DialogueMessage = full_dialogue[i]
+		
+		# If the dialogue has a condition to trigger
+		if dialogue.condition != "":
+			# Move this somewhere else
+			var is_condition_fufilled: bool = false
+			if dialogue.condition == "is_holding_apple":
+				if ItemInteractions.held_item == "ball":
+					is_condition_fufilled = true
+		
+			if is_condition_fufilled == false:
+				i += 1
+				continue
+		
+		# If the dialogue gives you options to choose from
 		if dialogue.is_option:
 			var dialogue_jump_to = await wait_for_response(dialogue.dialogue, dialogue.dialogue_speed, dialogue.options, dialogue.options_next_dialogue_index)
 			if dialogue_jump_to == -1:
@@ -49,6 +63,7 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 				continue
 		else:
 			await reveal_text(dialogue.dialogue, dialogue.dialogue_speed, dialogue.is_last_dialogue)
+			
 		if dialogue.is_last_dialogue:
 			break
 			
