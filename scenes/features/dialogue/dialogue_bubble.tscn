@@ -1,32 +1,6 @@
 [gd_scene format=3 uid="uid://bhwnhj3ffbskn"]
 
 [ext_resource type="Script" uid="uid://cje5ob4ao8h1w" path="res://scenes/features/dialogue/dialogue_bubble.gd" id="1_1jtt0"]
-[ext_resource type="Script" uid="uid://33p0yramfgc7" path="res://scenes/features/dialogue/dialogue_message.gd" id="2_1jtt0"]
-
-[sub_resource type="Resource" id="Resource_yxr41"]
-script = ExtResource("2_1jtt0")
-dialogue = "Hey! You there!"
-metadata/_custom_type_script = "uid://33p0yramfgc7"
-
-[sub_resource type="Resource" id="Resource_1jtt0"]
-script = ExtResource("2_1jtt0")
-dialogue = "Can you help me with something real quick?"
-is_option = true
-options = Array[String](["Sure!", "Nope"])
-options_next_dialogue_index = Array[int]([2, 3])
-metadata/_custom_type_script = "uid://33p0yramfgc7"
-
-[sub_resource type="Resource" id="Resource_yv887"]
-script = ExtResource("2_1jtt0")
-dialogue = "Great! Could you get me an apple? There's some behind you!"
-is_last_dialogue = true
-metadata/_custom_type_script = "uid://33p0yramfgc7"
-
-[sub_resource type="Resource" id="Resource_g0b1f"]
-script = ExtResource("2_1jtt0")
-dialogue = "Aw. That's okay though, come back if you have time later"
-is_last_dialogue = true
-metadata/_custom_type_script = "uid://33p0yramfgc7"
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1vivr"]
 resource_local_to_scene = true
@@ -47,7 +21,6 @@ billboard_keep_scale = true
 
 [node name="DialogueBubble" type="Node3D" unique_id=300148054]
 script = ExtResource("1_1jtt0")
-full_dialogue = Array[ExtResource("2_1jtt0")]([SubResource("Resource_yxr41"), SubResource("Resource_1jtt0"), SubResource("Resource_yv887"), SubResource("Resource_g0b1f")])
 
 [node name="SpeechBubble" type="MeshInstance3D" parent="." unique_id=310045426]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.3906101, 0)

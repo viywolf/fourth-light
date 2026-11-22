@@ -18,6 +18,7 @@ var is_starting_dialogue: bool = false
 var current_dialogue: int = -1
 
 var option_chosen: int = -1
+var dialogue_cancelled: bool = false
 
 var interaction_ui: CanvasLayer
 
@@ -40,20 +41,23 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 		print(i)
 		var dialogue: DialogueMessage = full_dialogue[i]
 		if dialogue.is_option:
-			print("options")
 			var dialogue_jump_to = await wait_for_response(dialogue.dialogue, dialogue.dialogue_speed, dialogue.options, dialogue.options_next_dialogue_index)
 			if dialogue_jump_to == -1:
-				continue
+				pass
 			else:
-				print("jump to dialogue " + str(dialogue_jump_to))
 				i = dialogue_jump_to
 				continue
 		else:
-			print("nomarl say")
-			await reveal_text(dialogue.dialogue, dialogue.dialogue_speed)
+			await reveal_text(dialogue.dialogue, dialogue.dialogue_speed, dialogue.is_last_dialogue)
 		if dialogue.is_last_dialogue:
-			print("bye")
 			break
+			
+		if dialogue_cancelled:
+			print("cancelled")
+			dialogue_cancelled = false
+			reveal_text(player_left_message)
+			break
+			
 		await get_tree().create_timer(LAST_MESSAGE_TIMEOUT / 2).timeout
 		i += 1
 		
@@ -67,12 +71,12 @@ func update_text_box_size() -> void:
 	
 	speech_bubble.position.y = 0.6 #label.size.y / 1000.0
 	
-	if label.custom_minimum_size.x < 100:
-		label.custom_minimum_size.x = 100
+	if label.custom_minimum_size.x < 350:
+		label.custom_minimum_size.x = 350
 		
 
 
-func reveal_text(message: String, text_speed: String = "normal") -> void:
+func reveal_text(message: String, text_speed: String = "normal", is_last_dialogue: bool = false) -> void:
 	label.visible_characters = 0
 	label.text = message
 	
@@ -88,6 +92,8 @@ func reveal_text(message: String, text_speed: String = "normal") -> void:
 	while label.visible_characters < label.text.length():
 		label.visible_characters += 1
 		await get_tree().create_timer(time_to_wait).timeout
+		if dialogue_cancelled and is_last_dialogue == false:
+			return
 	
 
 
@@ -100,7 +106,7 @@ func wait_for_response(message: String, text_speed: String, options: Array[Strin
 		await get_tree().process_frame
 	if option_chosen == 0:
 		print("bye")
-		reveal_text(player_left_message)
+		cancel_dialogue()
 		return -1
 	else:
 		print("chose option " + str(option_chosen))
@@ -109,9 +115,16 @@ func wait_for_response(message: String, text_speed: String, options: Array[Strin
 
 func choose_option(option_index: int) -> void:
 	option_chosen = option_index
-	interaction_ui.delete_interactable_button(str(self))
+	delete_option_select_buttons()
 
 
 func cancel_dialogue() -> void:
+	print("cancel dialogue function")
+	dialogue_cancelled = true
+	delete_option_select_buttons()
 	if option_chosen == -1:
 		option_chosen = 0
+
+
+func delete_option_select_buttons() -> void:
+	interaction_ui.delete_interactable_button(str(self))
