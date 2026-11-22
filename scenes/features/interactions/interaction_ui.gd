@@ -37,6 +37,10 @@ func _input(event: InputEvent) -> void:
 
 func interact() -> void:
 	if current_button_selected < buttons_container.get_child_count():
+		var button_chosen: Button = buttons_container.get_child(current_button_selected)
+		if button_chosen.custom_info != null and button_chosen.object_type == "dialogue":
+			var cur_dialogue: Node3D = Dialogue.current_dialogue
+			cur_dialogue.choose_option(button_chosen.custom_info)
 		var body_interacted_with: String = buttons_container.get_child(current_button_selected).object_id
 		for node: Node3D in get_tree().get_nodes_in_group("interactables"):
 			if str(node) == body_interacted_with:
@@ -49,12 +53,15 @@ func interact() -> void:
 					print("This node has no interaction method")
 		
 
-func add_interactable_button(object_name: String, object_id: String, object_type: String = "null") -> void:
-	if object_type != "NPC" and ItemInteractions.held_item == object_id:
+## Object type could be NPC or dialogue
+func add_interactable_button(object_name: String, object_id: String, object_type: String = "null", dialogue_option: Variant = null) -> void:
+	if object_type != "NPC" and ItemInteractions.held_item == object_id and object_id != "dialogue":
 		return
 	var new_button: Control = interactable_select_button.instantiate()
 	new_button.change_text(object_name)
 	new_button.object_id = object_id
+	new_button.object_type = object_type
+	new_button.custom_info = dialogue_option
 	buttons_container.add_child(new_button)
 	if buttons_container.get_child_count() == 1:
 		set_button_active(0)

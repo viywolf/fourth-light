@@ -12,13 +12,20 @@ metadata/_custom_type_script = "uid://33p0yramfgc7"
 script = ExtResource("2_1jtt0")
 dialogue = "Can you help me with something real quick?"
 is_option = true
-options = Array[String](["Sure!"])
-options_next_dialogue_index = Array[int]([-1])
+options = Array[String](["Sure!", "Nope"])
+options_next_dialogue_index = Array[int]([2, 3])
 metadata/_custom_type_script = "uid://33p0yramfgc7"
 
 [sub_resource type="Resource" id="Resource_yv887"]
 script = ExtResource("2_1jtt0")
 dialogue = "Great! Could you get me an apple? There's some behind you!"
+is_last_dialogue = true
+metadata/_custom_type_script = "uid://33p0yramfgc7"
+
+[sub_resource type="Resource" id="Resource_g0b1f"]
+script = ExtResource("2_1jtt0")
+dialogue = "Aw. That's okay though, come back if you have time later"
+is_last_dialogue = true
 metadata/_custom_type_script = "uid://33p0yramfgc7"
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1vivr"]
@@ -40,7 +47,7 @@ billboard_keep_scale = true
 
 [node name="DialogueBubble" type="Node3D" unique_id=300148054]
 script = ExtResource("1_1jtt0")
-full_dialogue = Array[ExtResource("2_1jtt0")]([SubResource("Resource_yxr41"), SubResource("Resource_1jtt0"), SubResource("Resource_yv887")])
+full_dialogue = Array[ExtResource("2_1jtt0")]([SubResource("Resource_yxr41"), SubResource("Resource_1jtt0"), SubResource("Resource_yv887"), SubResource("Resource_g0b1f")])
 
 [node name="SpeechBubble" type="MeshInstance3D" parent="." unique_id=310045426]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.3906101, 0)
@@ -71,9 +78,6 @@ theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_yxr41")
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
 autowrap_mode = 3
-
-[node name="OptionsContainer" type="VBoxContainer" parent="SubViewport/Control/HBoxContainer" unique_id=683734404]
-layout_mode = 2
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1233028373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2)

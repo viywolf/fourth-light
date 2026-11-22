@@ -6,5 +6,6 @@ extends Resource
 @export var is_option: bool = false
 @export var options: Array[String]
 @export var options_next_dialogue_index: Array[int]
+@export var is_last_dialogue: bool = false
 
 @export var special_effect: String
