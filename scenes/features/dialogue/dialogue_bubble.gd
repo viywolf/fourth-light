@@ -46,12 +46,21 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 			# Move this somewhere else
 			var is_condition_fufilled: bool = false
 			if dialogue.condition == "is_holding_apple":
-				if ItemInteractions.held_item == "ball":
-					is_condition_fufilled = true
+				print("apple")
+				var balls = ItemInteractions.find_item_node_from_type("ball")
+				print(balls)
+				for item in balls:
+					print(item)
+					if ItemInteractions.held_item == item.get("object_id"):
+						print("found")
+						is_condition_fufilled = true
+						ItemInteractions.delete_held_item(item)
 		
 			if is_condition_fufilled == false:
 				i += 1
 				continue
+			else:
+				print("condition fufilled")
 		
 		# If the dialogue gives you options to choose from
 		if dialogue.is_option:

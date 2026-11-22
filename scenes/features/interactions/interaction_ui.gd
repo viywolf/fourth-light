@@ -42,7 +42,7 @@ func interact() -> void:
 			var cur_dialogue: Node3D = Dialogue.current_dialogue
 			cur_dialogue.choose_option(button_chosen.custom_info)
 		var body_interacted_with: String = buttons_container.get_child(current_button_selected).object_id
-		var matching_nodes: Array[Node] = ItemInteractions.find_item_node(body_interacted_with)
+		var matching_nodes: Array[Node] = ItemInteractions.find_item_node_from_id(body_interacted_with)
 		for node: Node3D in matching_nodes:
 			if node.get("is_interactable") == true:
 				# If the interaction method return true (sucessful)

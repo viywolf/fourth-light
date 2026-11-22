@@ -52,9 +52,28 @@ func drop_item(item: Node, time_held: float) -> void:
 		printerr("No prograss bar availiable for throwing. (ItemInteractions)")
 
 
-func find_item_node(item_id: String) -> Array[Node]:
+
+func delete_held_item(item: Node) -> void:
+	if is_holding_item == false:
+		printerr("Not holding " + str(item) + ", unable to delete")
+	item.queue_free()
+	is_holding_item = false
+	held_item = ""
+
+
+## Finds the node that corresponds to the id belonging to the group interactables
+func find_item_node_from_id(item_id: String) -> Array[Node]:
 	var matching_nodes: Array[Node]
 	for node: Node3D in get_tree().get_nodes_in_group("interactables"):
 		if str(node) == item_id:
+			matching_nodes.push_back(node)
+	return matching_nodes
+
+
+## Finds the node that corresponds to the type belonging to the group interactables
+func find_item_node_from_type(item_type: String) -> Array[Node]:
+	var matching_nodes: Array[Node]
+	for node: Node3D in get_tree().get_nodes_in_group("interactables"):
+		if node.get("object_type") != null and node.object_type == item_type:
 			matching_nodes.push_back(node)
 	return matching_nodes
