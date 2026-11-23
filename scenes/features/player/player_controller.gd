@@ -11,12 +11,12 @@ func _ready() -> void:
 ## Whenever an object passes the player's interaction zone, and 
 ## has a variable called is_interactable which is true,
 ## add it to the ui
-func manage_new_interactable_object(object_name: String, object_id: String, is_entering_zone: bool) -> void:
+func manage_new_interactable_object(object_name: String, object_id: String, is_entering_zone: bool, object_type: String) -> void:
 	if ItemInteractions.is_holding_item and ItemInteractions.held_item == object_id:
 		return
 	if is_entering_zone:
 		ItemInteractions.objects_in_range[object_id] = true
-		$InteractionUI.add_interactable_button(object_name, object_id)
+		$InteractionUI.add_interactable_button(object_name, object_id, object_type)
 		#npcs reach here
 	# Else, the object is leaving the zone
 	else:

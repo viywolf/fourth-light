@@ -1,7 +1,7 @@
 extends Area3D
 
 ## This is connected to player_controller.gd's manage_new_interactable_object
-signal object_passed_interaction_zone(object_name: String, object_id: String, entered_zone: bool)
+signal object_passed_interaction_zone(object_name: String, object_id: String, entered_zone: bool, object_type: String)
 
 
 func _on_body_entered(body: Node3D) -> void:
@@ -9,9 +9,9 @@ func _on_body_entered(body: Node3D) -> void:
 	if body_is_interactable_value == false or body_is_interactable_value == null:
 		return
 	if body is InteractableObject:
-		object_passed_interaction_zone.emit(body.name, str(body.object_id), true)
+		object_passed_interaction_zone.emit(body.name, str(body.object_id), true, "object")
 	if body is NPC:
-		object_passed_interaction_zone.emit(body.npc_name, str(body), true)
+		object_passed_interaction_zone.emit(body.npc_name, str(body), true, "NPC")
 
 
 func _on_body_exited(body: Node3D) -> void:
@@ -19,6 +19,6 @@ func _on_body_exited(body: Node3D) -> void:
 	if body_is_interactable_value == false or body_is_interactable_value == null:
 		return
 	if body is InteractableObject:
-		object_passed_interaction_zone.emit(body.name, str(body.object_id), false)
+		object_passed_interaction_zone.emit(body.name, str(body.object_id), false, "object")
 	if body is NPC:
-		object_passed_interaction_zone.emit(body.npc_name, str(body), false)
+		object_passed_interaction_zone.emit(body.npc_name, str(body), false, "NPC")

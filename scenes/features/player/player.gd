@@ -6,7 +6,7 @@ var camera_direction: Vector3
 var raw_input: Vector2
 
 var speed: float = 8
-var jump_velocity: float = 35
+var jump_velocity: float = 22
 
 var rotation_speed: float = 12
 

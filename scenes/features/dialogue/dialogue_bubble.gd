@@ -1,5 +1,7 @@
 extends Node3D
 
+signal dialogue_finished
+
 const SIZE_RATIO: Vector2 = Vector2(3, 2)
 const DEFAULT_TEXT_REVEAL_SPEED: float = 0.05
 
@@ -36,6 +38,7 @@ func _process(_delta: float) -> void:
 
 
 func start_dialogue(current_dialogue_index: int = 0) -> void:
+	GameStatus.is_talking_to_npc = true
 	var items_to_delete: Array[Node]
 	
 	var i: int = current_dialogue_index 
@@ -96,6 +99,10 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 		ItemInteractions.delete_held_item(item)
 		
 	await get_tree().create_timer(LAST_MESSAGE_TIMEOUT).timeout
+	
+	GameStatus.is_talking_to_npc = false
+	dialogue_finished.emit()
+	
 	# or maybe hide it instead
 	self.queue_free()
 
