@@ -26,3 +26,12 @@ Go to the [itch.io page](https://viywolf.itch.io/fourth-light) and download the 
 ![](https://github.com/viywolf/fourth-light/blob/main/assets/promo_images/InGameScreenshotW3.png)
 - Ability to hold and throw items
 - New player model
+
+### Week 4
+(Skipped)
+
+### Week 5
+![](https://github.com/viywolf/fourth-light/blob/main/assets/promo_images/InGameScreenshotW5.png)
+- Dialogue system (includes branching dialogue, conditional dialogue, and interrupted dialogue)
+- More animations (jump + swim)
+- New music
