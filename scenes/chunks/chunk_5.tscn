@@ -25,6 +25,9 @@ size = Vector3(16, 2, 16)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ukmul"]
 size = Vector3(16, 16, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1vivr"]
+size = Vector3(24.634186, 1, 2.6186523)
+
 [node name="Chunk5" type="Node3D" unique_id=170265443]
 
 [node name="Water" type="Node3D" parent="." unique_id=2020396674 groups=["Water"]]
@@ -86,6 +89,10 @@ shape = SubResource("BoxShape3D_ukmul")
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D2" unique_id=92862130]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.320539, -8.437536, 0.09726715)
 shape = SubResource("BoxShape3D_ukmul")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D2" unique_id=2130064647]
+transform = Transform3D(1, 0, 0, 0, 0.85294527, -0.5220006, 0, 0.5220006, 0.85294527, -4.706131, -1.3367307, -6.983159)
+shape = SubResource("BoxShape3D_1vivr")
 
 [node name="Label3D" type="Label3D" parent="." unique_id=1152249377]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.5020785, -7.788946)

@@ -18,6 +18,16 @@ billboard_mode = 2
 billboard_keep_scale = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxr41"]
+bg_color = Color(0.66684675, 0.5789159, 0.45411325, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.122068726, 0.054042995, 0.0031340038, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="DialogueBubble" type="Node3D" unique_id=300148054]
 script = ExtResource("1_1jtt0")

@@ -37,40 +37,40 @@ visible = false
 text = "Welcome to the chunk testing stage. As you walk around you will be able to see chunks spawning in and out. Modify the settings by pressing ESC to see different behaviour."
 autowrap_mode = 3
 
-[node name="Object1" type="RigidBody3D" parent="." unique_id=947406617 groups=["interactables"]]
+[node name="Apple" type="RigidBody3D" parent="." unique_id=947406617 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7632413, 3.0159485, 0)
 collision_layer = 6
 collision_mask = 5
 mass = 0.1
 script = ExtResource("2_xp5vb")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Object1" unique_id=754955283]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Apple" unique_id=754955283]
 mesh = SubResource("SphereMesh_xbb4i")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Object1" unique_id=784019402]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apple" unique_id=784019402]
 shape = SubResource("SphereShape3D_0v6ml")
 
-[node name="Area3D" type="Area3D" parent="Object1" unique_id=2016299598]
+[node name="Area3D" type="Area3D" parent="Apple" unique_id=2016299598]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Object1/Area3D" unique_id=1343315404]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apple/Area3D" unique_id=1343315404]
 shape = SubResource("SphereShape3D_0v6ml")
 
-[node name="Object2" type="RigidBody3D" parent="." unique_id=1185197971 groups=["interactables"]]
+[node name="Apple 2" type="RigidBody3D" parent="." unique_id=1185197971 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8160791, 3.0159485, 2.8449173)
 collision_layer = 6
 collision_mask = 5
 mass = 0.1
 script = ExtResource("2_xp5vb")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Object2" unique_id=1846556818]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Apple 2" unique_id=1846556818]
 mesh = SubResource("SphereMesh_xbb4i")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Object2" unique_id=434415964]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apple 2" unique_id=434415964]
 shape = SubResource("SphereShape3D_0v6ml")
 
-[node name="Area3D" type="Area3D" parent="Object2" unique_id=518499854]
+[node name="Area3D" type="Area3D" parent="Apple 2" unique_id=518499854]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Object2/Area3D" unique_id=1638236131]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apple 2/Area3D" unique_id=1638236131]
 shape = SubResource("SphereShape3D_0v6ml")
 
 [node name="NPC" parent="." unique_id=1854603028 groups=["interactables"] instance=ExtResource("3_xbb4i")]
