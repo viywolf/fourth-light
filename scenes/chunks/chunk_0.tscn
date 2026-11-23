@@ -75,3 +75,4 @@ shape = SubResource("SphereShape3D_0v6ml")
 
 [node name="NPC" parent="." unique_id=1854603028 groups=["interactables"] instance=ExtResource("3_xbb4i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2778683, 0, -3.991065)
+npc_name = "Mabel"

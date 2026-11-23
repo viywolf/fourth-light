@@ -1,5 +1,8 @@
 extends CharacterBody3D
 
+var player_model_animation_player: AnimationPlayer
+var playing_jump_anim: bool = false
+
 var movement_direction: Vector3
 var camera_direction: Vector3
 
@@ -88,6 +91,8 @@ func _ready() -> void:
 	PhysicsServer3D.set_active(true)
 	ItemInteractions.is_holding_item = false
 	PlayerInformation.player = self
+	
+	player_model_animation_player = $PlayerModel.get_node("AnimationPlayer")
 
 
 func _physics_process(delta: float) -> void:
@@ -163,12 +168,14 @@ func ground_movement(delta: float) -> void:
 	if is_on_floor() == false:
 		self.velocity.y = move_toward(self.velocity.y, -gravity, gravity * delta)
 		coyote_timer -= delta
+		play_animation_jump_fall()
 	else:
 		coyote_timer = coyote_time
 		jumps_left = 1
 		jump_timer -= delta
 		jump_held_time = 0
 		cur_jump_hold_velocity_increase = 0
+		playing_jump_anim = false
 		
 	if is_on_floor() and not self.velocity.is_equal_approx(Vector3.ZERO):
 		if $AudioStreamPlayer3D.playing == false:
@@ -196,6 +203,8 @@ func ground_movement(delta: float) -> void:
 		jumps_left -= 1
 		jump_timer = jump_cooldown
 		self.velocity.y += jump_velocity
+		play_animation_jump_start()
+		playing_jump_anim = true
 		
 	if is_holding_jump and cur_jump_hold_velocity_increase <= max_jump_hold_velocity_increase:
 		jump_held_time += delta
@@ -204,6 +213,7 @@ func ground_movement(delta: float) -> void:
 		jump_held_time = clampf(jump_held_time, min_jump_hold_multiplier, max_jump_hold_multiplier)
 		self.velocity.y += jump_held_time
 		cur_jump_hold_velocity_increase += jump_held_time
+		play_animation_jump_rise()
 		
 	if is_ending_jump:
 		jump_held_time = 0
@@ -295,10 +305,26 @@ func swim_movement(delta: float) -> void:
 # Animations
 
 func play_animation_idle() -> void:
-	$PlayerModel.get_node("AnimationPlayer").play("idle")
+	if playing_jump_anim: return
+	player_model_animation_player.play("idle")
 
 func play_animation_run() -> void:
-	$PlayerModel.get_node("AnimationPlayer").play("run")
+	if playing_jump_anim: return
+	player_model_animation_player.play("run")
+
+func play_animation_jump_start() -> void:
+	player_model_animation_player.play("jump_start")
+
+func play_animation_jump_rise() -> void:
+	if player_model_animation_player.current_animation != "jump_start":
+		player_model_animation_player.play("jump_up")
+
+func play_animation_jump_fall() -> void:
+	player_model_animation_player.play("jump_fall")
+
+
+
+
 
 
 func _on_ledge_collider_is_on_ledge(is_on_ledge: bool) -> void:

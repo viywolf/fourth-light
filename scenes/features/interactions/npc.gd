@@ -22,8 +22,6 @@ var did_player_just_leave: bool = false
 var current_dialogue_bubble: Node3D
 
 
-# Make it so after you interact, the interact prompt pops back up
-
 func do_interaction() -> bool:
 	var new_dialogue: Node3D = dialogue_bubble_scene.instantiate()
 	new_dialogue.player_left_message = player_left_message
