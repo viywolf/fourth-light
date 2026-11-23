@@ -275,6 +275,9 @@ func stop_gliding() -> void:
 func stay_above_water(delta: float) -> void:
 	if is_head_under_water:
 		self.velocity.y += bob_velocity * delta
+	else:
+		self.velocity.y -= gravity * delta
+	play_animation_swim_idle()
 
 
 func dive_into_water(delta: float) -> void:
@@ -289,8 +292,10 @@ func swim_movement(delta: float) -> void:
 	movement_direction = movement_direction.normalized()
 	if raw_input != Vector2.ZERO:
 		self.velocity = velocity.move_toward(movement_direction * swim_speed, swim_acceleration * delta)
+		play_animation_swim_move()
 	else:
 		self.velocity = velocity.move_toward(Vector3.ZERO, swim_deceleration * delta)
+		play_animation_swim_idle()
 	
 	if Input.is_action_pressed("jump"):
 		self.velocity.y += swim_rise_speed
@@ -300,6 +305,11 @@ func swim_movement(delta: float) -> void:
 	self.velocity.y = clampf(self.velocity.y, -swim_max_vertical_speed, swim_max_vertical_speed)
 		
 	move_and_slide()
+	
+	if movement_direction.length() > 0.2:
+		last_move_direction = movement_direction
+	var target_angle: float = Vector3.BACK.signed_angle_to(last_move_direction, Vector3.UP)
+	self.global_rotation.y = lerp_angle(self.global_rotation.y, target_angle, rotation_speed * delta)
 
 
 # Animations
@@ -321,9 +331,14 @@ func play_animation_jump_rise() -> void:
 
 func play_animation_jump_fall() -> void:
 	player_model_animation_player.play("jump_fall")
+	
+func play_animation_swim_idle() -> void:
+	player_model_animation_player.play("swim_idle")
 
-
-
+func play_animation_swim_move() -> void:
+	player_model_animation_player.play("swim_move")
+	
+	
 
 
 
