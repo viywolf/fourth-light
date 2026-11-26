@@ -1,6 +1,6 @@
 extends Node3D
 
-signal item_taken(item)
+signal item_taken(item: Node)
 signal dialogue_finished
 
 const SIZE_RATIO: Vector2 = Vector2(3, 2)
@@ -16,7 +16,8 @@ const LAST_MESSAGE_TIMEOUT: float = 3
 
 @export var full_dialogue: Array[DialogueMessage]
 
-var items_to_take: Array
+## Object types that this bubble can take
+var items_to_take: Array[String]
 
 ## Obtained from parent NPC
 var conditions: Dictionary
@@ -50,14 +51,15 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 	while i < full_dialogue.size():
 		var dialogue: DialogueMessage = full_dialogue[i]
 		
-		# TODO what is even going on here
 		# If dialogue has special effect
-		#"""
-		if dialogue.special_effect == Dialogue.Effect.TAKE_ITEM:
-		
-				conditions["has_given_apple"] = true
-				ItemInteractions.items_to_delete.push_back(item)
-		#"""
+		if (dialogue.special_effect == Dialogue.Effect.TAKE_ITEM
+			and ItemInteractions.held_item != null):
+				# Check if its an item that can be taken
+				for item in items_to_take:
+					if ItemInteractions.held_item.get("object_type") == item:
+						print("take this")
+						ItemInteractions.items_to_delete.push_back(ItemInteractions.held_item)
+						item_taken.emit(ItemInteractions.held_item)
 		
 		# If the dialogue has a condition to trigger. Check if the condition has been fufilled
 		if dialogue.condition != "":

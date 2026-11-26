@@ -17,24 +17,28 @@ var dialogue_bubble_scene: PackedScene = preload("res://scenes/features/dialogue
 
 @export var conditions: Dictionary[String, bool]
 
+@export var items_to_take: Array[String]
+
 var is_player_in_range: bool = false
 var did_player_just_leave: bool = false
 var current_dialogue_bubble: Node3D
 
 
 @abstract func check_conditions() -> void
-
+@abstract func on_item_taken(item: InteractableObject) -> void
 
 func _ready() -> void:
 	load_data()
 
-# TODO: implement special effect take items
+
 func do_interaction() -> bool:
 	check_conditions()
 	var new_dialogue: Node3D = dialogue_bubble_scene.instantiate()
 	new_dialogue.player_left_message = player_left_message
 	new_dialogue.full_dialogue = dialogue
 	new_dialogue.conditions = conditions
+	new_dialogue.items_to_take = items_to_take
+	new_dialogue.item_taken.connect(on_item_taken)
 	new_dialogue.dialogue_finished.connect(_on_dialogue_finished)
 	current_dialogue_bubble = new_dialogue
 	self.add_child(new_dialogue)

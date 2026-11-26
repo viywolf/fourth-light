@@ -3,10 +3,10 @@ class_name InteractableObject
 
 @export var is_interactable: bool = true
 
+@export var object_type: String
+
 var object_id: String
 
-## TODO this is temp here
-var object_type: String = "ball"
 
 var saved_linear_velocity: Vector3
 var saved_angular_velocity: Vector3
@@ -15,6 +15,8 @@ var saved_angular_velocity: Vector3
 
 func _ready() -> void:
 	object_id = str(self)
+	if object_type == "":
+		printerr("Object " + str(self) + " has no object type")
 
 
 func _physics_process(delta: float) -> void:

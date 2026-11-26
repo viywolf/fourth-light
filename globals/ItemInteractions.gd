@@ -8,11 +8,10 @@ const MAX_DROP_HOLD_TIME: float = 3
 
 var is_holding_item: bool = false
 
-## The name/id of the node this is
-var held_item: String
+## The node
+var held_item: Node
 
-# TODO, make a better deletion system
-var items_to_delete: Array
+var items_to_delete: Array[Node]
 
 func pick_up_item(item: Node) -> bool:
 	if is_holding_item: 
@@ -25,7 +24,7 @@ func pick_up_item(item: Node) -> bool:
 	item.reparent(GameStatus.player.get_node("HeldObjects"))
 	item.position = Vector3.ZERO
 	item.is_interactable = false
-	held_item = str(item)
+	held_item = item
 	return true
 
 func drop_item(item: Node, time_held: float) -> void:
@@ -39,7 +38,7 @@ func drop_item(item: Node, time_held: float) -> void:
 		item.apply_central_force(time_held * THROW_SPEED_MULTIPLIER * throw_direction)
 	is_holding_item = false
 	item.is_interactable = true
-	held_item = ""
+	held_item = null
 	
 	# Find and get the throw progress bar
 	var all_ui = get_tree().get_nodes_in_group("ui")
@@ -55,15 +54,16 @@ func drop_item(item: Node, time_held: float) -> void:
 		printerr("No prograss bar availiable for throwing. (ItemInteractions)")
 
 
-
+## Calls queue_free() on item, sets is_holding_item to false, held_item to null
 func delete_held_item(item: Node) -> void:
 	if is_holding_item == false:
 		printerr("Not holding " + str(item) + ", unable to delete")
 	item.queue_free()
 	is_holding_item = false
-	held_item = ""
+	held_item = null
 
 
+## Calls delete_held_item() on all items in items_to_delete array
 func delete_items_in_deletion_queue() -> void:
 	for item in items_to_delete:
 		delete_held_item(item)

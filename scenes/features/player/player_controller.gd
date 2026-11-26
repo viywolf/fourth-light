@@ -12,7 +12,7 @@ func _ready() -> void:
 ## has a variable called is_interactable which is true,
 ## add it to the ui
 func manage_new_interactable_object(object_name: String, object_id: String, is_entering_zone: bool, object_type: String) -> void:
-	if ItemInteractions.is_holding_item and ItemInteractions.held_item == object_id:
+	if ItemInteractions.is_holding_item and str(ItemInteractions.held_item) == object_id:
 		return
 	if is_entering_zone:
 		ItemInteractions.objects_in_range[object_id] = true

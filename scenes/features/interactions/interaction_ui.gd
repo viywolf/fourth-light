@@ -55,7 +55,7 @@ func interact() -> void:
 
 ## Object type could be NPC or dialogue
 func add_interactable_button(object_name: String, object_id: String, object_type: String = "null", dialogue_option: Variant = null) -> void:
-	if ItemInteractions.held_item == str(object_id) and object_id != "dialogue":
+	if str(ItemInteractions.held_item) == object_id and object_id != "dialogue":
 		return
 	if GameStatus.is_talking_to_npc and object_type == "NPC":
 		return
