@@ -3,6 +3,8 @@ extends Node
 const SAVE_FILE_PATH = "user://save_file.json"
 
 func save_game() -> void:
+	print("Saving game")
+	
 	var save_file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("saveables")
 	
@@ -17,9 +19,15 @@ func save_game() -> void:
 			
 
 func load_game() -> void:
+	pass
+	
+	
+func get_save_data(scene_path: String = "") -> Dictionary:
+	var save_data: Dictionary
+	
 	if FileAccess.file_exists(SAVE_FILE_PATH) == false:
 		print("No save file exists")
-		return
+		return {}
 		
 	var save_file = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
@@ -31,6 +39,12 @@ func load_game() -> void:
 			printerr("JSON parse error: " + str(json.get_error_message()) + " at line " + str(json.get_error_line()))
 			continue
 			
-		var node_data = json.data
+		var node_data: Dictionary = json.data
+		
+		# If the data corresponding to the scene path has been found
+		if node_data.has("filename") and node_data.get("filename") == scene_path:
+			return node_data
+		
 		print(node_data)
-	
+		
+	return save_data

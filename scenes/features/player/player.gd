@@ -93,6 +93,8 @@ func _ready() -> void:
 	PlayerInformation.player = self
 	
 	player_model_animation_player = $PlayerModel.get_node("AnimationPlayer")
+	
+	load_data()
 
 
 func _physics_process(delta: float) -> void:
@@ -341,7 +343,6 @@ func play_animation_swim_move() -> void:
 	
 
 
-
 func _on_ledge_collider_is_on_ledge(is_on_ledge: bool) -> void:
 	if is_on_ledge:
 		is_hanging_on_ledge = true
@@ -352,15 +353,22 @@ func _on_ledge_collider_is_on_ledge(is_on_ledge: bool) -> void:
 
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_up"):
-		SaveFile.save_game()
-		
-	if Input.is_action_just_pressed("ui_down"):
-		SaveFile.load_game()
-
-
 func save() -> Dictionary:
 	return {
-		"position": self.global_position,
+		"filename": self.scene_file_path,
+		"position_x": self.global_position.x,
+		"position_y": self.global_position.y,
+		"position_z": self.global_position.z,
 	}
+
+
+func load_data() -> void:
+	var data: Dictionary = SaveFile.get_save_data(self.scene_file_path)
+	for key in data.keys():
+		match key:
+			"position_x":
+				self.global_position.x = data[key]
+			"position_y":
+				self.global_position.y = data[key]
+			"position_z":
+				self.global_position.z = data[key]
