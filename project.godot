@@ -30,6 +30,7 @@ EnvironmentGlobal="*uid://dkmtyc3vcocw4"
 ItemInteractions="*uid://bluqcmg4hp7ol"
 PlayerInformation="*uid://c272n4lk8x74f"
 Dialogue="*uid://ignjmlhhyqt4"
+SaveFile="*uid://5nkg3ljwaw5o"
 
 [display]
 
@@ -45,6 +46,7 @@ enabled=PackedStringArray("res://.godot/scenetime/plugin.cfg", "res://addons/god
 player=""
 world=""
 ui=""
+saveables=""
 
 [gui]
 

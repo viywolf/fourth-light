@@ -349,3 +349,18 @@ func _on_ledge_collider_is_on_ledge(is_on_ledge: bool) -> void:
 		# Do ledge stuff
 	else:
 		is_hanging_on_ledge = false
+
+
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_up"):
+		SaveFile.save_game()
+		
+	if Input.is_action_just_pressed("ui_down"):
+		SaveFile.load_game()
+
+
+func save() -> Dictionary:
+	return {
+		"position": self.global_position,
+	}

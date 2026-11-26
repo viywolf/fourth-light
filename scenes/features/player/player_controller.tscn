@@ -8,7 +8,7 @@
 [node name="PlayerController" type="Node3D" unique_id=1255494918]
 script = ExtResource("1_li70v")
 
-[node name="Player" parent="." unique_id=894728165 groups=["player"] instance=ExtResource("2_ma031")]
+[node name="Player" parent="." unique_id=894728165 groups=["player", "saveables"] instance=ExtResource("2_ma031")]
 unique_name_in_owner = true
 
 [node name="Camera" parent="." unique_id=359368113 instance=ExtResource("3_pk43t")]
