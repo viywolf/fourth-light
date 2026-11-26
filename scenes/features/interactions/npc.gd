@@ -1,3 +1,4 @@
+@abstract
 extends CharacterBody3D
 
 class_name NPC
@@ -14,23 +15,45 @@ var dialogue_bubble_scene: PackedScene = preload("res://scenes/features/dialogue
 @export var player_left_message: String
 @export var dialogue: Array[DialogueMessage]
 
-
-@export var conditions: Dictionary[String, Variant]
+@export var conditions: Dictionary[String, bool]
 
 var is_player_in_range: bool = false
 var did_player_just_leave: bool = false
 var current_dialogue_bubble: Node3D
 
 
+# TODO: implement special effect take items
 func do_interaction() -> bool:
 	var new_dialogue: Node3D = dialogue_bubble_scene.instantiate()
 	new_dialogue.player_left_message = player_left_message
 	new_dialogue.full_dialogue = dialogue
+	new_dialogue.conditions = conditions
 	new_dialogue.dialogue_finished.connect(_on_dialogue_finished)
 	current_dialogue_bubble = new_dialogue
 	self.add_child(new_dialogue)
 	new_dialogue.is_starting_dialogue = true
 	return true
+
+
+@abstract func check_conditions() -> void
+
+
+func save() -> Dictionary:
+	var data_to_save := {
+		"filename": self.scene_file_path,
+	}
+	
+	for condition in conditions.keys():
+		data_to_save[condition] = conditions[condition]
+	
+	return data_to_save
+
+
+func load_data() -> void:
+	var data: Dictionary = SaveFile.get_save_data(self.scene_file_path)
+	for key in data.keys():
+		if conditions.get(key) != null:
+			conditions[key] = data[key]
 
 
 func _on_talk_area_body_entered(body: Node3D) -> void:

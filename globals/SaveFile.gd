@@ -1,5 +1,27 @@
 extends Node
 
+"""
+Save code template
+
+
+func save() -> Dictionary:
+	return {
+		"filename": self.scene_file_path,
+		"blah_property": "sajdlas",
+	}
+
+
+func load_data() -> void:
+	var data: Dictionary = SaveFile.get_save_data(self.scene_file_path)
+	for key in data.keys():
+		match key:
+			"blah_property":
+				self.blah_property = data[key]
+
+
+"""
+
+
 const SAVE_FILE_PATH = "user://save_file.json"
 
 func save_game() -> void:

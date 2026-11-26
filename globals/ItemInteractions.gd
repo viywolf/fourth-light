@@ -11,6 +11,9 @@ var is_holding_item: bool = false
 ## The name/id of the node this is
 var held_item: String
 
+# TODO, make a better deletion system
+var items_to_delete: Array
+
 func pick_up_item(item: Node) -> bool:
 	if is_holding_item: 
 		return false
@@ -59,6 +62,11 @@ func delete_held_item(item: Node) -> void:
 	item.queue_free()
 	is_holding_item = false
 	held_item = ""
+
+
+func delete_items_in_deletion_queue() -> void:
+	for item in items_to_delete:
+		delete_held_item(item)
 
 
 ## Finds the node that corresponds to the id belonging to the group interactables

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bsqc4s8ghftkl" path="res://scenes/chunks/chunk_scripts/chunk_0.gd" id="1_r1y6h"]
 [ext_resource type="Script" uid="uid://dgm87bkkggc18" path="res://scripts/interactables/ball.gd" id="2_xp5vb"]
 [ext_resource type="PackedScene" uid="uid://dvmwut0pe7lpr" path="res://scenes/features/interactions/npc.tscn" id="3_xbb4i"]
+[ext_resource type="Script" uid="uid://bftfc2u2cd4yf" path="res://scenes/features/NPCs/mabel.gd" id="4_0v6ml"]
+[ext_resource type="Script" uid="uid://33p0yramfgc7" path="res://scenes/features/dialogue/dialogue_message.gd" id="5_scw63"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7fgmp"]
 size = Vector2(16, 16)
@@ -13,6 +15,52 @@ size = Vector3(16, 2, 16)
 [sub_resource type="SphereMesh" id="SphereMesh_xbb4i"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0v6ml"]
+
+[sub_resource type="Resource" id="Resource_scw63"]
+script = ExtResource("5_scw63")
+dialogue = "Hey! You got one, thanks!"
+condition = "is_holding_apple"
+special_effect = "take_item"
+metadata/_custom_type_script = "uid://33p0yramfgc7"
+
+[sub_resource type="Resource" id="Resource_inem6"]
+script = ExtResource("5_scw63")
+dialogue = "If you find any more, let me know"
+is_last_dialogue = true
+condition = "is_holding_apple"
+metadata/_custom_type_script = "uid://33p0yramfgc7"
+
+[sub_resource type="Resource" id="Resource_ujj7d"]
+script = ExtResource("5_scw63")
+dialogue = "Thanks for giving me an apple!"
+is_last_dialogue = true
+condition = "has_given_apple"
+metadata/_custom_type_script = "uid://33p0yramfgc7"
+
+[sub_resource type="Resource" id="Resource_nr4xd"]
+script = ExtResource("5_scw63")
+dialogue = "Hey! You there!"
+metadata/_custom_type_script = "uid://33p0yramfgc7"
+
+[sub_resource type="Resource" id="Resource_v83f6"]
+script = ExtResource("5_scw63")
+dialogue = "Can you help me with something real quick?"
+is_option = true
+options = Array[String](["Sure!", "Nope"])
+options_next_dialogue_index = Array[int]([5, 6])
+metadata/_custom_type_script = "uid://33p0yramfgc7"
+
+[sub_resource type="Resource" id="Resource_sl20f"]
+script = ExtResource("5_scw63")
+dialogue = "Great! Could you get me an apple? There's some behind you!"
+is_last_dialogue = true
+metadata/_custom_type_script = "uid://33p0yramfgc7"
+
+[sub_resource type="Resource" id="Resource_g2iec"]
+script = ExtResource("5_scw63")
+dialogue = "Aw. That's okay though, come back if you have time later!"
+is_last_dialogue = true
+metadata/_custom_type_script = "uid://33p0yramfgc7"
 
 [node name="Chunk0" type="Node3D" unique_id=217654621]
 script = ExtResource("1_r1y6h")
@@ -73,6 +121,9 @@ shape = SubResource("SphereShape3D_0v6ml")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Apple 2/Area3D" unique_id=1638236131]
 shape = SubResource("SphereShape3D_0v6ml")
 
-[node name="NPC" parent="." unique_id=1854603028 groups=["interactables"] instance=ExtResource("3_xbb4i")]
+[node name="Mabel" parent="." unique_id=528715837 groups=["interactables", "saveables"] instance=ExtResource("3_xbb4i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2778683, 0, -3.991065)
+script = ExtResource("4_0v6ml")
 npc_name = "Mabel"
+player_left_message = "Bye!"
+dialogue = Array[ExtResource("5_scw63")]([SubResource("Resource_scw63"), SubResource("Resource_inem6"), SubResource("Resource_ujj7d"), SubResource("Resource_nr4xd"), SubResource("Resource_v83f6"), SubResource("Resource_sl20f"), SubResource("Resource_g2iec")])

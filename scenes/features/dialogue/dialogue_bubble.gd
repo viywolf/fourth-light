@@ -15,6 +15,9 @@ const LAST_MESSAGE_TIMEOUT: float = 3
 
 @export var full_dialogue: Array[DialogueMessage]
 
+## Obtained from parent NPC
+var conditions: Dictionary
+
 var is_starting_dialogue: bool = false
 
 var current_dialogue: int = -1
@@ -45,27 +48,14 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 	while i < full_dialogue.size():
 		print(i)
 		var dialogue: DialogueMessage = full_dialogue[i]
-		
+		#TODO
 		# If the dialogue has a condition to trigger. Check if the condition has been fufilled
 		if dialogue.condition != "":
-			# Move this somewhere else
 			var is_condition_fufilled: bool = false
-			if dialogue.condition == "is_holding_apple":
-				print("apple")
-				var balls = ItemInteractions.find_item_node_from_type("ball")
-				print(balls)
-				for item in balls:
-					print(item)
-					if ItemInteractions.held_item == item.get("object_id"):
-						print("found")
+			for condition in conditions.keys():
+				if dialogue.condition == condition:
+					if conditions[condition] == true:
 						is_condition_fufilled = true
-						set_condition("has_given_apple", true)
-						items_to_delete.push_back(item)
-			if dialogue.condition == "has_given_apple":
-				var conditions_dict: Dictionary = get_parent().conditions
-				if conditions_dict.get(dialogue.condition) == true:
-					is_condition_fufilled = true
-		
 			if is_condition_fufilled == false:
 				i += 1
 				continue
@@ -94,9 +84,6 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 			
 		await get_tree().create_timer(LAST_MESSAGE_TIMEOUT / 2).timeout
 		i += 1
-		
-	for item in items_to_delete:
-		ItemInteractions.delete_held_item(item)
 		
 	await get_tree().create_timer(LAST_MESSAGE_TIMEOUT).timeout
 	

@@ -1,53 +1,6 @@
 [gd_scene format=3 uid="uid://dvmwut0pe7lpr"]
 
-[ext_resource type="Script" uid="uid://bqndum4yy75k3" path="res://scenes/features/interactions/npc.gd" id="1_6rvj7"]
 [ext_resource type="PackedScene" uid="uid://38h46wgc8w4v" path="res://assets/blender/exports/player.glb" id="1_okose"]
-[ext_resource type="Script" uid="uid://33p0yramfgc7" path="res://scenes/features/dialogue/dialogue_message.gd" id="2_cny8k"]
-
-[sub_resource type="Resource" id="Resource_o0plq"]
-script = ExtResource("2_cny8k")
-dialogue = "Hey! You got one, thanks!"
-condition = "is_holding_apple"
-metadata/_custom_type_script = "uid://33p0yramfgc7"
-
-[sub_resource type="Resource" id="Resource_ydrug"]
-script = ExtResource("2_cny8k")
-dialogue = "If you find any more, let me know"
-is_last_dialogue = true
-condition = "is_holding_apple"
-metadata/_custom_type_script = "uid://33p0yramfgc7"
-
-[sub_resource type="Resource" id="Resource_cny8k"]
-script = ExtResource("2_cny8k")
-dialogue = "Thanks for getting me an apple!"
-is_last_dialogue = true
-condition = "has_given_apple"
-metadata/_custom_type_script = "uid://33p0yramfgc7"
-
-[sub_resource type="Resource" id="Resource_yxr41"]
-script = ExtResource("2_cny8k")
-dialogue = "Hey! You there!"
-metadata/_custom_type_script = "uid://33p0yramfgc7"
-
-[sub_resource type="Resource" id="Resource_1jtt0"]
-script = ExtResource("2_cny8k")
-dialogue = "Can you help me with something real quick?"
-is_option = true
-options = Array[String](["Sure!", "Nope"])
-options_next_dialogue_index = Array[int]([5, 6])
-metadata/_custom_type_script = "uid://33p0yramfgc7"
-
-[sub_resource type="Resource" id="Resource_yv887"]
-script = ExtResource("2_cny8k")
-dialogue = "Great! Could you get me an apple? There's some behind you!"
-is_last_dialogue = true
-metadata/_custom_type_script = "uid://33p0yramfgc7"
-
-[sub_resource type="Resource" id="Resource_g0b1f"]
-script = ExtResource("2_cny8k")
-dialogue = "Aw. That's okay though, come back if you have time later"
-is_last_dialogue = true
-metadata/_custom_type_script = "uid://33p0yramfgc7"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cny8k"]
 radius = 0.31884766
@@ -56,12 +9,8 @@ height = 1.7607422
 [sub_resource type="SphereShape3D" id="SphereShape3D_1vivr"]
 radius = 4.0
 
-[node name="NPC" type="CharacterBody3D" unique_id=528715837]
+[node name="NPC" type="CharacterBody3D" unique_id=169762826]
 collision_layer = 3
-script = ExtResource("1_6rvj7")
-npc_name = "NPC Example"
-player_left_message = "Bye!"
-dialogue = Array[ExtResource("2_cny8k")]([SubResource("Resource_o0plq"), SubResource("Resource_ydrug"), SubResource("Resource_cny8k"), SubResource("Resource_yxr41"), SubResource("Resource_1jtt0"), SubResource("Resource_yv887"), SubResource("Resource_g0b1f")])
 
 [node name="PlayerModel" parent="." unique_id=924542848 instance=ExtResource("1_okose")]
 transform = Transform3D(1, 0, 0, 0, 1.2192242, 0, 0, 0, 1, 0, -0.07804668, 0)
