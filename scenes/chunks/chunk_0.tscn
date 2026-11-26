@@ -20,7 +20,6 @@ size = Vector3(16, 2, 16)
 script = ExtResource("5_scw63")
 dialogue = "Hey! You got one, thanks!"
 condition = "is_holding_apple"
-special_effect = "take_item"
 metadata/_custom_type_script = "uid://33p0yramfgc7"
 
 [sub_resource type="Resource" id="Resource_inem6"]
@@ -127,3 +126,7 @@ script = ExtResource("4_0v6ml")
 npc_name = "Mabel"
 player_left_message = "Bye!"
 dialogue = Array[ExtResource("5_scw63")]([SubResource("Resource_scw63"), SubResource("Resource_inem6"), SubResource("Resource_ujj7d"), SubResource("Resource_nr4xd"), SubResource("Resource_v83f6"), SubResource("Resource_sl20f"), SubResource("Resource_g2iec")])
+conditions = Dictionary[String, bool]({
+"has_given_apple": false,
+"is_holding_apple": false
+})

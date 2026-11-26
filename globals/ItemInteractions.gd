@@ -67,6 +67,7 @@ func delete_held_item(item: Node) -> void:
 func delete_items_in_deletion_queue() -> void:
 	for item in items_to_delete:
 		delete_held_item(item)
+	items_to_delete.clear()
 
 
 ## Finds the node that corresponds to the id belonging to the group interactables

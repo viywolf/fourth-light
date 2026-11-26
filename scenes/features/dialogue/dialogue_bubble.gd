@@ -1,5 +1,6 @@
 extends Node3D
 
+signal item_taken(item)
 signal dialogue_finished
 
 const SIZE_RATIO: Vector2 = Vector2(3, 2)
@@ -14,6 +15,8 @@ const LAST_MESSAGE_TIMEOUT: float = 3
 @export var player_left_message: String
 
 @export var full_dialogue: Array[DialogueMessage]
+
+var items_to_take: Array
 
 ## Obtained from parent NPC
 var conditions: Dictionary
@@ -42,13 +45,20 @@ func _process(_delta: float) -> void:
 
 func start_dialogue(current_dialogue_index: int = 0) -> void:
 	GameStatus.is_talking_to_npc = true
-	var items_to_delete: Array[Node]
 	
 	var i: int = current_dialogue_index 
 	while i < full_dialogue.size():
-		print(i)
 		var dialogue: DialogueMessage = full_dialogue[i]
-		#TODO
+		
+		# TODO what is even going on here
+		# If dialogue has special effect
+		#"""
+		if dialogue.special_effect == Dialogue.Effect.TAKE_ITEM:
+		
+				conditions["has_given_apple"] = true
+				ItemInteractions.items_to_delete.push_back(item)
+		#"""
+		
 		# If the dialogue has a condition to trigger. Check if the condition has been fufilled
 		if dialogue.condition != "":
 			var is_condition_fufilled: bool = false
@@ -59,8 +69,6 @@ func start_dialogue(current_dialogue_index: int = 0) -> void:
 			if is_condition_fufilled == false:
 				i += 1
 				continue
-			else:
-				print("condition fufilled")
 		
 		# If the dialogue gives you options to choose from
 		if dialogue.is_option:

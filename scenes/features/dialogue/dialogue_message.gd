@@ -9,4 +9,4 @@ extends Resource
 @export var is_last_dialogue: bool = false
 
 @export var condition: String
-@export var special_effect: String
+@export var special_effect: Dialogue.Effect

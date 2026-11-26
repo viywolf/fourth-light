@@ -22,8 +22,15 @@ var did_player_just_leave: bool = false
 var current_dialogue_bubble: Node3D
 
 
+@abstract func check_conditions() -> void
+
+
+func _ready() -> void:
+	load_data()
+
 # TODO: implement special effect take items
 func do_interaction() -> bool:
+	check_conditions()
 	var new_dialogue: Node3D = dialogue_bubble_scene.instantiate()
 	new_dialogue.player_left_message = player_left_message
 	new_dialogue.full_dialogue = dialogue
@@ -33,9 +40,6 @@ func do_interaction() -> bool:
 	self.add_child(new_dialogue)
 	new_dialogue.is_starting_dialogue = true
 	return true
-
-
-@abstract func check_conditions() -> void
 
 
 func save() -> Dictionary:
