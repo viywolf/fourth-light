@@ -215,6 +215,15 @@ text = "Only Load New Chunks"
 [node name="Spacer" type="Control" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer/OnlyLoadNewContainer" unique_id=1824221656]
 layout_mode = 2
 
+[node name="SaveLabel" type="Label" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1477065645]
+layout_mode = 2
+text = "Save"
+horizontal_alignment = 1
+
+[node name="ResetSaveButton" type="Button" parent="Panel/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1449261974]
+layout_mode = 2
+text = "Reset Save Data"
+
 [node name="CloseButton" type="Button" parent="." unique_id=1582507989]
 layout_mode = 0
 offset_left = 852.0
@@ -232,4 +241,5 @@ text = "X"
 [connection signal="value_changed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/LoadContainer/LoadHSlider" to="." method="_on_load_h_slider_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/ProcessContainer/ProcessHSlider" to="." method="_on_process_h_slider_value_changed"]
 [connection signal="toggled" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/OnlyLoadNewContainer/LoadNewCheckBox" to="." method="_on_load_new_check_box_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/ScrollContainer/VBoxContainer/ResetSaveButton" to="." method="_on_reset_save_button_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

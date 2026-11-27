@@ -12,17 +12,17 @@ func _ready() -> void:
 	%FPSContainer/Label.text = "Frames Per Second (" + str(Settings.frames_per_second) + ")"
 	
 	# Volume
-	%MainVolumeContainer/Label.text = "Main Volume: " + str(Settings.get_volume(Settings.MAIN_VOLUME))
+	%MainVolumeContainer/Label.text = "Main Volume: " + str(to_percentage(Settings.get_volume(Settings.MAIN_VOLUME)))
 	%MainVolumeContainer/MainHSlider.value = Settings.get_volume(Settings.MAIN_VOLUME)
-	%MusicVolumeContainer/Label.text = "Music Volume: " + str(Settings.get_volume(Settings.MUSIC_VOLUME))
+	%MusicVolumeContainer/Label.text = "Music Volume: " + str(to_percentage(Settings.get_volume(Settings.MUSIC_VOLUME)))
 	%MusicVolumeContainer/MusicHSlider.value = Settings.get_volume(Settings.MUSIC_VOLUME)
-	%SFXVolumeContainer/Label.text = "SFX Volume: " + str(Settings.get_volume(Settings.SFX_VOLUME))
+	%SFXVolumeContainer/Label.text = "SFX Volume: " + str(to_percentage(Settings.get_volume(Settings.SFX_VOLUME)))
 	%SFXVolumeContainer/SFXHSlider.value = Settings.get_volume(Settings.SFX_VOLUME)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("escape"):
-		queue_free()
+		_close_this_menu()
 
 
 func to_percentage(number: float) -> String:
@@ -79,9 +79,25 @@ func _on_sfxh_slider_value_changed(value: float) -> void:
 
 
 func _on_close_button_pressed() -> void:
-	queue_free()
+	_close_this_menu()
 
 
 func _on_load_new_check_box_toggled(toggled_on: bool) -> void:
 	ChunkInformation.only_load_new_chunks = toggled_on
 	
+
+var reset_button_press_number: int = 0
+func _on_reset_save_button_pressed() -> void:
+	if reset_button_press_number == 1:
+		SaveFile.reset_save_data()
+		$Panel/VBoxContainer/ScrollContainer/VBoxContainer/ResetSaveButton.text = "Reset Save Data"
+	else:
+		$Panel/VBoxContainer/ScrollContainer/VBoxContainer/ResetSaveButton.text = "Press Again To Delete Save"
+	
+	reset_button_press_number += 1
+	reset_button_press_number %= 2
+
+
+func _close_this_menu() -> void:
+	SaveFile.save_game()
+	queue_free()

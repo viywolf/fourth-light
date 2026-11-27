@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dvmwut0pe7lpr" path="res://scenes/features/interactions/npc.tscn" id="3_xbb4i"]
 [ext_resource type="Script" uid="uid://bftfc2u2cd4yf" path="res://scenes/features/NPCs/mabel.gd" id="4_0v6ml"]
 [ext_resource type="Script" uid="uid://33p0yramfgc7" path="res://scenes/features/dialogue/dialogue_message.gd" id="5_scw63"]
+[ext_resource type="PackedScene" uid="uid://bmjtfik14y3ng" path="res://assets/blender/exports/cliff1.glb" id="6_inem6"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7fgmp"]
 size = Vector2(16, 16)
@@ -133,3 +134,6 @@ conditions = Dictionary[String, bool]({
 "is_holding_apple": false
 })
 items_to_take = Array[String](["ball"])
+
+[node name="cliff1" parent="." unique_id=1477157831 instance=ExtResource("6_inem6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.512993, 0, 4.058405)

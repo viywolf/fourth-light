@@ -10,9 +10,7 @@ func on_item_taken(item: InteractableObject) -> void:
 
 
 func check_conditions() -> void:
-	print(conditions)
 	for condition in conditions:
-		print(condition)
 		if condition == "is_holding_apple":
 			var is_condition_true := false
 			var balls = ItemInteractions.find_item_node_from_type("ball")

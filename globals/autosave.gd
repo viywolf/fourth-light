@@ -11,4 +11,3 @@ func _ready() -> void:
 
 func _on_timeout() -> void:
 	SaveFile.save_game()
-	SaveFile.load_game()

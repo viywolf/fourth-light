@@ -32,16 +32,19 @@ func save_game() -> void:
 	
 	for node: Node in save_nodes:
 		if node.has_method("save"):
-			var node_data = node.call("save")
-			var json_string = JSON.stringify(node_data)
+			var node_data: Dictionary = node.call("save")
+			var json_string: String = JSON.stringify(node_data)
 			save_file.store_line(json_string)
 		else:
 			printerr("Node " + str(node) + " in saveables group does not have save() method")
 			
-			
+	# Add settings data separately
+	var settings_data = Settings.save()
+	var settings_json_string = JSON.stringify(settings_data)
+	save_file.store_line(settings_json_string)
 
 func load_game() -> void:
-	pass
+	Settings.load_data()
 	
 	
 func get_save_data(scene_path: String = "") -> Dictionary:
@@ -70,3 +73,8 @@ func get_save_data(scene_path: String = "") -> Dictionary:
 		print(node_data)
 		
 	return save_data
+
+# TODO: when resetting save the chunk loading stuff only loads one tile
+
+func reset_save_data() -> void:
+	DirAccess.remove_absolute(SAVE_FILE_PATH)

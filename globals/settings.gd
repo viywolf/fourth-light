@@ -6,8 +6,6 @@ enum{
 	SFX_VOLUME
 }
 
-var main_volume: float
-
 var frames_per_second: int = 60
 
 var autosave_time: float = 3
@@ -38,3 +36,29 @@ func get_volume(volume_type: int) -> float:
 		_:
 			printerr("Get volume invalid volume type")
 			return -1
+
+
+
+func save() -> Dictionary:
+	return {
+		"filename": self.scene_file_path,
+		"main_volume": get_volume(MAIN_VOLUME),
+		"music_volume": get_volume(MUSIC_VOLUME),
+		"sfx_volume": get_volume(SFX_VOLUME),
+		"fps": Engine.max_fps,
+	}
+
+
+func load_data() -> void:
+	var data: Dictionary = SaveFile.get_save_data(self.scene_file_path)
+	for key in data.keys():
+		match key:
+			"main_volume":
+				update_volume(MAIN_VOLUME, data[key])
+			"music_volume":
+				update_volume(MUSIC_VOLUME, data[key])
+			"sfx_volume":
+				update_volume(SFX_VOLUME, data[key])
+			"fps":
+				update_fps(data[key])
+	print(data)
