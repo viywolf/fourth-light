@@ -45,7 +45,10 @@ func save() -> Dictionary:
 		"main_volume": get_volume(MAIN_VOLUME),
 		"music_volume": get_volume(MUSIC_VOLUME),
 		"sfx_volume": get_volume(SFX_VOLUME),
-		"fps": Engine.max_fps,
+		"fps": self.frames_per_second,
+		"chunk_load_radius": ChunkInformation.chunk_load_radius,
+		"chunk_process_radius": ChunkInformation.chunk_process_radius,
+		"chunk_only_load_new": ChunkInformation.only_load_new_chunks,
 	}
 
 
@@ -61,4 +64,9 @@ func load_data() -> void:
 				update_volume(SFX_VOLUME, data[key])
 			"fps":
 				update_fps(data[key])
-	print(data)
+			"chunk_load_radius": 
+				ChunkInformation.chunk_load_radius = data[key]
+			"chunk_process_radius": 
+				ChunkInformation.chunk_process_radius = data[key]
+			"chunk_only_load_new": 
+				ChunkInformation.only_load_new_chunks = data[key]

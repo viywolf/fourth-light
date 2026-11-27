@@ -70,7 +70,7 @@ func get_save_data(scene_path: String = "") -> Dictionary:
 		if node_data.has("filename") and node_data.get("filename") == scene_path:
 			return node_data
 		
-		print(node_data)
+		#print(node_data)
 		
 	return save_data
 

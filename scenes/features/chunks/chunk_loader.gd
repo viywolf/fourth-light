@@ -36,6 +36,7 @@ func _ready() -> void:
 	
 	add_chunk(ChunkInformation.get_position_in_chunks(player_pos))
 	load_chunks(ChunkInformation.get_position_in_chunks(player_pos), ChunkInformation.chunk_load_radius)
+	print(ChunkInformation.chunk_load_radius)
 	
 	$ChunksPlaceholder.queue_free()
 

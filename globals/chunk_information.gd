@@ -51,3 +51,7 @@ func get_position_in_chunks(input_position: Vector2) -> Vector2:
 
 func get_coords_from_chunks(chunk_input: Vector2) -> Vector3:
 	return Vector3(chunk_input.x * ChunkInformation.CHUNK_SIZE, 0, chunk_input.y * ChunkInformation.CHUNK_SIZE)
+
+
+func get_player_position_in_chunks() -> Vector2:
+	return self.get_position_in_chunks(Vector2(GameStatus.player.global_position.x, GameStatus.player.global_position.z))
